@@ -44,7 +44,7 @@ test('Excel validates missing, wrong, duplicate and out of scope data; attendanc
  const db=seed(),row={'Mã HS':'HS001','Môn':'Toán','Điểm':8,'Nền tảng':'M3','Năng lực':'M2','Thái độ':'M4','Nhận xét':'Tiến bộ','Chuyên cần':999};
  const result=validateImport([row,{...row},{...row,'Mã HS':'NOPE','Thái độ':''},{...row,'Mã HS':'HS006','Môn':'Tiếng Anh'}],db);
  assert.equal(result[0].valid,true);assert.equal(result[0].attendance.present,1);
- assert.ok(result[1].errors.includes('Trùng dòng'));assert.ok(result[2].errors.includes('Sai mã HS'));assert.ok(result[2].errors.includes('Thiếu Thái độ'));assert.ok(result[3].errors.includes('Ngoài danh sách phụ trách'));
+ assert.ok(result[1].errors.includes('Trùng học sinh và môn học trong tệp. Chỉ giữ một dòng.'));assert.ok(result[2].errors.includes('Không tìm thấy mã học sinh. Kiểm tra mã trong danh sách phụ trách.'));assert.ok(result[2].errors.includes('Chưa chọn mức đánh giá thái độ học tập.'));assert.ok(result[3].errors.includes('Học sinh không thuộc danh sách đang phụ trách.'));
 });
 test('Corrupt local data recovers to fixtures; persistence round trips',()=>{
  const store={value:'broken',getItem(){return this.value;},setItem(_,v){this.value=v;}};

@@ -16,18 +16,18 @@ export const CRITERIA = [
 ];
 export const SCREEN_META = {
   A00:['Đăng nhập','Tài khoản do trung tâm cấp'],
-  GV01:['Tổng quan','Việc cần xử lý và lịch trong ngày'],GV02:['Học sinh','Tìm kiếm, lọc và mở hồ sơ'],GV03:['Hồ sơ học sinh','Thông tin theo quyền và các lớp đang học'],
-  GV04:['Nhập hồ sơ','Bước 1 · Thông tin học sinh'],GV04b:['Phụ huynh','Bước 2 · Thông tin liên hệ'],GV04c:['Test đầu vào','Bước 3 · Đánh giá và lưu hồ sơ'],
-  GV05:['Tạo lớp','Học sinh → môn → giáo viên → lịch'], 'GV05-s1':['Chọn môn','Danh sách 11 môn'],'GV05-s2':['Chọn giáo viên','Lọc theo bộ môn'],'GV05-s3':['Ngày bắt đầu','Không chọn ngày đã qua'],
-  GV06:['Chuyển giáo viên','Điều chỉnh giáo viên và lịch'],GV06b:['Chuyển lịch','Đổi ca học hằng tuần'],GV06c:['Nghỉ học','Lưu lý do và ngày có hiệu lực'],
-  GV07:['Duyệt báo cáo','Vòng duyệt Giáo vụ'],GV08:['Hóa đơn tháng','Tạo và cập nhật trạng thái thu'],GV09:['Giao việc','Gửi nhiệm vụ cho giáo viên'],GV10:['Sửa tích lịch','Yêu cầu sau giờ khóa và lịch sử'],GV11:['Tài khoản','Vai trò, bộ môn và trạng thái'],
+  GV01:['Tổng quan','Việc cần xử lý và lịch trong ngày'],GV02:['Học sinh','Tìm kiếm, lọc và mở hồ sơ'],GV03:['Hồ sơ học sinh','Thông tin học sinh và các môn đăng ký học'],
+  GV04:['Tiếp nhận học sinh','Bước 1 · Thông tin học sinh'],GV04b:['Phụ huynh','Bước 2 · Thông tin liên hệ'],GV04c:['Kiểm tra đầu vào','Bước 3 · Kết quả kiểm tra và nhận xét'],
+  GV05:['Xếp lớp','Học sinh → môn → giáo viên → lịch'], 'GV05-s1':['Chọn môn','Danh sách 11 môn'],'GV05-s2':['Chọn giáo viên','Lọc theo bộ môn'],'GV05-s3':['Ngày bắt đầu','Không chọn ngày đã qua'],
+  GV06:['Đổi giáo viên','Điều chỉnh giáo viên và lịch'],GV06b:['Đổi lịch học','Đổi ca học hằng tuần'],GV06c:['Ngừng học','Lưu lý do và ngày có hiệu lực'],
+  GV07:['Duyệt báo cáo','Vòng duyệt Giáo vụ'],GV08:['Học phí tháng','Tạo và cập nhật trạng thái thu'],GV09:['Giao việc','Gửi nhiệm vụ cho giáo viên'],GV10:['Điều chỉnh điểm danh','Yêu cầu sau giờ khóa và lịch sử'],GV11:['Tài khoản','Vai trò, bộ môn và trạng thái'],
   TBM01:['Duyệt bộ môn','Duyệt vòng 1 trước Giáo vụ'],
   TC01:['Tổng quan','Ca dạy và việc cần hoàn thành'],TC01b:['Thống kê','9 chỉ số theo tháng'],TC02:['Lịch dạy','Bảng tuần theo ngày × ca'],TC02b:['Lịch theo ngày','Lịch theo ngày hoặc từng học sinh'],
-  TC03:['Tích lịch','Có mặt / Vắng trước giờ khóa'],TC03b:['Ca đã khóa','Chỉ xem và yêu cầu sửa'],TC03c:['Buổi phát sinh','Dạy thay hoặc học bù'],
+  TC03:['Điểm danh','Có mặt / Vắng trước giờ khóa'],TC03b:['Ca đã khóa','Chỉ xem và yêu cầu sửa'],TC03c:['Buổi học bổ sung','Dạy thay hoặc học bù'],
   TC04a:['Học sinh','Danh sách học sinh phụ trách'],TC04:['Hồ sơ học sinh','Lịch, đánh giá và báo cáo'],TC04b:['Đánh giá năng lực','8 tiêu chí theo thang M1–M4'],
-  TC05:['Báo cáo','Trạng thái và hạn nộp'],TC05b:['Xem báo cáo','Tiến trình duyệt hai vòng'],TC05c:['Nhập báo cáo','Chuyên cần lấy từ tích lịch'],TC05d:['Sửa báo cáo','Lý do làm lại và lịch sử gửi'],TC05w:['Import Excel','Nhập hàng loạt trên web'],
-  TC06:['Công việc','Nhiệm vụ và tiến độ'],TC06b:['Chi tiết công việc','Trao đổi, cập nhật và lịch sử'],TC06c:['Gửi kết quả','Bàn giao cho người giao xác nhận'],
-  TC07:['Trao đổi','Tin nhắn và thông báo chung'],TC07b:['Hội thoại','Tin nhắn, file và trạng thái xem'],TC07c:['Soạn tin','Chọn người nhận và gửi']
+  TC05:['Báo cáo','Trạng thái và hạn nộp'],TC05b:['Xem báo cáo','Tiến trình duyệt hai vòng'],TC05c:['Lập báo cáo','Chuyên cần tổng hợp từ điểm danh'],TC05d:['Bổ sung báo cáo','Nội dung cần bổ sung và lịch sử gửi'],TC05w:['Nhập từ Excel','Nhập hàng loạt trên web'],
+  TC06:['Công việc','Công việc được giao và tiến độ thực hiện'],TC06b:['Chi tiết công việc','Trao đổi, cập nhật và lịch sử'],TC06c:['Gửi kết quả','Bàn giao cho người giao việc xác nhận'],
+  TC07:['Trao đổi','Tin nhắn và thông báo chung'],TC07b:['Hội thoại','Tin nhắn, tệp đính kèm và trạng thái đã xem'],TC07c:['Soạn tin','Chọn người nhận và gửi']
 };
 export const today = () => new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Bangkok',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 export function seed() {
@@ -38,12 +38,12 @@ export function seed() {
     sessions:[{id:'CA1',name:'Toán · Khối 7',day:'T4',shift:'Chiều',time:'14:00 – 15:30',date:today(),students:['HS001','HS002','HS003'],teacher:'T01',marks:{},locked:false},
       {id:'CA2',name:'Toán · Khối 9',day:'T4',shift:'Tối',time:'18:00 – 19:30',date:today(),students:['HS004','HS005'],teacher:'T01',marks:{},locked:false},
       {id:'CA3',name:'Toán · Khối 7',day:'T2',shift:'Tối',time:'18:00 – 19:30',date:'2026-10-19',students:['HS001','HS002','HS003'],teacher:'T01',marks:{HS001:'Có',HS002:'Vắng',HS003:'Có'},locked:true}],
-    requests:[{id:'YC1',session:'CA3',teacher:'T01',student:'HS002',kind:'Sửa tích lịch',from:'Vắng',to:'Có',reason:'Học sinh đến muộn, cần cập nhật có mặt.',status:'Chờ duyệt',time:'20/10 · 09:15'}],audit:[],
-    tasks:[{id:'CV001',title:'Hoàn thiện báo cáo tháng 10',description:'Rà soát chuyên cần và bổ sung nhận xét, định hướng tháng sau cho học sinh phụ trách.',assignee:'T01',owner:'Giáo vụ · Thu Phương',due:'2026-10-25',priority:'Cao',status:'Mới giao',progress:0,files:[],comments:[],history:[{text:'Thu Phương giao việc',time:'20/10 · 08:30'}]},
-      {id:'CV002',title:'Chuẩn bị bài kiểm tra cuối tháng',description:'Chuẩn bị đề Toán khối 7 theo nội dung đã học.',assignee:'T01',owner:'TBM · Hoàng Nam',due:'2026-10-24',priority:'Bình thường',status:'Đang làm',progress:60,files:[],comments:[],history:[{text:'Đã nhận việc',time:'19/10 · 10:00'}]},
+    requests:[{id:'YC1',session:'CA3',teacher:'T01',student:'HS002',kind:'Điều chỉnh điểm danh',from:'Vắng',to:'Có',reason:'Học sinh đến muộn, cần cập nhật có mặt.',status:'Chờ duyệt',time:'20/10 · 09:15'}],audit:[],
+    tasks:[{id:'CV001',title:'Hoàn thiện báo cáo tháng 10',description:'Rà soát chuyên cần và bổ sung nhận xét, kế hoạch hỗ trợ tháng tới cho học sinh phụ trách.',assignee:'T01',owner:'Giáo vụ · Thu Phương',due:'2026-10-25',priority:'Cao',status:'Mới giao',progress:0,files:[],comments:[],history:[{text:'Thu Phương giao việc',time:'20/10 · 08:30'}]},
+      {id:'CV002',title:'Chuẩn bị bài kiểm tra cuối tháng',description:'Chuẩn bị đề Toán khối 7 theo nội dung đã học.',assignee:'T01',owner:'Trưởng bộ môn · Hoàng Nam',due:'2026-10-24',priority:'Bình thường',status:'Đang làm',progress:60,files:[],comments:[],history:[{text:'Đã nhận việc',time:'19/10 · 10:00'}]},
       {id:'CV003',title:'Gửi kế hoạch phụ đạo',description:'Tổng hợp học sinh cần hỗ trợ và kế hoạch phụ đạo.',assignee:'T01',owner:'Giáo vụ · Thu Phương',due:'2026-10-20',priority:'Cao',status:'Chờ xác nhận',progress:100,result:'Đã gửi kế hoạch phụ đạo cho 3 học sinh.',files:['Kế hoạch.pdf'],comments:[],history:[{text:'Giáo viên gửi kết quả',time:'20/10 · 16:00'}]}],
     invoices:[],accounts:[{id:'A1',name:'Nguyễn Minh Anh',phone:'0900000001',role:'Giáo viên',subject:'Toán',created:'01/10/2026',locked:false},{id:'A2',name:'Trần Hoàng Nam',phone:'0900000002',role:'Trưởng bộ môn',subject:'Toán',created:'01/10/2026',locked:false},{id:'A3',name:'Lê Thu Phương',phone:'0900000003',role:'Giáo vụ',subject:'—',created:'01/10/2026',locked:false}],
-    threads:[{id:'TN1',name:'Giáo vụ · Thu Phương',group:'Điều phối đào tạo',unread:2,messages:[{sender:'other',text:'Chào cô, lớp Toán chiều nay có thêm học sinh mới. Nhờ cô kiểm tra lịch giúp nhé.',time:'09:10'},{sender:'me',text:'Mình đã nhận được thông tin, cảm ơn Phương.',time:'09:12',seen:true}]},{id:'TN2',name:'PH · An Nhiên',group:'Gia đình học sinh',unread:1,messages:[{sender:'other',text:'Cô cho em hỏi nội dung cần ôn tập trong tuần này ạ?',time:'08:45'}]}],
+    threads:[{id:'TN1',name:'Giáo vụ · Thu Phương',group:'Điều phối đào tạo',unread:2,messages:[{sender:'other',text:'Chào cô, lớp Toán chiều nay có thêm học sinh mới. Nhờ cô kiểm tra lịch giúp nhé.',time:'09:10'},{sender:'me',text:'Mình đã nhận được thông tin, cảm ơn Phương.',time:'09:12',seen:true}]},{id:'TN2',name:'PH · An Nhiên',group:'Phụ huynh học sinh',unread:1,messages:[{sender:'other',text:'Cô cho em hỏi nội dung cần ôn tập trong tuần này ạ?',time:'08:45'}]}],
     notices:[{id:'N1',title:'Hạn nộp báo cáo tháng 10',body:'Hoàn thành và gửi báo cáo trước ngày 25/10.',route:'TC05'},{id:'N2',title:'Họp bộ môn tuần này',body:'15:30 thứ Sáu · Phòng họp cơ sở 1.',route:'TC07'},{id:'N3',title:'Lịch dạy đã được cập nhật',body:'Kiểm tra các ca dạy và học sinh mới trong tuần.',route:'TC02'}]
   };
 }
@@ -109,14 +109,14 @@ export function validateImport(rows,db) {
   return rows.map((row,i)=>{
     const id=String(row['Mã HS']||'').trim(); const subject=String(row['Môn']||'').trim();
     const s=db.students.find(s=>s.id===id); const errors=[];
-    if (!s) errors.push('Sai mã HS');
-    if (s&&subject!==s.subject) errors.push('Sai môn');
-    if (!row['Thái độ']) errors.push('Thiếu Thái độ');
-    for(const field of ['Nền tảng','Năng lực','Thái độ']) if(row[field]&&!/^M[1-4]$/.test(String(row[field]).trim())) errors.push(`${field}: M1–M4`);
-    if (!String(row['Nhận xét']||'').trim()) errors.push('Thiếu nhận xét');
-    if(row['Điểm']!==''&&row['Điểm']!==undefined&&(!Number.isFinite(Number(row['Điểm']))||Number(row['Điểm'])<0||Number(row['Điểm'])>10)) errors.push('Điểm từ 0–10');
-    if (s&&(s.teacher!=='T01'||s.status!=='Đang học')) errors.push('Ngoài danh sách phụ trách');
-    const key=`${id}-${subject}`;if(seen.has(key)) errors.push('Trùng dòng');seen.add(key);
+    if (!s) errors.push('Không tìm thấy mã học sinh. Kiểm tra mã trong danh sách phụ trách.');
+    if (s&&subject!==s.subject) errors.push('Môn học chưa khớp với hồ sơ học sinh.');
+    if (!row['Thái độ']) errors.push('Chưa chọn mức đánh giá thái độ học tập.');
+    for(const field of ['Nền tảng','Năng lực','Thái độ']) if(row[field]&&!/^M[1-4]$/.test(String(row[field]).trim())) errors.push(`${field}: chọn mức từ M1 đến M4.`);
+    if (!String(row['Nhận xét']||'').trim()) errors.push('Chưa có nhận xét kết quả học tập.');
+    if(row['Điểm']!==''&&row['Điểm']!==undefined&&(!Number.isFinite(Number(row['Điểm']))||Number(row['Điểm'])<0||Number(row['Điểm'])>10)) errors.push('Điểm kiểm tra cần nằm trong khoảng 0–10.');
+    if (s&&(s.teacher!=='T01'||s.status!=='Đang học')) errors.push('Học sinh không thuộc danh sách đang phụ trách.');
+    const key=`${id}-${subject}`;if(seen.has(key)) errors.push('Trùng học sinh và môn học trong tệp. Chỉ giữ một dòng.');seen.add(key);
     return {row,line:i+2,errors,valid:errors.length===0,attendance:s?attendance(db,id):null};
   });
 }
