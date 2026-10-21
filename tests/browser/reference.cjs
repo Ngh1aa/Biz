@@ -16,10 +16,10 @@ checks.push('Teacher reference hierarchy and attendance reminders reflect shared
 await go('tc','TC02');assert.equal(await page.locator('.center-schedule-views [data-action=schedule-view]').count(),3);await page.locator('[data-action=schedule-view][data-value=student]').click();await page.waitForURL(/TC02b/);await page.locator('.student-schedule').first().waitFor();assert.ok(await page.locator('.student-schedule').count());await page.locator('[data-action=schedule-view][data-value=day]').click();await page.locator('.student-schedule').first().waitFor({state:'detached'});assert.equal(await page.locator('.student-schedule').count(),0);
 await go('tbm','TBM01');assert.equal(await page.locator('.tabbar .tab').nth(2).getAttribute('data-go'),'TBM01');
 checks.push('Reference navigation exposes week/day/student schedule views and a department approval tab');
-await go('gv','GV04');await page.locator('[name=name]').fill('Bản nháp giữ nguyên qua ba giao diện');const route=page.url().split('#')[1];
-for(const theme of ['pastel','mono','center']){await page.locator(`.theme-switch [data-value=${theme}]`).click();assert.equal(await page.locator('[name=name]').inputValue(),'Bản nháp giữ nguyên qua ba giao diện');assert.equal(page.url().split('#')[1],route);}
+await go('gv','GV04');await page.locator('[name=name]').fill('Bản nháp được giữ nguyên');
+for(const legacy of ['pastel','mono']){await page.goto(`${base}?theme=${legacy}#/gv/GV04`);await page.locator('[name=name]').waitFor();assert.equal(await page.locator('html').getAttribute('data-theme'),'center');assert.equal(new URL(page.url()).searchParams.has('theme'),false);assert.equal(await page.locator('[data-action=theme],.theme-switch').count(),0);assert.equal(await page.locator('[name=name]').inputValue(),'Bản nháp được giữ nguyên');}
 const field=await page.locator('[name=name]').boundingBox();assert.ok(field.height>=56);assert.equal(await page.locator('.form-footer .primary').evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(37, 58, 126)');
-checks.push('56px fields and primary buttons use the source DS; theme switching retains draft, route and inputs');
+checks.push('56px fields and primary buttons use the source DS; retired theme links use the current interface and retain the saved draft');
 const failures=[];
 for(const width of [360,390,768,1440]){await page.setViewportSize({width,height:width===1440?1040:844});for(const [role,route] of [['gv','GV01'],['tc','TC01'],['gv','GV04'],['tc','TC02'],['tc','TC03'],['tbm','TBM01']]){
  await go(role,route);await page.evaluate(()=>document.fonts.ready);

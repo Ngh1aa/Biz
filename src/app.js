@@ -11,20 +11,13 @@ const states={};
 export const ctx={db:load(),route:'GV01',state:{},save,render,navigate,toast,sheet,closeSheet,states};
 const defaults={gv:'GV01',tc:'TC01',tbm:'TC01'};
 const app=document.querySelector('#app'),dialog=document.querySelector('#sheet');
-const resolveTheme=value=>['center','pastel','mono'].includes(value)?value:'center';
-let theme=resolveTheme(new URLSearchParams(location.search).get('theme'));
-ctx.theme=theme;
-document.documentElement.dataset.theme=theme;
-const graphic=(name,className='')=>`<img class="pastel-graphic ${className}" src="./assets/graphics/${name}.svg" width="240" height="260" alt="" aria-hidden="true">`;
-function setTheme(value){
- theme=resolveTheme(value);ctx.theme=theme;
- const url=new URL(location.href);url.searchParams.set('theme',theme);history.replaceState(null,'',url);
- document.documentElement.dataset.theme=theme;
- document.querySelector('meta[name="theme-color"]').content=theme==='center'?'#f4f5f9':theme==='pastel'?'#fbfbf9':'#f7f7f7';
- if(app.querySelector('form')){formatHeadings();renderReviewer();}else render();
-}
+ctx.theme='center';
+document.documentElement.dataset.theme='center';
+// Old theme links keep their route and open the single current interface.
+const url=new URL(location.href);
+if(url.searchParams.has('theme')){url.searchParams.delete('theme');history.replaceState(null,'',url);}
 function formatHeadings(){
- app.querySelectorAll('h1,h2').forEach(h=>{h.dataset.originalHeading ||= h.innerHTML;h.innerHTML=theme==='center'?h.dataset.originalHeading.replaceAll('<br>',' '):h.dataset.originalHeading;});
+ app.querySelectorAll('h1,h2').forEach(h=>{h.innerHTML=h.innerHTML.replaceAll('<br>',' ');});
 }
 const tabs={
  gv:[['GV01','home','Tổng quan'],['GV02','users','Học sinh'],['GV07','check-square','Duyệt'],['GV08','file-text','Học phí'],['TC07','message-circle','Trao đổi']],
@@ -48,7 +41,6 @@ function navigate(route,opts={}) {
  if(opts.replace){history.replaceState(null,'',hash);readRoute();}else if(location.hash===hash){render();}else location.hash=hash;
 }
 function readRoute(){
- theme=resolveTheme(new URLSearchParams(location.search).get('theme'));ctx.theme=theme;document.documentElement.dataset.theme=theme;
  const [path,query]=location.hash.slice(1).split('?'),[,role,route]=path.split('/');
  ctx.db.role=ROLES[role]?role:ctx.db.role;ctx.route=SCREEN_META[route]?route:defaults[ctx.db.role];
  if(ctx.route.startsWith('GV')&&ctx.db.role!=='gv'){navigate(defaults[ctx.db.role],{replace:true});return;}
@@ -65,7 +57,7 @@ function readRoute(){
  if(ctx.route.startsWith('GV05-'))actions.openClassPicker(ctx.route);
 }
 function nav(){
- const list=tabs[ctx.db.role==='gv'?'gv':ctx.db.role==='tbm'&&theme==='center'?'tbm':'tc'];
+ const list=tabs[ctx.db.role==='gv'?'gv':ctx.db.role==='tbm'?'tbm':'tc'];
  function active(r){if(r===ctx.route)return true;if(r==='GV02')return ['GV03','GV04','GV04b','GV04c','GV05','GV06','GV06b','GV06c'].includes(ctx.route);if(r==='TC02')return ctx.route.startsWith('TC02')||ctx.route.startsWith('TC03');if(r==='TC04a')return ctx.route.startsWith('TC04');if(r==='TC05')return ctx.route.startsWith('TC05');if(r==='TC06')return ctx.route.startsWith('TC06');return false;}
  return `<nav class="tabbar" aria-label="Điều hướng chính">${list.map(([r,i,t])=>`<button data-go="${r}" class="tab ${active(r)?'active':''}" ${active(r)?'aria-current="page"':''}>${icon(i,21)}<span>${t}</span></button>`).join('')}</nav>`;
 }
@@ -83,22 +75,6 @@ function render(){
  else if(r.startsWith('TC07'))html=communication(ctx);
  else html=operations(ctx);
  app.innerHTML=`<div class="screen ${r==='A00'?'login-screen':''}" data-screen="${r}">${html}</div>${r==='A00'?'':nav()}`;
- const hero=app.querySelector('.hero-task');
- if(hero){hero.dataset.category=ctx.db.role==='gv'?'report':'class';hero.querySelector('h2').insertAdjacentHTML('afterend',graphic(ctx.db.role==='gv'?'report-graphic':'pastel-toolkit','task-graphic'));}
- if(r==='A00')app.querySelector('.login-art').insertAdjacentHTML('beforeend',graphic('pastel-toolkit','welcome-graphic'));
- if(['GV03','TC04'].includes(r))app.querySelector('.profile-summary').insertAdjacentHTML('beforeend',graphic('student-graphic','profile-graphic'));
- if(['TC03','TC03b'].includes(r))app.querySelector('.session-summary').insertAdjacentHTML('beforeend',graphic('calendar-graphic','session-graphic'));
- if(r==='TC05b')app.querySelector('.report-student').insertAdjacentHTML('beforeend',graphic('report-graphic','record-graphic'));
- const headerGraphics={GV02:'student-graphic',TC04a:'student-graphic',TC02:'calendar-graphic',TC02b:'calendar-graphic',TC05:'report-graphic',GV07:'report-graphic',TBM01:'report-graphic',TC01b:'report-graphic'};
- if(headerGraphics[r])app.querySelector('.page-head')?.insertAdjacentHTML('beforeend',graphic(headerGraphics[r],'page-graphic'));
- // A reviewer-only comparison of the same overview content and state.
- app.classList.toggle('direction-b',theme!=='center'&&new URLSearchParams(location.search).get('direction')==='b'&&r==='TC01');
- if(app.classList.contains('direction-b')){
-   const hero=app.querySelector('.hero-task'),metrics=app.querySelector('.metrics');
-   hero.before(metrics);
-   const h=hero.querySelector('h2'),bottom=hero.querySelector('.hero-bottom'),top=hero.querySelector('.hero-top');
-   hero.innerHTML=`<div class="compact-task-icon">${icon('clock',25)}</div><div class="compact-task-copy">${top.innerHTML}<h2>${h.innerHTML.replaceAll('<br>',' ')}</h2>${bottom.innerHTML}</div>`;
- }
  document.querySelector('#device').classList.toggle('web-device',r==='TC05w');
  formatHeadings();
  document.title=`${SCREEN_META[r][0]} · Minh Hoàng Center`;
@@ -106,19 +82,17 @@ function render(){
 }
 function renderReviewer(){
  const role=ctx.db.role,r=ctx.route;
- const pastel=theme==='pastel',center=theme==='center';
- document.querySelector('.workspace-heading span:first-child').textContent=center?'MINH HOÀNG / QUẢN LÝ ĐÀO TẠO':'BIZ / QUẢN LÝ ĐÀO TẠO';
- document.querySelector('.workspace-heading span:last-child').textContent=center?'MINH HOÀNG CENTER · V0.4':pastel?'iOS PASTEL · V0.3':'UX TRẮNG ĐEN · V0.3';
- const themeButtons=`<div class="theme-switch" role="group" aria-label="Giao diện trải nghiệm">${[['center','Minh Hoàng'],['pastel','Pastel'],['mono','Trắng đen']].map(([value,label])=>btn(label,'theme',{class:theme===value?'selected':'',data:`data-value="${value}" aria-pressed="${theme===value}"`})).join('')}</div>`;
+ document.querySelector('.workspace-heading span:first-child').textContent='MINH HOÀNG / QUẢN LÝ ĐÀO TẠO';
+ document.querySelector('.workspace-heading span:last-child').textContent='MINH HOÀNG CENTER · V0.4';
  const screens=Object.entries(SCREEN_META).filter(([id])=>id==='A00'||(role==='gv'?id.startsWith('GV')||id.startsWith('TC07'):id.startsWith('TC')||(role==='tbm'&&id==='TBM01')));
  const selectedGroup=r.startsWith('GV04')?'Tiếp nhận học sinh':r.startsWith('TC03')?'Lịch dạy và điểm danh':r.startsWith('TC05')||['GV07','TBM01'].includes(r)?'Báo cáo học tập':'Không gian làm việc';
- document.querySelector('#review-tools').innerHTML=`<aside class="review-sidebar"><div class="review-brand">${center?'Minh Hoàng':'biz<span>↗</span>'}<small>${center?'CENTER · QUẢN LÝ ĐÀO TẠO':'QUẢN LÝ ĐÀO TẠO'}</small></div><div class="review-version"><span class="live-dot"></span> ${center?'THEO NGUỒN MINH HOÀNG':pastel?'PASTEL GRAPHIC':'UX TRẮNG ĐEN'} <b>${center?'V0.4':'V0.3'}</b></div>${themeButtons}<p class="review-label">ĐANG TRẢI NGHIỆM VỚI VAI TRÒ</p><div class="role-switch">${Object.entries(ROLES).map(([key,label])=>btn(`${icon(key==='gv'?'layers':key==='tc'?'book-open':'award',18)} ${label}${key===role?icon('check',16):''}`,'role',{class:key===role?'selected':'',data:`data-value="${key}" aria-pressed="${key===role}"`})).join('')}</div><div class="review-label screen-label">DANH MỤC MÀN HÌNH <span>${screens.length}</span></div><nav class="screen-index" aria-label="Danh mục màn hình UX">${screens.map(([id,[title]])=>link(id,`<code>${id.replace('-','·')}</code><span>${title}</span>`,id===r?'screen-item selected':'screen-item')).join('')}</nav><div class="review-bottom"><p>Dữ liệu mẫu · Lưu trên thiết bị<br>Không kết nối hệ thống thật</p>${btn(icon('rotate-ccw',15)+' Đặt lại bản trải nghiệm','demo-reset',{class:'text-link'})}</div></aside><div class="mobile-review"><b>${center?'Minh Hoàng':'biz.'} <small>UX</small></b><label><span class="sr-only">Vai trò trải nghiệm</span><select id="mobile-role">${Object.entries(ROLES).map(([k,v])=>`<option value="${k}" ${k===role?'selected':''}>${v}</option>`).join('')}</select></label>${btn(icon(pastel?'circle':'droplet',17),'theme',{class:'circle',data:`data-value="${center?'pastel':pastel?'mono':'center'}" aria-label="${center?'Xem giao diện pastel':pastel?'Xem UX trắng đen':'Xem giao diện Minh Hoàng'}"`})}${btn(icon('grid',18),'screen-menu',{class:'circle',data:'aria-label="Danh mục màn hình"'})}</div>`;
- document.querySelector('#context-panel').innerHTML=`<div class="context-top"><span class="context-number">${r}</span><p>${selectedGroup}</p><h2>${SCREEN_META[r][0]}</h2><span class="context-rule"></span><p>${SCREEN_META[r][1]}</p></div><div class="context-block"><span class="review-label">NGUYÊN TẮC TRẢI NGHIỆM</span><ul><li>Trạng thái hiện tại rõ ràng</li><li>Mỗi màn một việc chính</li><li>Luôn có đường quay lại</li></ul></div><div class="context-block"><span class="review-label">THỬ MỘT LUỒNG</span>${(role==='gv'?[['GV04','Tiếp nhận → Xếp lớp'],['GV07','Duyệt báo cáo hai vòng'],['GV10','Duyệt điều chỉnh điểm danh'],['GV09','Giao việc → Xác nhận']]:[['TC02','Lịch dạy → Điểm danh'],['TC05','Lập → Gửi báo cáo'],['TC06','Nhận việc → Gửi kết quả'],...(role==='tbm'?[['TBM01','Duyệt báo cáo bộ môn']]:[])]).map(([id,t])=>link(id,`${t} ${icon('arrow-up-right',15)}`,'context-flow')).join('')}</div><div class="context-foot"><span>390 × 844</span><span>${center?'MINH HOÀNG DESIGN SYSTEM':pastel?'GIAO DIỆN PASTEL':'GIAO DIỆN TRẮNG ĐEN'}</span><div class="swatches"><i></i><i></i><i></i><i></i><i></i></div></div>`;
+ document.querySelector('#review-tools').innerHTML=`<aside class="review-sidebar"><div class="review-brand">Minh Hoàng<small>CENTER · QUẢN LÝ ĐÀO TẠO</small></div><div class="review-version"><span class="live-dot"></span> THEO NGUỒN MINH HOÀNG <b>V0.4</b></div><p class="review-label">ĐANG TRẢI NGHIỆM VỚI VAI TRÒ</p><div class="role-switch">${Object.entries(ROLES).map(([key,label])=>btn(`${icon(key==='gv'?'layers':key==='tc'?'book-open':'award',18)} ${label}${key===role?icon('check',16):''}`,'role',{class:key===role?'selected':'',data:`data-value="${key}" aria-pressed="${key===role}"`})).join('')}</div><div class="review-label screen-label">DANH MỤC MÀN HÌNH <span>${screens.length}</span></div><nav class="screen-index" aria-label="Danh mục màn hình UX">${screens.map(([id,[title]])=>link(id,`<code>${id.replace('-','·')}</code><span>${title}</span>`,id===r?'screen-item selected':'screen-item')).join('')}</nav><div class="review-bottom"><p>Dữ liệu mẫu · Lưu trên thiết bị<br>Không kết nối hệ thống thật</p>${btn(icon('rotate-ccw',15)+' Đặt lại bản trải nghiệm','demo-reset',{class:'text-link'})}</div></aside><div class="mobile-review"><b>Minh Hoàng <small>UX</small></b><label><span class="sr-only">Vai trò trải nghiệm</span><select id="mobile-role">${Object.entries(ROLES).map(([k,v])=>`<option value="${k}" ${k===role?'selected':''}>${v}</option>`).join('')}</select></label>${btn(icon('grid',18),'screen-menu',{class:'circle',data:'aria-label="Danh mục màn hình"'})}</div>`;
+ document.querySelector('#context-panel').innerHTML=`<div class="context-top"><span class="context-number">${r}</span><p>${selectedGroup}</p><h2>${SCREEN_META[r][0]}</h2><span class="context-rule"></span><p>${SCREEN_META[r][1]}</p></div><div class="context-block"><span class="review-label">NGUYÊN TẮC TRẢI NGHIỆM</span><ul><li>Trạng thái hiện tại rõ ràng</li><li>Mỗi màn một việc chính</li><li>Luôn có đường quay lại</li></ul></div><div class="context-block"><span class="review-label">THỬ MỘT LUỒNG</span>${(role==='gv'?[['GV04','Tiếp nhận → Xếp lớp'],['GV07','Duyệt báo cáo hai vòng'],['GV10','Duyệt điều chỉnh điểm danh'],['GV09','Giao việc → Xác nhận']]:[['TC02','Lịch dạy → Điểm danh'],['TC05','Lập → Gửi báo cáo'],['TC06','Nhận việc → Gửi kết quả'],...(role==='tbm'?[['TBM01','Duyệt báo cáo bộ môn']]:[])]).map(([id,t])=>link(id,`${t} ${icon('arrow-up-right',15)}`,'context-flow')).join('')}</div><div class="context-foot"><span>390 × 844</span><span>MINH HOÀNG DESIGN SYSTEM</span><div class="swatches"><i></i><i></i><i></i><i></i><i></i></div></div>`;
 }
 const actions=createActions(ctx);
 document.addEventListener('click',async e=>{
  const go=e.target.closest('[data-go]');if(go){if(go.dataset.student)ctx.db.selectedStudent=go.dataset.student;if(go.dataset.report)ctx.db.selectedReport=go.dataset.report;if(go.dataset.session)ctx.db.selectedSession=go.dataset.session;if(go.dataset.task)ctx.db.selectedTask=go.dataset.task;if(go.dataset.thread){ctx.db.selectedThread=go.dataset.thread;const t=ctx.db.threads.find(t=>t.id===go.dataset.thread);if(t)t.unread=0;}navigate(go.dataset.go);return;}
- const a=e.target.closest('[data-action]');if(a?.dataset.action==='theme'){setTheme(a.dataset.value);return;}if(a&&!a.disabled)await actions.click(a.dataset.action,a);
+ const a=e.target.closest('[data-action]');if(a&&!a.disabled)await actions.click(a.dataset.action,a);
 });
 document.addEventListener('submit',async e=>{const f=e.target.closest('[data-form]');if(!f)return;e.preventDefault();await actions.submit(f.dataset.form,f);});
 document.addEventListener('input',e=>actions.input(e));

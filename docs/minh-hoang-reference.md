@@ -61,8 +61,8 @@ Không thay mã tuyến hoặc tạo 41 bản HTML rời. Các trạng thái `GV
 ## Cách mở và kiểm tra
 
 - Mặc định và `?theme=center`: bản Minh Hoàng V0.4.
-- `?theme=pastel`, `?theme=mono`: giữ hai phương án trước để đối chiếu.
-- Chuyển giao diện không remount biểu mẫu đang nhập; giữ giá trị và tuyến hiện tại.
+- Đã gỡ Pastel và Trắng đen theo yêu cầu người dùng. Các liên kết `?theme=pastel`, `?theme=mono` tự mở Minh Hoàng, giữ nguyên tuyến và dữ liệu đã lưu.
+- Mở lại liên kết cũ giữ dữ liệu nháp đã lưu trên thiết bị và tuyến hiện tại.
 - `npm run check`, `npm test`, `npm run build`, `npm run test:browser`.
 - Ma trận hiện có kiểm tra đủ 41 màn ở 360/390/768/1440px và tăng cỡ chữ 150% trên các biểu mẫu đại diện.
 - `reference.cjs` kiểm tra token từ nguồn, cấu trúc hai tổng quan, số liệu điểm danh, điều hướng 64px, ô nhập 56px và nhãn điều khiển trên nền đặc.

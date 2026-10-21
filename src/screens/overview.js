@@ -5,23 +5,9 @@ export function overview(ctx) {
   const {db,route}=ctx;
   if(route==='A00') return `<div class="login-art"><span class="brand-mark">b<span>↗</span></span><div class="art-orbit"></div><span class="art-caption">KẾT NỐI ĐỘI NGŨ · ĐỒNG HÀNH HỌC SINH</span></div><div class="login-content"><p class="eyebrow">CHÀO MỪNG ĐẾN BIZ</p><h1>Cùng dạy tốt,<br>cùng học tốt.</h1><p>Không gian làm việc dành cho đội ngũ đào tạo.</p>${form('login',field('Số điện thoại','phone','',{type:'tel',required:true,autocomplete:'username',placeholder:'Nhập số điện thoại'})+field('Mật khẩu','password','',{type:'password',required:true,autocomplete:'current-password',placeholder:'Nhập mật khẩu'})+btn('Quên mật khẩu?','forgot',{class:'text-link'})+footer('Đăng nhập','',{type:'submit',icon:'arrow-right'}))}<p class="login-hint">Tài khoản do trung tâm cấp</p></div>`;
   if(route==='TC01b') return stats(ctx);
-  if(ctx.theme==='center') return centerOverview(ctx);
-  const isOffice=db.role==='gv';
-  const name=isOffice?'Thu Phương':'Minh Anh';
-  const urgent=isOffice?db.reports.filter(r=>r.status==='Chờ duyệt'&&r.head).length:db.sessions.filter(s=>s.teacher==='T01'&&!s.locked&&s.students.length&&!Object.keys(s.marks).length).length;
-  const pending=db.students.filter(s=>s.status==='Chờ xếp lớp').length;
-  const next=db.sessions.find(s=>s.teacher==='T01'&&!s.locked&&s.students.length);
-  return `<div class="greeting">${avatar(isOffice?'Thu Phương':'Minh Anh','me')}<div><span>Chào ${name},</span><strong>Sẵn sàng cho ngày học mới.</strong></div>${link('TC07',icon('bell'),'circle notification','aria-label="Mở tin nhắn và thông báo"')}</div>
-    <div class="overview-title"><div><span class="eyebrow">THỨ TƯ, 21 THÁNG 10</span><h1>Công tác<br>hôm nay<span class="title-dot">.</span></h1></div>${btn(icon('grid'),'shortcuts',{class:'circle',data:'aria-label="Mở tác vụ nhanh"'})}</div>
-    <article class="hero-task"><div class="hero-top">${pill(isOffice?'Cần xử lý':'Trước 00:00 ngày mai',true)}${icon(isOffice?'file-text':'clock')}</div><span class="hero-kicker">${isOffice?'BÁO CÁO HỌC TẬP':'ĐIỂM DANH HÔM NAY'}</span><h2>${urgent} ${isOffice?'báo cáo<br>chờ xét duyệt':'buổi học<br>chưa điểm danh'}</h2><div class="hero-bottom"><span>${isOffice?'Trưởng bộ môn đã duyệt bước 1':'Ghi nhận có mặt, vắng cho từng học sinh'}</span>${link(isOffice?'GV07':'TC02',icon('arrow-up-right',24),'round-arrow','aria-label="'+(isOffice?'Duyệt báo cáo':'Mở lịch dạy')+'"')}</div></article>
-    <div class="metrics">${isOffice?metric(pending,'Chờ xếp lớp','GV02','users')+metric(db.invoices.filter(i=>!i.paid).length,'Học phí chưa thu','GV08','credit-card'):metric('38<span>/40</span>','Buổi dạy tháng này','TC01b','calendar')+metric('7<span>/10</span>','Mục tiêu quý IV','TC01b','trending-up')}</div>
-    ${section(isOffice?'Tác vụ nhanh':'Lịch dạy hôm nay',isOffice?link('GV04','Tiếp nhận mới '+icon('arrow-right',15)):link('TC02','Xem lịch '+icon('arrow-right',15)))}
-    ${isOffice?`<div class="shortcuts">${[['GV04','user-plus','Tiếp nhận học sinh'],['GV05','plus-square','Xếp lớp'],['GV06','refresh-cw','Đổi giáo viên'],['GV06b','calendar','Đổi lịch học'],['GV06c','user-minus','Ngừng học'],['GV08','file-text','Học phí']].map(([r,i,t])=>link(r,`${icon(i,22)}<span>${t}</span>`,'shortcut')).join('')}</div>${section('Lịch học trong ngày')}<div class="day-summary">${[['Sáng','2 ca','12 học sinh'],['Chiều','3 ca','18 học sinh'],['Tối','4 ca','24 học sinh']].map(([a,b,c])=>`<div><span>${a}</span><strong>${b}</strong><small>${c}</small></div>`).join('')}</div>`:
-      `<div class="next-class">${pill('Ca tiếp theo')}<div class="next-title"><div><h3>${esc(next?.name||'Đã hoàn thành hôm nay')}</h3><p>${esc(next?.time||'Không còn ca sắp tới')}</p></div>${link('TC03',icon('arrow-right'),'circle','aria-label="Điểm danh ca tiếp theo"')}</div><div class="student-stack">${db.students.slice(0,3).map(s=>avatar(s.name)).join('')}<small>${next?.students.length||0} học sinh · Cơ sở 1</small></div></div>${section('Học sinh cần theo dõi')}<div class="attention">${icon('alert-circle')}<div><strong>2 học sinh chưa đủ buổi dự kiến</strong><p>Đối chiếu điểm danh với lịch học trong tháng.</p></div>${link('TC04a',icon('chevron-right'),'icon-link','aria-label="Xem chuyên cần học sinh"')}</div>`}
-    ${db.role==='tbm'?link('TBM01',`${icon('check-square')} Duyệt báo cáo bộ môn ${icon('arrow-right')}`,'full-link'):''}
-    ${section('Thông báo chung',link('TC07','Xem tất cả'))}<div class="notice-list">${db.notices.slice(0,2).map(n=>link(n.route,`<span class="notice-dot"></span><span><strong>${esc(n.title)}</strong><small>${esc(n.body)}</small></span>${icon('chevron-right',16)}`,'notice-row')).join('')}</div>
-    ${isOffice?`<div class="utility-links">${[['GV09','Giao việc'],['GV10','Điều chỉnh điểm danh'],['GV11','Tài khoản']].map(([r,t])=>link(r,t)).join('')}</div>`:''}`;
+  return centerOverview(ctx);
 }
+
 function centerOverview(ctx) {
  const {db}=ctx,office=db.role==='gv',name=office?'Thu Phương':'Minh Anh';
  const daySessions=db.sessions.filter(s=>s.date===today()&&s.students.length&&(office||s.teacher==='T01'));
