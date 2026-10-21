@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "returncode": 0,
+  "phase": "rendered",
+  "contract_version": "2.0",
+  "errors": [],
+  "page_count": 3,
+  "verification": "DECISION_INTEGRITY_ONLY",
+  "aesthetic_quality": "UNKNOWN",
+  "ux_integrity": "RECORDED",
+  "human_preference": "UNKNOWN",
+  "comparison_reviews": [
+    {
+      "route": "TC01",
+      "status": "HEURISTIC_ONLY",
+      "human_review_count": 0
+    }
+  ],
+  "direction_comparison": "MULTI_AXIS_DECLARED",
+  "contract_sha256": "a1cf6d6031d166f0de2fea1e8bf04e2dfee7ffcead1478c1d7aa4b41f4c51c2c",
+  "path": "docs/uiux/design-decisions.json",
+  "project_root": "C:\\Users\\LENOVO\\Documents\\Codex\\2026-10-21\\s-d-ng-https-github-com-5\\work\\Biz",
+  "artifact_path": "C:\\Users\\LENOVO\\Documents\\Codex\\2026-10-21\\s-d-ng-https-github-com-5\\work\\Biz\\docs\\uiux\\design-decisions.json",
+  "artifact_sha256": "sha256:a1cf6d6031d166f0de2fea1e8bf04e2dfee7ffcead1478c1d7aa4b41f4c51c2c",
+  "dependency_hashes": {
+    "docs/uiux/comparison-observations.json": "1dc8a8e8812f9f659d12179b13a3328defc514c2966900c6d3169c98b0b388bd",
+    "docs/uiux/comparison-plan.json": "bcfb71e9bfe49ef35956efc911f95d1ae603b152191409e700776c61fb3cb6e7",
+    "evidence/browser/form-desktop.png": "8a0ae97917dbbd9fc8279f6587543e3a77abb11ab4856e33f69225e4f0df3c67",
+    "evidence/browser/form-mobile.png": "30f66b4b0ee78f6b0402da34bb44b053d04516554dac9b53136b5b1b65fcdc37",
+    "evidence/browser/overview-a-desktop.png": "07e5c7c884c01c95280f61f15a12792d70630f4a5078ed530c05d4bf2020d1c8",
+    "evidence/browser/overview-a-mobile.png": "8ec160f47c929e33d3087aa5fc74fa571ba7e1da1fe018ffd095e285bdc5b1e6",
+    "evidence/browser/overview-b-desktop.png": "7c29d4df341720e14117e6787779f9b67b77a9caa3a35699fa1897490710f602",
+    "evidence/browser/overview-b-mobile.png": "736e14b897a0646f2b7c19189d5687ae4d56b70dae8099ea7f8df7af6c94f2fe",
+    "evidence/browser/selection-desktop.png": "00c23f0da2ffc910c8e404496c79628ac1eae645e8d19634f3c790a2efa2015d",
+    "evidence/browser/selection-mobile.png": "5321e3e677147df375d49d8547761f8579cc627a5e66435b52f01acf5e8dd3a2"
+  }
+}

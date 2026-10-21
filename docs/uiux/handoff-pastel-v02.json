@@ -1,0 +1,25 @@
+{
+  "version": "0.2",
+  "style": "iOS-inspired pastel graphic browser prototype",
+  "delivery": "PREPARED_LOCAL_UNCOMMITTED",
+  "input": "Biz-design-system.zip",
+  "input_sha256": "0243c423cec209d550167c00ef4c860a4ad3144c1dd95e3845cda433a7b5b57b",
+  "themes": {
+    "pastel": "?theme=pastel",
+    "monochrome_baseline": "?theme=mono"
+  },
+  "source_sha256": {
+    "index.html": "0b24828c6a861060053d6f2b5171327e053f3b485e16bf1d0b46e82a67d0db81",
+    "src/app.js": "1bab4089e588e74518691e9098f889c146baebd235e5df33fb9e5b371a948aec",
+    "src/ui.js": "377a1adc3c0a2db10d49bc3b0a2953a523667946f1168e3b8dd36c0798387bc9",
+    "src/pastel.css": "8b8787edd5379d83ee516be8e084790b65a56a47d02bce55dea5937dba7cd1c9"
+  },
+  "qa": {
+    "unit_tests": 9,
+    "route_viewport_cases": 164,
+    "theme_draft_preservation": "PASS",
+    "graphic_overlap_scan": "PASS",
+    "opaque_control_contrast": "PASS",
+    "native_ios": "NOT_RUN"
+  }
+}

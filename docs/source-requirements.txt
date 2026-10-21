@@ -1,0 +1,91 @@
+1. Khung UX: vai trò và luồng màn hình
+App mobile-first (khung 390 × 844) cho nhân sự nội bộ, một app duy nhất, giao diện thay đổi theo tài khoản. Đăng nhập bằng số điện thoại và mật khẩu (tài khoản do trung tâm cấp). Chỉ việc nhập báo cáo hàng loạt bằng Excel chạy trên web (TC05w).
+3 giao diện theo vai trò [ART]:
+• Giáo vụ: màn GV01–GV11, tab bar 5 mục; các tác vụ còn lại vào qua lối tắt ở Tổng quan.
+• Giáo viên: màn TC01–TC07, tab bar 5 mục.
+• Trưởng bộ môn: giao diện giáo viên cộng thêm màn TBM01 (duyệt báo cáo).
+Giám đốc, Admin–Kế toán và Trưởng phòng Đào tạo có trong phân quyền gốc [PDF] nhưng chưa có giao diện. Hồ sơ học sinh chỉ hiện đủ cho Giám đốc, Trưởng phòng Đào tạo và Admin; vai trò khác chỉ thấy tên, mã học sinh và trường [PDF]. Phần hiển thị rút gọn này chưa được thiết kế.
+Luồng màn hình chính:
+1. Nhận học sinh mới (Giáo vụ): GV04 → GV04b → GV04c → GV05 tạo lớp; lịch tự nhảy vào ca của giáo viên (TC02) kèm thông báo.
+2. Điều chỉnh lớp (Giáo vụ): GV03 → GV06 / GV06b / GV06c.
+3. Tích lịch (Giáo viên): TC02 → TC03 trước 0h → TC03b khi đã khóa → yêu cầu sửa → GV10; buổi phát sinh ở TC03c.
+4. Báo cáo tháng: TC05 → TC05c (hoặc TC05w) → duyệt ở TBM01 và GV07 → Đã duyệt, hoặc Làm lại → TC05d.
+5. Công việc: GV09 giao → TC06 → TC06b → TC06c gửi kết quả → người giao xác nhận.
+6. Trao đổi: TC07 → TC07b hội thoại hoặc TC07c soạn tin.
+2. Màn hình của Giáo vụ (màn GV, 18 màn + A00)
+A00 Đăng nhập [ART]: số điện thoại, mật khẩu, quên mật khẩu; ghi chú “Tài khoản do trung tâm cấp”.
+GV01 Tổng quan [ART]: 4 chỉ số (chờ xếp lớp, báo cáo chờ duyệt, ca chưa tích lịch, hóa đơn chưa thu); lối tắt tác vụ (Nhập hồ sơ, Tạo lớp, Chuyển GV, Chuyển lịch, Nghỉ học, Hóa đơn); mục “Hôm nay” theo Sáng, Chiều, Tối (số ca, số học sinh).
+GV02 Danh sách học sinh [ART]: tìm kiếm; lọc Tất cả, Chờ xếp lớp, Khối, Môn, Đã nghỉ; mỗi dòng gồm tên, khối, trường, môn và trạng thái (Chờ xếp lớp, Đang học, Đã nghỉ).
+GV03 Hồ sơ học sinh [PDF][ART]: khối A cố định (thông tin học sinh, phụ huynh, liên hệ khẩn cấp, bài test đầu vào kèm mức M và giáo viên kiểm tra); trạng thái ON/OFF; môn đang học; thẻ theo môn (giáo viên, lịch, ngày bắt đầu, số buổi tháng này); lịch sử học tập; nút Tạo lớp và Điều chỉnh.
+GV04, GV04b, GV04c Nhập hồ sơ 3 bước [PDF][ART]:
+• Bước 1 Học sinh: mã tự tạo; cảnh báo trùng họ tên với học sinh đã có; ngày sinh, giới tính, khối, cơ sở, trường, địa chỉ, SĐT học sinh, nguồn biết đến.
+• Bước 2 Phụ huynh: họ tên, SĐT (cảnh báo nếu SĐT đã là phụ huynh của học sinh khác, cho phép “Dùng chung”), email, quan hệ (Bố, Mẹ, Khác), người liên hệ khẩn cấp.
+• Bước 3 Test đầu vào: ngày test, môn, giáo viên kiểm tra, bài test scan (chụp hoặc tải lên), mức đánh giá M1 Xây nền, M2 Phát triển, M3 Đạt chuẩn, M4 Vững chắc, nhận xét. Hai nút: “Lưu hồ sơ và tạo lớp” hoặc “Chỉ lưu hồ sơ”.
+GV05, GV05·s1, s2, s3 Tạo lớp [PDF][ART]: gõ mã học sinh để hiện gợi ý (mã, tên, khối, trường) và tên tự điền; chọn môn qua bottom sheet 11 môn; chọn giáo viên (chỉ hiện giáo viên của bộ môn đã chọn); lịch hằng tuần tick trên lưới ngày × ca; ngày bắt đầu chọn trên lịch (ngày đã qua bị khóa); Lưu.
+GV06 Chuyển giáo viên [PDF][ART]: mã học sinh, môn, giáo viên hiện tại và lịch hiện tại tự điền, giáo viên nhận (lọc theo môn), lịch (giữ lịch cũ hoặc tick lịch mới), lý do (Lịch học với giáo viên hiện tại không phù hợp; Phương pháp giảng dạy chưa phù hợp; Trình độ hoặc mục tiêu của học sinh thay đổi; Theo đề xuất, điều phối của trung tâm; Lý do khác), ngày bắt đầu. Ba màn GV06, GV06b, GV06c dùng chung thanh chuyển Chuyển GV / Chuyển lịch / Nghỉ học.
+GV06b Chuyển lịch [PDF][ART]: giáo viên và lịch hiện tại tự điền, tick lịch mới, ngày bắt đầu.
+GV06c Nghỉ học [PDF][ART]: giáo viên và lịch tự điền; lý do nghỉ (Trùng lịch học; Giáo viên không phù hợp; Chuyển trường hoặc chuyển nơi ở; Không sắp xếp được lịch học phù hợp; Kết quả học tập không đạt kỳ vọng; Không liên hệ được hoặc tự ý ngừng học; Lý do cá nhân hoặc gia đình; Đã hoàn thành mục tiêu học tập; Lý do khác); ngày bắt đầu nghỉ. Hồ sơ chuyển “Đã nghỉ”, ẩn khỏi lịch dạy, có thể bật lại.
+GV07 Duyệt báo cáo [DOCX][ART]: lọc theo tháng và trạng thái (Chờ duyệt, Quá hạn, Đã duyệt); mỗi thẻ có học sinh, môn, giáo viên, thời điểm gửi, đồng hồ “Còn …h”, tình trạng duyệt của Trưởng bộ môn và Giáo vụ; hai nút Làm lại và Duyệt.
+GV08 Hóa đơn tháng [ART]: tổng tháng (số học sinh, tổng tiền), số đã thu và chưa thu, nút “Tạo hóa đơn tháng”; mỗi học sinh hiện số buổi theo môn, số tiền, trạng thái Đã thu hoặc Chưa thu.
+GV09 Giao việc [DOCX][ART]: tiêu đề, mô tả, người nhận (chọn giáo viên, hiển thị Trưởng bộ môn), hạn hoàn thành, mức ưu tiên, đính kèm; phiếu sang danh sách việc của giáo viên (TC06).
+GV10 Sửa tích lịch sau giờ khóa [DOCX][ART]: chỉ Giáo vụ. Hai tab: Yêu cầu và Lịch sử sửa. Mỗi yêu cầu gồm giáo viên, lớp, ca, thời điểm gửi, thay đổi (ví dụ Vắng → Có mặt), lý do, nút Từ chối và Duyệt sửa; có cả yêu cầu thêm buổi phát sinh hoặc học bù. Lịch sử ghi người sửa, nội dung, thời điểm.
+GV11 Quản trị tài khoản [ART]: danh sách lọc theo Giáo viên, Trưởng bộ môn, Giáo vụ, Tạm khóa; chi tiết gồm tên đăng nhập, ngày tạo, vai trò, bộ môn, Đặt lại mật khẩu, Khóa tài khoản.
+3. Màn hình của Trưởng bộ môn (TBM01)
+TBM01 Duyệt báo cáo [DOCX][ART]: dùng chung toàn bộ màn TC (mục 4) và thêm màn duyệt. Ba tab: Chờ tôi duyệt, Chờ Giáo vụ, Đã duyệt. Thẻ báo cáo hiện chuyên cần, điểm kiểm tra, trích nhận xét, đồng hồ 24 giờ; hai nút Yêu cầu làm lại và Duyệt.
+4. Màn hình của Giáo viên (màn TC, 21 màn)
+4.1 Tổng quan và thống kê
+TC01 Tổng quan [ART]: ca chưa tích lịch kèm giờ khóa, ca tiếp theo, học sinh cần chú ý chuyên cần (thiếu buổi), số ca dạy (ví dụ 38/40), KPI quý (ví dụ 7/10), lối vào thống kê, thông báo chung (hạn nộp báo cáo, họp bộ môn).
+TC01b Thống kê [DOCX][ART]: 9 chỉ số, module có thể bổ sung hoặc cập nhật chỉ số về sau.
+Chỉ số
+Nội dung
+Chuyên cần
+Theo từng học sinh, cảnh báo khi thiếu buổi so với lịch dự kiến
+Ca dạy
+Tỷ lệ ca thực tế so với ca danh nghĩa
+KPI
+KPI hoàn thành so với tổng KPI giao đầu quý
+Biến động học sinh
+Nghỉ, nhận mới, chuyển giáo viên, dạy thay
+Tần suất học
+Số học sinh học 1, 2, 3 buổi/tuần theo danh nghĩa
+Điểm
+Điểm số của học sinh (phân bố theo khoảng, điểm trung bình)
+Tỷ trọng khối lớp
+Tỷ trọng học sinh theo khối trên tổng học sinh phụ trách
+Giờ làm việc
+Giờ thực tế trích từ dữ liệu chấm công
+Nhiệm vụ chưa hoàn thành
+Số lần chưa hoàn thành nhiệm vụ được giao
+4.2 Lịch dạy và tích lịch
+TC02 Lịch dạy, bảng tuần và TC02b theo ngày [PDF][DOCX][ART]: lịch xem theo 2 cách (theo từng học sinh và theo ngày làm việc), trình bày dạng bảng. Bảng tuần là lưới T2–CN × Sáng/Chiều/Tối, mỗi ô hiện lớp và sĩ số (ví dụ L7·6). Trạng thái ô: Đã tích, Chưa tích, Sắp tới, Phát sinh. Chạm vào ô để mở danh sách học sinh của ca và nút “Tích lịch ca này”.
+TC03 Tích lịch trước giờ khóa [DOCX][ART]: danh sách học sinh đã xếp sẵn, mỗi người chọn Có hoặc Vắng; nút “Có mặt tất cả”; đồng hồ đếm ngược đến 0h đêm; số có mặt và vắng; lịch sử chỉnh sửa; Lưu. TC03b Đã khóa: chỉ xem, nêu rõ chỉ Giáo vụ được sửa, có nút gửi yêu cầu sửa. TC03c Buổi phát sinh: thêm buổi ngoài danh sách với 2 loại Dạy thay hoặc Học bù; bắt buộc ghi học sinh, môn, giáo viên thực hiện, ngày học, ca, loại buổi.
+4.3 Học sinh
+TC04a Danh sách học sinh [ART]: học sinh giáo viên phụ trách (ví dụ 17 học sinh), tìm kiếm, lọc Tất cả, Thiếu buổi, Khối, Môn, Ca; hiện số buổi đã học trên tháng.
+TC04 Hồ sơ học sinh [DOCX][ART]: lịch học theo môn, số buổi tháng này, kết quả test đầu vào (Nền tảng, Năng lực, Thái độ), báo cáo hàng tháng, điểm thi tại trung tâm, trao đổi với phụ huynh. Hiển thị tuân theo quy tắc phân quyền xem hồ sơ ở mục 1.
+TC04b Phiếu đánh giá năng lực [ART]: thang M1–M4 với 8 tiêu chí chia 3 nhóm: Nền tảng (kiến thức nền tảng, kiến thức mở rộng, hiểu bản chất), Năng lực (kỹ năng tính toán, tư duy phân tích và lập luận, phát hiện và sửa lỗi), Phương pháp và thái độ (phương pháp và thói quen học, thái độ học và sự kiên trì); điểm mạnh nổi bật, điểm cần cải thiện, xem bản scan.
+4.4 Báo cáo học tập
+• TC05 Danh sách [ART]: lọc Tất cả, Chưa nộp, Nháp, Làm lại, Chờ duyệt, Đã duyệt; gửi xét duyệt hàng loạt các bản nháp; hiển thị hạn nộp; lối vào import Excel trên web.
+• TC05b Xem báo cáo: trạng thái duyệt (ví dụ Chờ duyệt 1/2), mốc Đã gửi, Trưởng bộ môn, Giáo vụ; chuyên cần tự lấy từ tích lịch; điểm trong tháng; đánh giá Nền tảng, Năng lực, Thái độ; nhận xét; định hướng tháng sau; các tháng trước.
+• TC05c Nhập báo cáo: chuyên cần tự lấy; điểm (kiểm tra tháng, giữa kỳ, thêm bài); đánh giá; nhận xét; định hướng tháng sau; Lưu nháp hoặc Gửi xét duyệt.
+• TC05d Sửa và gửi lại: hiện lý do bị yêu cầu làm lại, các lần gửi trước.
+• TC05w Import Excel (web) [DOCX][ART]: tải file mẫu .xlsx, tải file lên, kiểm tra từng dòng (Hợp lệ, Thiếu Thái độ, Sai mã HS). Cột: Mã HS, Họ tên, Môn, Chuyên cần, Điểm, Nền tảng, Năng lực, Thái độ, Nhận xét. Chuyên cần luôn lấy từ tích lịch; cột trong file chỉ để đối chiếu.
+4.5 Công việc (ticket)
+• TC06 Danh sách [ART]: lọc Đang mở, Mới giao, Đang làm, Chờ xác nhận, Đã đóng; thẻ có hạn, người giao, tiến độ; nút Nhận việc hoặc Hỏi lại; cảnh báo quá hạn.
+• TC06b Chi tiết phiếu [DOCX][ART]: mã phiếu, người giao, ngày giao, hạn, ưu tiên, mô tả, đính kèm, tiến độ %, cập nhật tiến độ, trao đổi trên phiếu, lịch sử (giao, phản hồi, cập nhật, xác nhận).
+• TC06c Gửi kết quả: nhập kết quả, đính kèm; phiếu chuyển sang Chờ xác nhận.
+4.6 Trao đổi và thông báo
+TC07 Hộp thư, TC07b Hội thoại, TC07c Soạn tin [DOCX][ART]: tab Tin nhắn và Thông báo. Giáo viên nhắn với giáo viên cùng bộ môn, Giáo vụ, Trưởng bộ môn và với gia đình (phụ huynh); hội thoại hỗ trợ đính kèm file và trạng thái đã xem. Thông báo chung từ Trưởng bộ môn hoặc phòng Giáo vụ chỉ dùng cho thông báo chung; xử lý từng nhiệm vụ nằm ở mục công việc.
+5. Trạng thái và hành vi giao diện
+• Ô lịch (TC02): Đã tích, Chưa tích, Sắp tới, Phát sinh; chạm vào ô để mở danh sách học sinh của ca.
+• Tích lịch (TC03): mỗi học sinh một lựa chọn Có hoặc Vắng, nút “Có mặt tất cả”, đồng hồ đếm ngược “Sửa được đến 0h đêm nay”, bộ đếm có mặt và vắng. Sau mốc khóa màn chuyển sang chế độ chỉ xem (TC03b): “Đã khóa lúc 0h · Chỉ Giáo vụ được sửa”, kèm nút gửi yêu cầu sửa. Mọi chỉnh sửa hiện trong “Lịch sử chỉnh sửa” (người sửa, giờ, nội dung).
+• Báo cáo: pill trạng thái Chưa nộp, Nháp, Chờ duyệt (kèm tiến trình 1/2), Làm lại, Đã duyệt; đồng hồ “Còn …h” và nhãn “Quá hạn” ở GV07 và TBM01; banner lý do làm lại và dòng thời gian các lần gửi ở TC05d.
+• Phiếu công việc: thanh bước Được giao → Đang làm → Chờ xác nhận → Đã đóng; pill “Quá hạn n ngày”; thanh tiến độ %; phiếu bị trả lại quay về Đang làm.
+• Học sinh: pill Chờ xếp lớp, Đang học, Đã nghỉ; hồ sơ OFF thì ẩn thông tin và ẩn khỏi lịch dạy, bật lại được.
+• Form: ô tự điền gắn nhãn “Tự điền”; chuyên cần là trường chỉ đọc “Tự lấy từ tích lịch”; cảnh báo trùng họ tên hoặc số điện thoại hiện ngay dưới ô nhập, kèm nút Xem hoặc Dùng chung; gợi ý tìm kiếm mở ngay dưới ô nhập; danh sách chọn mở bằng bottom sheet; ngày đã qua bị khóa trong lịch chọn ngày; mỗi màn một nút hành động chính full-width ở đáy.
+• Thông báo: giáo viên nhận tin báo khi có học sinh mới và lịch tự nhảy vào ca của mình; nhãn đỏ cam dùng cho cảnh báo, quá hạn, vắng, nghỉ học.
+6. Design System và điều hướng hiện tại [ART]
+• Design System v1: font Google Sans Flex; màu brand xanh #253a7e (nút chính, tab bar), cam #ea4c2d (cảnh báo, nghỉ, quá hạn, hành động phá hủy), vàng #f4e743 (điểm nhấn nhỏ); thêm ink, muted, surface, line, success và 4 nền soft. Bo góc 8, 12, 16, 24, 28, tròn. Chạm tối thiểu 44 px. Khung 390 × 844, chừa 128 px đáy cho tab bar nổi.
+• Quy tắc: mỗi màn một hành động chính (nút full-width ở đáy); không viền card, phân cấp bằng nền; trạng thái luôn là pill có chữ; dropdown mở bằng bottom sheet; icon stroke 2.
+• Tab bar hiện tại (chỉ icon): Giáo vụ gồm Tổng quan, Học sinh, Duyệt, Hóa đơn, Trao đổi; Giáo viên gồm Tổng quan, Lịch dạy, Học sinh, Báo cáo, Công việc.
+• Bàn giao: Tailwind (tailwind.config.js, tailwind.src.css), dự kiến map token sang Flutter ThemeData.
+• Đang cân nhắc, chưa chốt: 3 hướng UX/UI: A Hub theo vai trò, B Hàng đợi “Việc cần làm”, C Học sinh làm trung tâm.

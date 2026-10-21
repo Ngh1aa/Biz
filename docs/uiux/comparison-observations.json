@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "plan_sha256": "09ac85491eb35bee23d8c6a74e9a1152e75d6b451b8de43c868675891efff68e",
+  "reviews": [
+    {
+      "reviewer_id": "codex-author-review",
+      "role": "Author reviewing synthetic teacher scenario",
+      "source": "agent-heuristic",
+      "independent": false,
+      "session_index": 0,
+      "presentation_order": [
+        "A",
+        "B"
+      ],
+      "answers": [
+        {
+          "label": "A",
+          "question_id": "C1",
+          "response": "The large two-session priority card and midnight pill lead directly to the circular schedule action.",
+          "criteria_met": [
+            true,
+            true
+          ],
+          "observed_element": "Priority card at upper center and circular arrow",
+          "capture_sha256": "8ec160f47c929e33d3087aa5fc74fa571ba7e1da1fe018ffd095e285bdc5b1e6"
+        },
+        {
+          "label": "A",
+          "question_id": "D1",
+          "response": "Large rounded task object, heavy title, grayscale metric pair and pill tab bar match the supplied visual grammar.",
+          "criteria_met": [
+            true,
+            true
+          ],
+          "observed_element": "Priority card at upper center and circular arrow",
+          "capture_sha256": "8ec160f47c929e33d3087aa5fc74fa571ba7e1da1fe018ffd095e285bdc5b1e6"
+        },
+        {
+          "label": "B",
+          "question_id": "C1",
+          "response": "Metrics appear first; the compact task row still exposes the deadline and count, and next class is visible earlier.",
+          "criteria_met": [
+            true,
+            true
+          ],
+          "observed_element": "Compact task row below metrics and next-class card",
+          "capture_sha256": "736e14b897a0646f2b7c19189d5687ae4d56b70dae8099ea7f8df7af6c94f2fe"
+        },
+        {
+          "label": "B",
+          "question_id": "D1",
+          "response": "Compact statistics and inline task row are denser; the action is discoverable but has less visual emphasis.",
+          "criteria_met": [
+            true,
+            true
+          ],
+          "observed_element": "Compact task row below metrics and next-class card",
+          "capture_sha256": "736e14b897a0646f2b7c19189d5687ae4d56b70dae8099ea7f8df7af6c94f2fe"
+        }
+      ],
+      "preferred_label": "A",
+      "tradeoff": "A prioritizes attendance risk; B fits more schedule content. This is author heuristic review, not an independent or human preference finding."
+    }
+  ]
+}

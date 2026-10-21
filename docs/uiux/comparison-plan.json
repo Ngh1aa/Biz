@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "contract_sha256": "37e430e532289ab553632c5d8485772588b61e3cfc0e36cb6fb91e1d807575fe",
+  "route": "TC01",
+  "seed": 0,
+  "facilitator": {
+    "labels": {
+      "A": "A",
+      "B": "B"
+    },
+    "protocol": {
+      "buyer_task": "Identify unmarked sessions and the next action before midnight.",
+      "held_constant": {
+        "audience": "Teacher T01",
+        "content": "Two unmarked sessions, 38/40 shifts, KPI 7/10, next class",
+        "claims": "Synthetic fixture data only",
+        "cta": "Open schedule and attendance",
+        "state": "Default seeded store",
+        "assets": "Self-hosted Manrope and Feather icons",
+        "viewports": "390×844 and 1440×1040"
+      },
+      "questions": [
+        {
+          "id": "C1",
+          "dimension": "comprehension",
+          "prompt": "What needs action before midnight, and where do you go?",
+          "criteria": [
+            "Unmarked count and deadline identifiable",
+            "Schedule action discoverable"
+          ]
+        },
+        {
+          "id": "D1",
+          "dimension": "distinctiveness",
+          "prompt": "Which visible structure conveys the requested learning-app language?",
+          "criteria": [
+            "Rounded task object and circular action visible",
+            "Hierarchy supports the actual attendance task"
+          ]
+        }
+      ]
+    },
+    "captures": [
+      {
+        "route": "TC01",
+        "composition_id": "A",
+        "file": "evidence/browser/overview-a-mobile.png",
+        "sha256": "8ec160f47c929e33d3087aa5fc74fa571ba7e1da1fe018ffd095e285bdc5b1e6",
+        "width": 390,
+        "viewport_height": 844,
+        "inspected": true,
+        "review_source": "agent-heuristic",
+        "critique": {
+          "hierarchy": "A emphasizes the attendance deadline; B exposes more next-class content; selection leads with criteria; intake leads with step context.",
+          "typography": "Vietnamese headings readable, strong contrast. Small metadata remains secondary; critical actions carry text labels.",
+          "spacing": "24px product gutter. No observed clipping; long forms and lists scroll behind floating tabs with bottom reserve.",
+          "media": "No raster media, no crop claims. Initials are synthetic identifiers; icons support words.",
+          "distinctiveness": "Rounded grayscale task objects, circular directional control and capsule navigation transfer the requested reference grammar without course-screen copying."
+        }
+      },
+      {
+        "route": "TC01",
+        "composition_id": "A",
+        "file": "evidence/browser/overview-a-desktop.png",
+        "sha256": "07e5c7c884c01c95280f61f15a12792d70630f4a5078ed530c05d4bf2020d1c8",
+        "width": 1440,
+        "viewport_height": 1040,
+        "inspected": true,
+        "review_source": "agent-heuristic",
+        "critique": {
+          "hierarchy": "A emphasizes the attendance deadline; B exposes more next-class content; selection leads with criteria; intake leads with step context.",
+          "typography": "Vietnamese headings readable, strong contrast. Small metadata remains secondary; critical actions carry text labels.",
+          "spacing": "24px product gutter. No observed clipping; long forms and lists scroll behind floating tabs with bottom reserve.",
+          "media": "No raster media, no crop claims. Initials are synthetic identifiers; icons support words.",
+          "distinctiveness": "Rounded grayscale task objects, circular directional control and capsule navigation transfer the requested reference grammar without course-screen copying."
+        }
+      },
+      {
+        "route": "TC01",
+        "composition_id": "B",
+        "file": "evidence/browser/overview-b-mobile.png",
+        "sha256": "736e14b897a0646f2b7c19189d5687ae4d56b70dae8099ea7f8df7af6c94f2fe",
+        "width": 390,
+        "viewport_height": 844,
+        "inspected": true,
+        "review_source": "agent-heuristic",
+        "critique": {
+          "hierarchy": "A emphasizes the attendance deadline; B exposes more next-class content; selection leads with criteria; intake leads with step context.",
+          "typography": "Vietnamese headings readable, strong contrast. Small metadata remains secondary; critical actions carry text labels.",
+          "spacing": "24px product gutter. No observed clipping; long forms and lists scroll behind floating tabs with bottom reserve.",
+          "media": "No raster media, no crop claims. Initials are synthetic identifiers; icons support words.",
+          "distinctiveness": "Rounded grayscale task objects, circular directional control and capsule navigation transfer the requested reference grammar without course-screen copying."
+        }
+      },
+      {
+        "route": "TC01",
+        "composition_id": "B",
+        "file": "evidence/browser/overview-b-desktop.png",
+        "sha256": "7c29d4df341720e14117e6787779f9b67b77a9caa3a35699fa1897490710f602",
+        "width": 1440,
+        "viewport_height": 1040,
+        "inspected": true,
+        "review_source": "agent-heuristic",
+        "critique": {
+          "hierarchy": "A emphasizes the attendance deadline; B exposes more next-class content; selection leads with criteria; intake leads with step context.",
+          "typography": "Vietnamese headings readable, strong contrast. Small metadata remains secondary; critical actions carry text labels.",
+          "spacing": "24px product gutter. No observed clipping; long forms and lists scroll behind floating tabs with bottom reserve.",
+          "media": "No raster media, no crop claims. Initials are synthetic identifiers; icons support words.",
+          "distinctiveness": "Rounded grayscale task objects, circular directional control and capsule navigation transfer the requested reference grammar without course-screen copying."
+        }
+      }
+    ],
+    "ordering": "Assign contiguous session_index from zero; rotate label order by seed + session index. This balances first exposure within one cohort."
+  },
+  "reviewer": {
+    "buyer_task": "Identify unmarked sessions and the next action before midnight.",
+    "labels": [
+      "A",
+      "B"
+    ],
+    "questions": [
+      {
+        "id": "C1",
+        "dimension": "comprehension",
+        "prompt": "What needs action before midnight, and where do you go?"
+      },
+      {
+        "id": "D1",
+        "dimension": "distinctiveness",
+        "prompt": "Which visible structure conveys the requested learning-app language?"
+      }
+    ],
+    "instruction": "Show only this reviewer packet and anonymously labelled captures. Answer before seeing another candidate. Do not disclose answer criteria or author preference."
+  },
+  "status": "PLANNED_VALIDATION",
+  "human_preference": "UNKNOWN",
+  "causal_effect": "UNKNOWN",
+  "boundary": "Labels do not prove blinding. A facilitator who also authored or grades the candidates must report heuristic review. Human provenance remains a reviewer declaration."
+}
