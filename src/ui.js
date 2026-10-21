@@ -9,7 +9,7 @@ export const link=(route,text,cls='',data='')=>`<button type="button" class="${c
 export const circle=(name,route,label)=>link(route,icon(name),'circle',`aria-label="${esc(label)}"`);
 export const pill=(text,dark=false)=>{
   const label=String(text);
-  const status=/Quá hạn|Làm lại|Cần bổ sung|Vắng|Đã nghỉ|Ngừng học|Tạm nghỉ|Tạm khóa|Từ chối/.test(label)?'warning':/Đã duyệt|Đã thu|Đang học|Hợp lệ|Hoạt động|Đã đóng|Đã hoàn thành|Có mặt/.test(label)?'success':/Chờ|Nháp|Chưa|Sắp tới/.test(label)?'pending':'neutral';
+  const status=/Quá hạn|Làm lại|Cần bổ sung|Vắng|Đã nghỉ|Ngừng học|Tạm nghỉ|Tạm khóa|Từ chối/.test(label)?'warning':/Đã duyệt|Đã thu|Đang học|Hợp lệ|Hoạt động|Đã đóng|Đã hoàn thành|Có mặt|Chấp thuận|Đã công bố/.test(label)?'success':/Chờ|Nháp|Chưa|Sắp tới/.test(label)?'pending':'neutral';
   return `<span class="pill ${dark?'dark':''}" data-status="${status}">${esc(statusLabel(text))}</span>`;
 };
 export const avatar=(name,cls='')=>`<span class="avatar ${cls}" aria-hidden="true">${esc(name.split(' ').slice(-2).map(n=>n[0]).join(''))}</span>`;

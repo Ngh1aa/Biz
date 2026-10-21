@@ -1,4 +1,4 @@
-import {load,persist,SCREEN_META,ROLES,applyDueChanges,isLocked} from './data.js';
+import {load,persist,SCREEN_META,ROLES,applyDueChanges,isLocked,canOpenRoute,roleHome,isRoleScreen} from './data.js';
 import {esc,icon,btn,link,empty} from './ui.js';
 import {overview} from './screens/overview.js';
 import {students} from './screens/students.js';
@@ -7,9 +7,12 @@ import {reports} from './screens/reports.js';
 import {operations} from './screens/operations.js';
 import {communication} from './screens/communication.js';
 import {createActions} from './actions.js';
+import {ensureFamily,familyThreadVisible} from './family.js';
+import {parents} from './screens/parents.js';
 const states={};
-export const ctx={db:load(),route:'GV01',state:{},save,render,navigate,toast,sheet,closeSheet,states};
-const defaults={gv:'GV01',tc:'TC01',tbm:'TC01'};
+export const ctx={db:ensureFamily(load()),route:'GV01',state:{},save,render,navigate,toast,sheet,closeSheet,states};
+const defaults={gv:'GV01',tc:'TC01',tbm:'TC01',ph:'PH01'};
+const familyRouteKeys={PH02b:'selectedFamilySession',PH03b:'selectedFamilyReport',PH04b:'selectedFamilyInvoice',PH05b:'selectedFamilyThread',PH06b:'selectedFamilyRequest'};
 const app=document.querySelector('#app'),dialog=document.querySelector('#sheet');
 ctx.theme='center';
 document.documentElement.dataset.theme='center';
@@ -20,6 +23,7 @@ function formatHeadings(){
  app.querySelectorAll('h1,h2').forEach(h=>{h.innerHTML=h.innerHTML.replaceAll('<br>',' ');});
 }
 const tabs={
+ ph:[['PH01','home','Tổng quan'],['PH02','calendar','Lịch học'],['PH03','file-text','Kết quả'],['PH04','credit-card','Học phí'],['PH05','message-circle','Trao đổi']],
  gv:[['GV01','home','Tổng quan'],['GV02','users','Học sinh'],['GV07','check-square','Duyệt'],['GV08','file-text','Học phí'],['TC07','message-circle','Trao đổi']],
  tc:[['TC01','home','Tổng quan'],['TC02','calendar','Lịch dạy'],['TC04a','users','Học sinh'],['TC05','file-text','Báo cáo'],['TC06','check-square','Công việc']],
  tbm:[['TC01','home','Tổng quan'],['TC02','calendar','Lịch dạy'],['TBM01','check-square','Duyệt'],['TC05','file-text','Báo cáo'],['TC06','check-square','Công việc']]
@@ -35,7 +39,8 @@ function navigate(route,opts={}) {
  if(!SCREEN_META[route])route=defaults[ctx.db.role];
  const role=opts.role||ctx.db.role;
  const params=new URLSearchParams();
- const id=opts.id|| (['GV03','TC04','TC04b','GV05','GV06','GV06b','GV06c'].includes(route)?ctx.db.selectedStudent:route.startsWith('TC05')&&!['TC05','TC05w'].includes(route)?ctx.db.selectedReport:['TC03','TC03b'].includes(route)?ctx.db.selectedSession:['TC06b','TC06c'].includes(route)?ctx.db.selectedTask:route==='TC07b'?ctx.db.selectedThread:'');
+ if(familyRouteKeys[route]&&!opts.id)opts={...opts,id:ctx.db[familyRouteKeys[route]]};
+ const id=opts.id|| (['GV03','TC04','TC04b','GV05','GV06','GV06b','GV06c'].includes(route)?ctx.db.selectedStudent:route.startsWith('TC05')&&!['TC05','TC05w'].includes(route)?ctx.db.selectedReport:['TC03','TC03b'].includes(route)?ctx.db.selectedSession:['TC06b','TC06c'].includes(route)?ctx.db.selectedTask:route==='TC07b'?ctx.db.selectedFamilyThread||ctx.db.selectedThread:'');
  if(id)params.set('id',id);
  const hash=`#/${role}/${route}${params.size?'?'+params:''}`;
  if(opts.replace){history.replaceState(null,'',hash);readRoute();}else if(location.hash===hash){render();}else location.hash=hash;
@@ -43,12 +48,14 @@ function navigate(route,opts={}) {
 function readRoute(){
  const [path,query]=location.hash.slice(1).split('?'),[,role,route]=path.split('/');
  ctx.db.role=ROLES[role]?role:ctx.db.role;ctx.route=SCREEN_META[route]?route:defaults[ctx.db.role];
- if(ctx.route.startsWith('GV')&&ctx.db.role!=='gv'){navigate(defaults[ctx.db.role],{replace:true});return;}
+ if(!canOpenRoute(ctx.db.role,ctx.route)){navigate(defaults[ctx.db.role],{replace:true});return;}
  if(ctx.route==='TBM01'&&ctx.db.role!=='tbm'){navigate(defaults[ctx.db.role],{replace:true});return;}
  const id=new URLSearchParams(query).get('id');
+ if(ctx.route==='TC07b'&&id)ctx.db.selectedFamilyThread=ctx.db.familyThreads.some(t=>t.id===id)?id:'';
  if(!id&&ctx.route==='TC03b')ctx.db.selectedSession=ctx.db.sessions.find(s=>isLocked(s))?.id||ctx.db.selectedSession;
  if(!id&&ctx.route==='TC03')ctx.db.selectedSession=ctx.db.sessions.find(s=>!isLocked(s)&&s.teacher==='T01')?.id||ctx.db.selectedSession;
  if(!id&&ctx.route==='TC05d')ctx.db.selectedReport=ctx.db.reports.find(r=>r.status==='Làm lại')?.id||ctx.db.selectedReport;
+ if(id&&ctx.db.role==='ph'&&familyRouteKeys[ctx.route])ctx.db[familyRouteKeys[ctx.route]]=id;
  if(id){if(['GV03','TC04','TC04b','GV05','GV06','GV06b','GV06c'].includes(ctx.route))ctx.db.selectedStudent=id;
  else if(ctx.route.startsWith('TC05'))ctx.db.selectedReport=id;else if(ctx.route.startsWith('TC03'))ctx.db.selectedSession=id;else if(ctx.route.startsWith('TC06'))ctx.db.selectedTask=id;else if(ctx.route==='TC07b')ctx.db.selectedThread=id;}
  applyDueChanges(ctx.db); ctx.state=states[`${ctx.db.role}-${ctx.route}`]||={};save();
@@ -57,18 +64,21 @@ function readRoute(){
  if(ctx.route.startsWith('GV05-'))actions.openClassPicker(ctx.route);
 }
 function nav(){
- const list=tabs[ctx.db.role==='gv'?'gv':ctx.db.role==='tbm'?'tbm':'tc'];
- function active(r){if(r===ctx.route)return true;if(r==='GV02')return ['GV03','GV04','GV04b','GV04c','GV05','GV06','GV06b','GV06c'].includes(ctx.route);if(r==='TC02')return ctx.route.startsWith('TC02')||ctx.route.startsWith('TC03');if(r==='TC04a')return ctx.route.startsWith('TC04');if(r==='TC05')return ctx.route.startsWith('TC05');if(r==='TC06')return ctx.route.startsWith('TC06');return false;}
+ const list=tabs[ctx.db.role];
+ function active(r){if(ctx.db.role==='ph')return r===ctx.route||r!=='PH01'&&ctx.route.startsWith(r);if(r===ctx.route)return true;if(r==='GV02')return ['GV03','GV04','GV04b','GV04c','GV05','GV06','GV06b','GV06c'].includes(ctx.route);if(r==='TC02')return ctx.route.startsWith('TC02')||ctx.route.startsWith('TC03');if(r==='TC04a')return ctx.route.startsWith('TC04');if(r==='TC05')return ctx.route.startsWith('TC05');if(r==='TC06')return ctx.route.startsWith('TC06');return false;}
  return `<nav class="tabbar" aria-label="Điều hướng chính">${list.map(([r,i,t])=>`<button data-go="${r}" class="tab ${active(r)?'active':''}" ${active(r)?'aria-current="page"':''}>${icon(i,21)}<span>${t}</span></button>`).join('')}</nav>`;
 }
 function render(){
  const r=ctx.route;let html;
  const entitySets={GV03:['students','selectedStudent'],TC04:['students','selectedStudent'],TC04b:['students','selectedStudent'],TC05b:['reports','selectedReport'],TC05c:['reports','selectedReport'],TC05d:['reports','selectedReport'],TC03:['sessions','selectedSession'],TC03b:['sessions','selectedSession'],TC06b:['tasks','selectedTask'],TC06c:['tasks','selectedTask'],TC07b:['threads','selectedThread']};
  const entity=entitySets[r];
- if(entity&&!ctx.db[entity[0]].some(item=>item.id===ctx.db[entity[1]])){
-  app.innerHTML=`<div class="screen"><h1 tabindex="-1">Không tìm thấy nội dung</h1>${empty('Liên kết không còn hợp lệ','Nội dung mẫu có thể đã được đặt lại.',link(ctx.db.role==='gv'?'GV01':'TC01','Về tổng quan','btn primary'))}</div>${nav()}`;renderReviewer();return;
+ const familyThread=ctx.db.familyThreads.find(t=>t.id===ctx.db.selectedFamilyThread);
+ if(r==='TC07b'&&familyThread&&!familyThreadVisible(ctx.db,familyThread)){ctx.db.selectedFamilyThread='';navigate('TC07',{replace:true});return;}
+ if(entity&&!ctx.db[entity[0]].some(item=>item.id===ctx.db[entity[1]])&&!(r==='TC07b'&&familyThread)){
+  app.innerHTML=`<div class="screen"><h1 tabindex="-1">Không tìm thấy nội dung</h1>${empty('Liên kết không còn hợp lệ','Nội dung mẫu có thể đã được đặt lại.',link(roleHome(ctx.db.role),'Về tổng quan','btn primary'))}</div>${nav()}`;renderReviewer();return;
  }
- if(['A00','GV01','TC01','TC01b'].includes(r))html=overview(ctx);
+ if(r.startsWith('PH'))html=parents(ctx);
+ else if(['A00','GV01','TC01','TC01b'].includes(r))html=overview(ctx);
  else if(['GV02','GV03','GV04','GV04b','GV04c','GV05','GV05-s1','GV05-s2','GV05-s3','GV06','GV06b','GV06c','TC04a','TC04','TC04b'].includes(r))html=students(ctx);
  else if(r.startsWith('TC02')||r.startsWith('TC03'))html=teaching(ctx);
  else if(r.startsWith('TC05')||['GV07','TBM01'].includes(r))html=reports(ctx);
@@ -84,14 +94,14 @@ function renderReviewer(){
  const role=ctx.db.role,r=ctx.route;
  document.querySelector('.workspace-heading span:first-child').textContent='MINH HOÀNG / QUẢN LÝ ĐÀO TẠO';
  document.querySelector('.workspace-heading span:last-child').textContent='MINH HOÀNG CENTER · V0.4';
- const screens=Object.entries(SCREEN_META).filter(([id])=>id==='A00'||(role==='gv'?id.startsWith('GV')||id.startsWith('TC07'):id.startsWith('TC')||(role==='tbm'&&id==='TBM01')));
+ const screens=Object.entries(SCREEN_META).filter(([id])=>isRoleScreen(role,id));
  const selectedGroup=r.startsWith('GV04')?'Tiếp nhận học sinh':r.startsWith('TC03')?'Lịch dạy và điểm danh':r.startsWith('TC05')||['GV07','TBM01'].includes(r)?'Báo cáo học tập':'Không gian làm việc';
- document.querySelector('#review-tools').innerHTML=`<aside class="review-sidebar"><div class="review-brand">Minh Hoàng<small>CENTER · QUẢN LÝ ĐÀO TẠO</small></div><div class="review-version"><span class="live-dot"></span> THEO NGUỒN MINH HOÀNG <b>V0.4</b></div><p class="review-label">ĐANG TRẢI NGHIỆM VỚI VAI TRÒ</p><div class="role-switch">${Object.entries(ROLES).map(([key,label])=>btn(`${icon(key==='gv'?'layers':key==='tc'?'book-open':'award',18)} ${label}${key===role?icon('check',16):''}`,'role',{class:key===role?'selected':'',data:`data-value="${key}" aria-pressed="${key===role}"`})).join('')}</div><div class="review-label screen-label">DANH MỤC MÀN HÌNH <span>${screens.length}</span></div><nav class="screen-index" aria-label="Danh mục màn hình UX">${screens.map(([id,[title]])=>link(id,`<code>${id.replace('-','·')}</code><span>${title}</span>`,id===r?'screen-item selected':'screen-item')).join('')}</nav><div class="review-bottom"><p>Dữ liệu mẫu · Lưu trên thiết bị<br>Không kết nối hệ thống thật</p>${btn(icon('rotate-ccw',15)+' Đặt lại bản trải nghiệm','demo-reset',{class:'text-link'})}</div></aside><div class="mobile-review"><b>Minh Hoàng <small>UX</small></b><label><span class="sr-only">Vai trò trải nghiệm</span><select id="mobile-role">${Object.entries(ROLES).map(([k,v])=>`<option value="${k}" ${k===role?'selected':''}>${v}</option>`).join('')}</select></label>${btn(icon('grid',18),'screen-menu',{class:'circle',data:'aria-label="Danh mục màn hình"'})}</div>`;
- document.querySelector('#context-panel').innerHTML=`<div class="context-top"><span class="context-number">${r}</span><p>${selectedGroup}</p><h2>${SCREEN_META[r][0]}</h2><span class="context-rule"></span><p>${SCREEN_META[r][1]}</p></div><div class="context-block"><span class="review-label">NGUYÊN TẮC TRẢI NGHIỆM</span><ul><li>Trạng thái hiện tại rõ ràng</li><li>Mỗi màn một việc chính</li><li>Luôn có đường quay lại</li></ul></div><div class="context-block"><span class="review-label">THỬ MỘT LUỒNG</span>${(role==='gv'?[['GV04','Tiếp nhận → Xếp lớp'],['GV07','Duyệt báo cáo hai vòng'],['GV10','Duyệt điều chỉnh điểm danh'],['GV09','Giao việc → Xác nhận']]:[['TC02','Lịch dạy → Điểm danh'],['TC05','Lập → Gửi báo cáo'],['TC06','Nhận việc → Gửi kết quả'],...(role==='tbm'?[['TBM01','Duyệt báo cáo bộ môn']]:[])]).map(([id,t])=>link(id,`${t} ${icon('arrow-up-right',15)}`,'context-flow')).join('')}</div><div class="context-foot"><span>390 × 844</span><span>MINH HOÀNG DESIGN SYSTEM</span><div class="swatches"><i></i><i></i><i></i><i></i><i></i></div></div>`;
+ document.querySelector('#review-tools').innerHTML=`<aside class="review-sidebar"><div class="review-brand">Minh Hoàng<small>CENTER · QUẢN LÝ ĐÀO TẠO</small></div><div class="review-version"><span class="live-dot"></span> THEO NGUỒN MINH HOÀNG <b>V0.4</b></div><p class="review-label">ĐANG TRẢI NGHIỆM VỚI VAI TRÒ</p><div class="role-switch">${Object.entries(ROLES).map(([key,label])=>btn(`${icon(key==='gv'?'layers':key==='tc'?'book-open':key==='ph'?'users':'award',18)} ${label}${key===role?icon('check',16):''}`,'role',{class:key===role?'selected':'',data:`data-value="${key}" aria-pressed="${key===role}"`})).join('')}</div><div class="review-label screen-label">DANH MỤC MÀN HÌNH <span>${screens.length}</span></div><nav class="screen-index" aria-label="Danh mục màn hình UX">${screens.map(([id,[title]])=>link(id,`<code>${id.replace('-','·')}</code><span>${title}</span>`,id===r?'screen-item selected':'screen-item')).join('')}</nav><div class="review-bottom"><p>Dữ liệu mẫu · Lưu trên thiết bị<br>Không kết nối hệ thống thật</p>${btn(icon('rotate-ccw',15)+' Đặt lại bản trải nghiệm','demo-reset',{class:'text-link'})}</div></aside><div class="mobile-review"><b>Minh Hoàng <small>UX</small></b><label><span class="sr-only">Vai trò trải nghiệm</span><select id="mobile-role">${Object.entries(ROLES).map(([k,v])=>`<option value="${k}" ${k===role?'selected':''}>${v}</option>`).join('')}</select></label>${btn(icon('grid',18),'screen-menu',{class:'circle',data:'aria-label="Danh mục màn hình"'})}</div>`;
+ document.querySelector('#context-panel').innerHTML=`<div class="context-top"><span class="context-number">${r}</span><p>${selectedGroup}</p><h2>${SCREEN_META[r][0]}</h2><span class="context-rule"></span><p>${SCREEN_META[r][1]}</p></div><div class="context-block"><span class="review-label">NGUYÊN TẮC TRẢI NGHIỆM</span><ul><li>Trạng thái hiện tại rõ ràng</li><li>Mỗi màn một việc chính</li><li>Luôn có đường quay lại</li></ul></div><div class="context-block"><span class="review-label">THỬ MỘT LUỒNG</span>${(role==='ph'?[['PH02','Lịch học → Xin nghỉ'],['PH03','Xem báo cáo đã công bố'],['PH04','Theo dõi học phí'],['PH05','Trao đổi với trung tâm']]:role==='gv'?[['GV04','Tiếp nhận → Xếp lớp'],['GV07','Duyệt báo cáo hai vòng'],['GV10','Duyệt điều chỉnh điểm danh'],['GV09','Giao việc → Xác nhận']]:[['TC02','Lịch dạy → Điểm danh'],['TC05','Lập → Gửi báo cáo'],['TC06','Nhận việc → Gửi kết quả'],...(role==='tbm'?[['TBM01','Duyệt báo cáo bộ môn']]:[])]).map(([id,t])=>link(id,`${t} ${icon('arrow-up-right',15)}`,'context-flow')).join('')}</div><div class="context-foot"><span>390 × 844</span><span>MINH HOÀNG DESIGN SYSTEM</span><div class="swatches"><i></i><i></i><i></i><i></i><i></i></div></div>`;
 }
 const actions=createActions(ctx);
 document.addEventListener('click',async e=>{
- const go=e.target.closest('[data-go]');if(go){if(go.dataset.student)ctx.db.selectedStudent=go.dataset.student;if(go.dataset.report)ctx.db.selectedReport=go.dataset.report;if(go.dataset.session)ctx.db.selectedSession=go.dataset.session;if(go.dataset.task)ctx.db.selectedTask=go.dataset.task;if(go.dataset.thread){ctx.db.selectedThread=go.dataset.thread;const t=ctx.db.threads.find(t=>t.id===go.dataset.thread);if(t)t.unread=0;}navigate(go.dataset.go);return;}
+ const go=e.target.closest('[data-go]');if(go){if(!canOpenRoute(ctx.db.role,go.dataset.go)){toast('Màn hình không thuộc vai trò đang xem.');return;}for(const [kind,key] of Object.entries({Session:'selectedFamilySession',Report:'selectedFamilyReport',Invoice:'selectedFamilyInvoice',Request:'selectedFamilyRequest',Thread:'selectedFamilyThread'})){if(go.dataset['family'+kind])ctx.db[key]=go.dataset['family'+kind];}if(go.dataset.thread)ctx.db.selectedFamilyThread='';if(go.dataset.student)ctx.db.selectedStudent=go.dataset.student;if(go.dataset.report)ctx.db.selectedReport=go.dataset.report;if(go.dataset.session)ctx.db.selectedSession=go.dataset.session;if(go.dataset.task)ctx.db.selectedTask=go.dataset.task;if(go.dataset.thread){ctx.db.selectedThread=go.dataset.thread;const t=ctx.db.threads.find(t=>t.id===go.dataset.thread);if(t)t.unread=0;}navigate(go.dataset.go);return;}
  const a=e.target.closest('[data-action]');if(a&&!a.disabled)await actions.click(a.dataset.action,a);
 });
 document.addEventListener('submit',async e=>{const f=e.target.closest('[data-form]');if(!f)return;e.preventDefault();await actions.submit(f.dataset.form,f);});

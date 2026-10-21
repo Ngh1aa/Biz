@@ -1,7 +1,10 @@
 // Synthetic fixtures for the UX prototype. No production data or credentials.
 export const KEY = 'biz.ux.v1';
 export const SUBJECTS = ['Toán','Ngữ văn','Tiếng Anh','Vật lý','Hóa học','Sinh học','Lịch sử','Địa lý','Tin học','Tiếng Trung','Tiếng Nhật'];
-export const ROLES = { gv:'Giáo vụ', tc:'Giáo viên', tbm:'Trưởng bộ môn' };
+export const ROLES = { gv:'Giáo vụ', tc:'Giáo viên', tbm:'Trưởng bộ môn', ph:'Phụ huynh' };
+export const roleHome = role => role==='gv'?'GV01':role==='ph'?'PH01':'TC01';
+export const canOpenRoute = (role,route) => route==='A00'||(role==='ph'?route.startsWith('PH'):route.startsWith('PH')?false:route.startsWith('GV')?role==='gv':route==='TBM01'?role==='tbm':true);
+export const isRoleScreen = (role,route) => route==='A00'||(role==='ph'?route.startsWith('PH'):role==='gv'?route.startsWith('GV')||route.startsWith('TC07'):route.startsWith('TC')||role==='tbm'&&route==='TBM01');
 export const TEACHERS = [
   { id:'T01',name:'Nguyễn Minh Anh',subject:'Toán',head:'Trần Hoàng Nam' },
   { id:'T02',name:'Trần Hoàng Nam',subject:'Toán',head:'Trần Hoàng Nam' },
@@ -15,12 +18,16 @@ export const CRITERIA = [
   ['Phương pháp và thái độ',['Phương pháp và thói quen học','Thái độ học và sự kiên trì']]
 ];
 export const SCREEN_META = {
+  PH01:['Đồng hành cùng con','Lịch gần nhất và thông tin của con'],PH02:['Lịch học của con','Lịch tuần và kết quả điểm danh'],PH02b:['Chi tiết buổi học','Thời gian, giáo viên và xin nghỉ'],
+  PH03:['Kết quả học tập','Báo cáo đã được trung tâm duyệt'],PH03b:['Báo cáo của con','Chuyên cần, kết quả và kế hoạch học tập'],PH04:['Học phí của con','Thông báo và trạng thái thu'],PH04b:['Chi tiết học phí','Các khoản do trung tâm lập'],
+  PH05:['Trao đổi với trung tâm','Hội thoại về các con được liên kết'],PH05b:['Hội thoại phụ huynh','Trao đổi với người phụ trách'],PH05c:['Soạn tin cho trung tâm','Giáo vụ hoặc giáo viên của con'],
+  PH06:['Yêu cầu xin nghỉ','Theo dõi phản hồi của Giáo vụ'],PH06a:['Gửi xin nghỉ','Chọn buổi học và ghi rõ lý do'],PH06b:['Chi tiết xin nghỉ','Trạng thái, phản hồi và lịch sử'],PH07:['Gia đình và hỗ trợ','Con liên kết và đầu mối liên hệ'],
   A00:['Đăng nhập','Tài khoản do trung tâm cấp'],
   GV01:['Tổng quan','Việc cần xử lý và lịch trong ngày'],GV02:['Học sinh','Tìm kiếm, lọc và mở hồ sơ'],GV03:['Hồ sơ học sinh','Thông tin học sinh và các môn đăng ký học'],
   GV04:['Tiếp nhận học sinh','Bước 1 · Thông tin học sinh'],GV04b:['Phụ huynh','Bước 2 · Thông tin liên hệ'],GV04c:['Kiểm tra đầu vào','Bước 3 · Kết quả kiểm tra và nhận xét'],
   GV05:['Xếp lớp','Học sinh → môn → giáo viên → lịch'], 'GV05-s1':['Chọn môn','Danh sách 11 môn'],'GV05-s2':['Chọn giáo viên','Lọc theo bộ môn'],'GV05-s3':['Ngày bắt đầu','Không chọn ngày đã qua'],
   GV06:['Đổi giáo viên','Điều chỉnh giáo viên và lịch'],GV06b:['Đổi lịch học','Đổi ca học hằng tuần'],GV06c:['Ngừng học','Lưu lý do và ngày có hiệu lực'],
-  GV07:['Duyệt báo cáo','Vòng duyệt Giáo vụ'],GV08:['Học phí tháng','Tạo và cập nhật trạng thái thu'],GV09:['Giao việc','Gửi nhiệm vụ cho giáo viên'],GV10:['Điều chỉnh điểm danh','Yêu cầu sau giờ khóa và lịch sử'],GV11:['Tài khoản','Vai trò, bộ môn và trạng thái'],
+  GV07:['Duyệt báo cáo','Vòng duyệt Giáo vụ'],GV08:['Học phí tháng','Tạo và cập nhật trạng thái thu'],GV09:['Giao việc','Gửi nhiệm vụ cho giáo viên'],GV10:['Điểm danh & xin nghỉ','Yêu cầu từ giáo viên và phụ huynh'],GV11:['Tài khoản','Vai trò, bộ môn và trạng thái'],
   TBM01:['Duyệt bộ môn','Duyệt vòng 1 trước Giáo vụ'],
   TC01:['Tổng quan','Ca dạy và việc cần hoàn thành'],TC01b:['Thống kê','9 chỉ số theo tháng'],TC02:['Lịch dạy','Bảng tuần theo ngày × ca'],TC02b:['Lịch theo ngày','Lịch theo ngày hoặc từng học sinh'],
   TC03:['Điểm danh','Có mặt / Vắng trước giờ khóa'],TC03b:['Ca đã khóa','Chỉ xem và yêu cầu sửa'],TC03c:['Buổi học bổ sung','Dạy thay hoặc học bù'],
