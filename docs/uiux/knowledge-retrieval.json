@@ -1,0 +1,287 @@
+{
+  "design_system": {
+    "project_name": "EDUCATION OPERATIONS MOBILE OVERVIEW",
+    "category": "Banking/Traditional Finance",
+    "pattern": {
+      "name": "Trust & Authority + Conversion",
+      "sections": "Hero (mission/credibility) > Proof (logos, certs, stats) > Solution overview > Clear CTA path",
+      "cta_placement": "Contact Sales / Get Quote (primary) + Nav",
+      "color_strategy": "Navy/Grey corporate. Trust blue. Accent for CTA only.",
+      "conversion": "Security badges. Case studies. Transparent pricing. Low-friction form. Provide pause/stop and stop the logo carousel on focus, hover, and reduced motion. Previous/next controls provide the keyboard equivalent; pause offscreen/hidden and render a static logo set under reduced motion."
+    },
+    "style": {
+      "id": "minimalism-and-swiss-style",
+      "name": "Minimalism & Swiss Style",
+      "type": "General",
+      "effects": "Subtle hover (200-250ms), smooth transitions, sharp shadows if any, clear type hierarchy, fast loading",
+      "keywords": "Clean, simple, spacious, functional, white space, high contrast, geometric, sans-serif, grid-based, essential",
+      "best_for": "Enterprise apps, dashboards, documentation sites, SaaS platforms, professional tools",
+      "performance": "cost:low|drivers:none",
+      "accessibility": "risk:low|requires:contrast-text-4.5,keyboard,visible-focus,reduced-motion",
+      "light_mode": "supported",
+      "dark_mode": "supported"
+    },
+    "colors": {
+      "primary": "#0F172A",
+      "on_primary": "#FFFFFF",
+      "secondary": "#1E3A8A",
+      "on_secondary": "#FFFFFF",
+      "accent": "#A16207",
+      "on_accent": "#FFFFFF",
+      "background": "#F8FAFC",
+      "foreground": "#020617",
+      "card": "#FFFFFF",
+      "card_foreground": "#020617",
+      "muted": "#E8ECF1",
+      "muted_foreground": "#475569",
+      "border": "#E2E8F0",
+      "destructive": "#DC2626",
+      "on_destructive": "#FFFFFF",
+      "ring": "#0F172A",
+      "notes": "Trust navy + premium gold [Accent adjusted from #CA8A04]",
+      "cta": "#A16207",
+      "text": "#020617",
+      "on_cta": "#FFFFFF"
+    },
+    "typography": {
+      "heading": "IBM Plex Sans",
+      "body": "IBM Plex Sans",
+      "mood": "financial, trustworthy, professional, corporate, banking, serious",
+      "best_for": "Banks, finance, insurance, investment, fintech, enterprise",
+      "google_fonts_url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap",
+      "css_import": "@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');"
+    },
+    "key_effects": "Subtle hover (200-250ms), smooth transitions, sharp shadows if any, clear type hierarchy, fast loading",
+    "anti_patterns": "Playful design + Poor security UX + AI purple/pink gradients",
+    "decision_rules": {
+      "must_have": [
+        "constraint:security-first",
+        "constraint:accessibility"
+      ]
+    },
+    "activated_rules": [
+      {
+        "condition": "must_have",
+        "actions": [
+          "constraint:security-first",
+          "constraint:accessibility"
+        ]
+      }
+    ],
+    "constraints": [
+      "security-first",
+      "accessibility"
+    ],
+    "reasoning_default": false,
+    "source_identities": {
+      "product": "Banking/Traditional Finance",
+      "reasoning": "Banking/Traditional Finance",
+      "style": "minimalism-and-swiss-style",
+      "color": "Banking/Traditional Finance",
+      "typography": "Financial Trust",
+      "landing": "Trust & Authority + Conversion"
+    },
+    "source_derivations": {
+      "color_mode": null
+    },
+    "severity": "HIGH",
+    "dials": {
+      "variance": null,
+      "variance_label": null,
+      "motion": null,
+      "motion_label": null,
+      "density": null,
+      "density_label": null
+    },
+    "motion_snippet": {},
+    "spacing_scale": null
+  },
+  "persistence": null,
+  "factory_design_knowledge": {
+    "schema_version": "1.0",
+    "source": "skills_UIUX/visual-design-direction/data/design-knowledge.json",
+    "source_sha256": "6d10f0a479b9126dfe23a8f7dcf0c490e45b6d62ac928f6df8b605d5a1172cf7",
+    "identity": {
+      "website_type": "education",
+      "domain": "education",
+      "product_archetype": "generic"
+    },
+    "domain_status": "NO_CURATED_DOMAIN_PROFILE",
+    "conflicting_profile_ids": [],
+    "domain_profiles": [],
+    "page_role": "app-overview",
+    "available_roles": [
+      "orientation",
+      "offering",
+      "evidence",
+      "conversion",
+      "catalog",
+      "editorial",
+      "app-overview",
+      "app-selection",
+      "app-task",
+      "app-record",
+      "app-support"
+    ],
+    "role_card": {
+      "question": "What needs my attention and what can I do next?",
+      "decision_object": "Current-state summary with one contextual next action",
+      "compositions": [
+        {
+          "id": "next-action-ticket",
+          "anatomy": "Current state, time/context and action share a compact ticket; supporting shortcuts form a quieter group.",
+          "mobile": "Keep labels, state and action together; preserve reading order at narrow widths."
+        },
+        {
+          "id": "activity-rail",
+          "anatomy": "A chronological activity spine leads, with the next actionable event expanded.",
+          "mobile": "Use reachable controls and reflow without shrinking essential type."
+        }
+      ],
+      "type_px_candidates": {
+        "title": {
+          "desktop": [
+            24,
+            32
+          ],
+          "mobile": [
+            24,
+            28
+          ]
+        },
+        "section": {
+          "desktop": [
+            20,
+            24
+          ],
+          "mobile": [
+            18,
+            22
+          ]
+        },
+        "body": [
+          16,
+          18
+        ],
+        "meta": [
+          12,
+          14
+        ]
+      },
+      "spacing_px_candidates": {
+        "gutter": {
+          "desktop": [
+            20,
+            32
+          ],
+          "mobile": [
+            16,
+            24
+          ]
+        },
+        "section": {
+          "desktop": [
+            24,
+            32
+          ],
+          "mobile": [
+            24,
+            32
+          ]
+        },
+        "group": [
+          12,
+          16
+        ],
+        "component": [
+          16,
+          24
+        ]
+      },
+      "density": "Working hypothesis: compact within one decision, breathing room between unrelated tasks. Inspect real text and enlarged text.",
+      "reject_when": "Decorative hero displaces the next useful action.",
+      "sources": [
+        "mobile-ux-first",
+        "local-direction",
+        "local-journey",
+        "reflow"
+      ]
+    },
+    "foundations": {
+      "type_selection": [
+        "Choose productive vs expressive roles from the current task, not the website label alone.",
+        "Choose font by actual glyph coverage, legibility, numerals, weight availability, license and subject/brand fit. No prescribed family.",
+        "Measure headline wraps and first decision-object position; a large clamp value is not a hierarchy proof.",
+        "Set body, UI and metadata independently. Do not shrink explanatory body copy to fit a dense object."
+      ],
+      "spacing_selection": [
+        "Separate page gutters, section rhythm, group gaps and component padding.",
+        "Use tighter spacing within one decision object than between unrelated decisions.",
+        "Try a denser and a more expressive arrangement when density is a free axis; choose from real content and media.",
+        "Use a repeated base only when it helps alignment; optical exceptions need a reason."
+      ],
+      "art_direction": [
+        "Specify subject, view distance, detail level, lighting, safe crop zone, caption and mobile treatment.",
+        "Choose document, product, person, place or process media for the information it conveys.",
+        "Use one icon family with visible labels; technical appearance alone is not evidence.",
+        "Reserve one memorable visual commitment tied to subject matter; do not stack unrelated effects."
+      ],
+      "tone_of_voice": [
+        "Use concrete nouns, actions and outputs. State what the buyer can evaluate or do next.",
+        "Prefer one useful explanation to repeated brand adjectives or vague benefit slogans.",
+        "Separate actual evidence, design concepts and unknown capabilities.",
+        "Do not reproduce the vocabulary, numerical claims or identity of a reference supplier."
+      ],
+      "pressure_checks": [
+        "320 CSS px reflow",
+        "longest real heading and service name",
+        "one primary CTA visible and named",
+        "text-spacing override",
+        "media no-cut zones",
+        "hover/focus surface pairs"
+      ]
+    },
+    "sources": {
+      "mobile-ux-first": "skills_UIUX/visual-design-direction/references/mobile-ux-first.md",
+      "local-direction": "skills_UIUX/visual-design-direction/SKILL.md",
+      "local-journey": "skills_UIUX/journey-driven-content-and-layout/SKILL.md",
+      "reflow": {
+        "url": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
+        "checked": "2026-10-08",
+        "principle": "Check information and function at 320 CSS px; handle genuinely two-dimensional content separately."
+      }
+    },
+    "numeric_status": "PROFESSIONAL_HYPOTHESIS",
+    "reference_anatomy": {
+      "status": "NO_CURATED_REFERENCE_ANATOMY",
+      "source": "skills_UIUX/visual-design-direction/data/reference-anatomies.json",
+      "source_sha256": "364ad534a2d436be1b0b4d075fcc9f9d1dbee1024bd8e0e88cb62134e94b2611",
+      "cards": [],
+      "sources": {},
+      "rule": "No exact profile/page-role card is a visible knowledge gap. Research the current first-party page and author a grounded transfer; never borrow an unrelated industry preset.",
+      "adopted": false
+    },
+    "adopted": false,
+    "fit_status": "UNVALIDATED",
+    "aesthetic_quality": "UNKNOWN",
+    "rule": "Cards and ranges are candidates, not a preset or exhaustive catalog. Create another grounded composition when these examples do not fit. Choose from real content, constraints and renders; do not adopt lexical upstream matches as project truth."
+  },
+  "factory_retrieval_review": {
+    "status": "MATCHED_CANDIDATE",
+    "category": "Banking/Traditional Finance",
+    "reasoning_default": false,
+    "source_identities": {
+      "product": "Banking/Traditional Finance",
+      "reasoning": "Banking/Traditional Finance",
+      "style": "minimalism-and-swiss-style",
+      "color": "Banking/Traditional Finance",
+      "typography": "Financial Trust",
+      "landing": "Trust & Authority + Conversion"
+    },
+    "fit_status": "UNVALIDATED",
+    "adopted": false,
+    "next_action": "Verify product/category and page-role fit; record ADOPT / ADAPT / REJECT in the project Design Contract. A fallback is not domain-specific knowledge.",
+    "context_fit": "REQUIRES_REVIEW_AGAINST_STRUCTURED_IDENTITY",
+    "upstream_candidate_adopted": false
+  }
+}

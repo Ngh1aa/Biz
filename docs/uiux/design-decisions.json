@@ -1,0 +1,1183 @@
+{
+  "schema_version": "2.0",
+  "pages": [
+    {
+      "route": "TC01",
+      "page_role": "app-overview",
+      "user_question": "Ca nào chưa tích, tôi cần làm gì trước 0h?",
+      "cta": "Mở lịch dạy và tích lịch",
+      "decisions": [
+        {
+          "axis": "layout",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/product-brief.md"
+          },
+          "value": "overview task-first composition",
+          "rejected_alternative": "One hero copied to every function"
+        },
+        {
+          "axis": "font",
+          "source": {
+            "kind": "reference",
+            "ref": "User image references 1–3"
+          },
+          "value": "Self-hosted Manrope, rounded sans, Vietnamese coverage",
+          "rejected_alternative": "Decorative serif"
+        },
+        {
+          "axis": "typography",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "src/styles.css"
+          },
+          "value": "Title 31px; body 12px; UI 13px; meta 10px",
+          "rejected_alternative": "Oversized headings that hide next action"
+        },
+        {
+          "axis": "spacing",
+          "source": {
+            "kind": "reference",
+            "ref": "User image references 1–3"
+          },
+          "value": "24px gutter; 27px section; 13px group; 23px object padding",
+          "rejected_alternative": "Tight desktop table squeezed onto phone"
+        },
+        {
+          "axis": "media",
+          "source": {
+            "kind": "user",
+            "ref": "Request: UX trắng đen, style references without copying"
+          },
+          "value": "No photographs; initials identify fixture people; icon cues support labelled controls",
+          "rejected_alternative": "Copying photographs and decorative 3D from concept screenshots"
+        },
+        {
+          "axis": "voice",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/product-brief.md"
+          },
+          "value": "Functional Vietnamese screen headings, explicit action and state labels",
+          "rejected_alternative": "Poetic functional headings that obscure the task"
+        }
+      ],
+      "desktop_type": {
+        "title": {
+          "size_px": 31,
+          "weight": 800,
+          "line_height": 1.3
+        },
+        "section": {
+          "size_px": 16,
+          "weight": 800,
+          "line_height": 1.4
+        },
+        "body": {
+          "size_px": 12,
+          "weight": 500,
+          "line_height": 1.8
+        },
+        "ui": {
+          "size_px": 13,
+          "weight": 750,
+          "line_height": 1.5
+        },
+        "meta": {
+          "size_px": 10,
+          "weight": 650,
+          "line_height": 1.6
+        }
+      },
+      "mobile_type": {
+        "title": {
+          "size_px": 31,
+          "weight": 800,
+          "line_height": 1.3
+        },
+        "section": {
+          "size_px": 16,
+          "weight": 800,
+          "line_height": 1.4
+        },
+        "body": {
+          "size_px": 12,
+          "weight": 500,
+          "line_height": 1.8
+        },
+        "ui": {
+          "size_px": 13,
+          "weight": 750,
+          "line_height": 1.5
+        },
+        "meta": {
+          "size_px": 10,
+          "weight": 650,
+          "line_height": 1.6
+        }
+      },
+      "desktop_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 13,
+        "reading_width_ch": 35,
+        "density": "mixed"
+      },
+      "mobile_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 13,
+        "reading_width_ch": 35,
+        "density": "mixed"
+      },
+      "desktop_spacing": {
+        "gutter_px": 24,
+        "section_gap_px": 27,
+        "group_gap_px": 13,
+        "component_padding_px": 23
+      },
+      "mobile_spacing": {
+        "gutter_px": 24,
+        "section_gap_px": 27,
+        "group_gap_px": 13,
+        "component_padding_px": 23
+      },
+      "compositions": [
+        {
+          "id": "A",
+          "anchor": "Urgent task",
+          "structure": {
+            "regions": [
+              {
+                "role": "primary",
+                "layout": "full-width-priority-card",
+                "contains": [
+                  "deadline",
+                  "count",
+                  "explanation",
+                  "circular action"
+                ]
+              },
+              {
+                "role": "secondary",
+                "layout": "two-metric-grid",
+                "contains": [
+                  "teaching shifts",
+                  "quarter KPI"
+                ]
+              }
+            ],
+            "relationships": [
+              [
+                "priority task",
+                "precedes",
+                "metrics"
+              ],
+              [
+                "metrics",
+                "precedes",
+                "schedule"
+              ]
+            ],
+            "mobile_layout": "editorial vertical task card above metric pair",
+            "mobile_grouping": [
+              [
+                "deadline",
+                "count",
+                "circular action"
+              ],
+              [
+                "shifts",
+                "KPI"
+              ],
+              [
+                "schedule"
+              ]
+            ]
+          },
+          "proof": "evidence/browser/overview-a-mobile.png",
+          "tradeoff": "Prioritize recognition; long content requires scrolling.",
+          "direction": {
+            "desktop_typography": {
+              "family": "Manrope",
+              "title": {
+                "size_px": 31,
+                "weight": 800,
+                "line_height": 1.3
+              },
+              "body": {
+                "size_px": 12,
+                "weight": 500,
+                "line_height": 1.8
+              },
+              "title_tracking_em": -0.04,
+              "reading_width_ch": 35
+            },
+            "mobile_typography": {
+              "family": "Manrope",
+              "title": {
+                "size_px": 31,
+                "weight": 800,
+                "line_height": 1.3
+              },
+              "body": {
+                "size_px": 12,
+                "weight": 500,
+                "line_height": 1.8
+              },
+              "title_tracking_em": -0.04,
+              "reading_width_ch": 35
+            },
+            "desktop_density": {
+              "mode": "mixed",
+              "section_gap_px": 27,
+              "group_gap_px": 13,
+              "object_padding_px": 23
+            },
+            "mobile_density": {
+              "mode": "mixed",
+              "section_gap_px": 27,
+              "group_gap_px": 13,
+              "object_padding_px": 23
+            },
+            "visual_object": {
+              "kind": "priority-action-card",
+              "information_task": "Recognize unmarked sessions and open attendance before midnight",
+              "anatomy": [
+                "deadline pill",
+                "editorial task count",
+                "supporting line",
+                "large circular next action"
+              ],
+              "reality": "synthetic"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "anchor": "Summary metrics and compact task row",
+          "structure": {
+            "regions": [
+              {
+                "role": "primary",
+                "layout": "metrics-pair-above-inline-task",
+                "contains": [
+                  "count",
+                  "deadline",
+                  "attendance action",
+                  "metrics"
+                ]
+              },
+              {
+                "role": "secondary",
+                "layout": "schedule-card",
+                "contains": [
+                  "schedule",
+                  "attention"
+                ]
+              }
+            ],
+            "relationships": [
+              [
+                "metrics",
+                "precedes",
+                "inline task"
+              ],
+              [
+                "task row",
+                "precedes",
+                "schedule"
+              ]
+            ],
+            "mobile_layout": "compact statistics above a horizontal task row",
+            "mobile_grouping": [
+              [
+                "metrics",
+                "task row"
+              ],
+              [
+                "schedule"
+              ]
+            ]
+          },
+          "proof": "evidence/browser/overview-b-mobile.png",
+          "tradeoff": "More schedule visible above fold, but urgent attendance loses prominence.",
+          "direction": {
+            "desktop_typography": {
+              "family": "Manrope",
+              "title": {
+                "size_px": 24,
+                "weight": 600,
+                "line_height": 1.45
+              },
+              "body": {
+                "size_px": 12,
+                "weight": 500,
+                "line_height": 1.8
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "mobile_typography": {
+              "family": "Manrope",
+              "title": {
+                "size_px": 24,
+                "weight": 600,
+                "line_height": 1.45
+              },
+              "body": {
+                "size_px": 12,
+                "weight": 500,
+                "line_height": 1.8
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "desktop_density": {
+              "mode": "mixed",
+              "section_gap_px": 18,
+              "group_gap_px": 8,
+              "object_padding_px": 13
+            },
+            "mobile_density": {
+              "mode": "mixed",
+              "section_gap_px": 18,
+              "group_gap_px": 8,
+              "object_padding_px": 13
+            },
+            "visual_object": {
+              "kind": "inline-task-row",
+              "information_task": "Recognize unmarked sessions and open attendance before midnight",
+              "anatomy": [
+                "clock cue",
+                "inline count and status",
+                "compact row action"
+              ],
+              "reality": "synthetic"
+            }
+          }
+        }
+      ],
+      "selected_composition": "A",
+      "comparison_required": true,
+      "inherited_from": null,
+      "reference_transfers": [
+        {
+          "reference_id": "user-concept-1-3",
+          "source": {
+            "kind": "reference",
+            "ref": "Three images attached by the user on 2026-10-21"
+          },
+          "action": "ADAPT",
+          "property": "Large rounded containers, left-aligned strong typography, circular next action, floating navigation.",
+          "reason": "Match the requested visual language while designing operations-specific journeys.",
+          "boundary": "Concept references only; monochrome and labelled tabs; no copied course layouts, people or artwork."
+        }
+      ],
+      "ux": {
+        "entry_state": "Synthetic overview content in a selected reviewer role",
+        "user_goal": "Mở lịch dạy và tích lịch",
+        "information_priority": [
+          "current role",
+          "unmarked sessions",
+          "deadline",
+          "next action",
+          "secondary metrics"
+        ],
+        "primary_action": "Mở lịch dạy và tích lịch",
+        "destination": "TC02 → TC03",
+        "feedback": "Central local store updates lists, detail and notifications; submitted forms show state feedback.",
+        "recovery": "Back keeps intake draft; filtered empty has clear filters; invalid input remains editable.",
+        "walkthrough_observation": "Actual browser interaction evidence in evidence/browser/flows.json and matrix.json. Agent heuristic, no participants.",
+        "evidence_ref": "evidence/browser/flows.json",
+        "review_source": "agent-heuristic",
+        "findings": [
+          {
+            "observation": "Functional screens used poetic headings that weakened information scent.",
+            "severity": "minor",
+            "status": "resolved",
+            "retest": "Current representative captures use explicit student, intake, schedule and report headings."
+          }
+        ]
+      },
+      "comparison_protocol": {
+        "buyer_task": "Identify unmarked sessions and the next action before midnight.",
+        "held_constant": {
+          "audience": "Teacher T01",
+          "content": "Two unmarked sessions, 38/40 shifts, KPI 7/10, next class",
+          "claims": "Synthetic fixture data only",
+          "cta": "Open schedule and attendance",
+          "state": "Default seeded store",
+          "assets": "Self-hosted Manrope and Feather icons",
+          "viewports": "390×844 and 1440×1040"
+        },
+        "questions": [
+          {
+            "id": "C1",
+            "dimension": "comprehension",
+            "prompt": "What needs action before midnight, and where do you go?",
+            "criteria": [
+              "Unmarked count and deadline identifiable",
+              "Schedule action discoverable"
+            ]
+          },
+          {
+            "id": "D1",
+            "dimension": "distinctiveness",
+            "prompt": "Which visible structure conveys the requested learning-app language?",
+            "criteria": [
+              "Rounded task object and circular action visible",
+              "Hierarchy supports the actual attendance task"
+            ]
+          }
+        ]
+      },
+      "comparison_record": {
+        "plan": "docs/uiux/comparison-plan.json",
+        "observations": "docs/uiux/comparison-observations.json"
+      }
+    },
+    {
+      "route": "GV02",
+      "page_role": "app-selection",
+      "user_question": "Tìm đúng học sinh cần xử lý ở đâu?",
+      "cta": "Tìm và mở hồ sơ học sinh",
+      "decisions": [
+        {
+          "axis": "layout",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/product-brief.md"
+          },
+          "value": "selection task-first composition",
+          "rejected_alternative": "One hero copied to every function"
+        },
+        {
+          "axis": "font",
+          "source": {
+            "kind": "reference",
+            "ref": "User image references 1–3"
+          },
+          "value": "Self-hosted Manrope, rounded sans, Vietnamese coverage",
+          "rejected_alternative": "Decorative serif"
+        },
+        {
+          "axis": "typography",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "src/styles.css"
+          },
+          "value": "Title 29px; body 12px; UI 13px; meta 10px",
+          "rejected_alternative": "Oversized headings that hide next action"
+        },
+        {
+          "axis": "spacing",
+          "source": {
+            "kind": "reference",
+            "ref": "User image references 1–3"
+          },
+          "value": "24px gutter; 27px section; 13px group; 23px object padding",
+          "rejected_alternative": "Tight desktop table squeezed onto phone"
+        },
+        {
+          "axis": "media",
+          "source": {
+            "kind": "user",
+            "ref": "Request: UX trắng đen, style references without copying"
+          },
+          "value": "No photographs; initials identify fixture people; icon cues support labelled controls",
+          "rejected_alternative": "Copying photographs and decorative 3D from concept screenshots"
+        },
+        {
+          "axis": "voice",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/product-brief.md"
+          },
+          "value": "Functional Vietnamese screen headings, explicit action and state labels",
+          "rejected_alternative": "Poetic functional headings that obscure the task"
+        }
+      ],
+      "desktop_type": {
+        "title": {
+          "size_px": 29,
+          "weight": 800,
+          "line_height": 1.27
+        },
+        "section": {
+          "size_px": 16,
+          "weight": 800,
+          "line_height": 1.4
+        },
+        "body": {
+          "size_px": 12,
+          "weight": 500,
+          "line_height": 1.8
+        },
+        "ui": {
+          "size_px": 13,
+          "weight": 750,
+          "line_height": 1.5
+        },
+        "meta": {
+          "size_px": 10,
+          "weight": 650,
+          "line_height": 1.6
+        }
+      },
+      "mobile_type": {
+        "title": {
+          "size_px": 29,
+          "weight": 800,
+          "line_height": 1.27
+        },
+        "section": {
+          "size_px": 16,
+          "weight": 800,
+          "line_height": 1.4
+        },
+        "body": {
+          "size_px": 12,
+          "weight": 500,
+          "line_height": 1.8
+        },
+        "ui": {
+          "size_px": 13,
+          "weight": 750,
+          "line_height": 1.5
+        },
+        "meta": {
+          "size_px": 10,
+          "weight": 650,
+          "line_height": 1.6
+        }
+      },
+      "desktop_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 13,
+        "reading_width_ch": 35,
+        "density": "mixed"
+      },
+      "mobile_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 13,
+        "reading_width_ch": 35,
+        "density": "mixed"
+      },
+      "desktop_spacing": {
+        "gutter_px": 24,
+        "section_gap_px": 27,
+        "group_gap_px": 13,
+        "component_padding_px": 23
+      },
+      "mobile_spacing": {
+        "gutter_px": 24,
+        "section_gap_px": 27,
+        "group_gap_px": 13,
+        "component_padding_px": 23
+      },
+      "compositions": [
+        {
+          "id": "A",
+          "anchor": "Search criteria",
+          "structure": {
+            "regions": [
+              {
+                "role": "criteria",
+                "layout": "search-and-filter-stack",
+                "contains": [
+                  "search",
+                  "status",
+                  "grade",
+                  "subject"
+                ]
+              },
+              {
+                "role": "students",
+                "layout": "comparable-rows",
+                "contains": [
+                  "avatar initials",
+                  "name",
+                  "school",
+                  "subject",
+                  "status"
+                ]
+              }
+            ],
+            "relationships": [
+              [
+                "criteria",
+                "filters",
+                "students"
+              ]
+            ],
+            "mobile_layout": "one-column filterable list",
+            "mobile_grouping": [
+              [
+                "search",
+                "status"
+              ],
+              [
+                "grade",
+                "subject"
+              ],
+              [
+                "name",
+                "school",
+                "status"
+              ]
+            ]
+          },
+          "proof": "evidence/browser/selection-mobile.png",
+          "tradeoff": "Prioritize recognition; long content requires scrolling.",
+          "direction": {
+            "desktop_typography": {
+              "family": "Manrope",
+              "title": {
+                "size_px": 29,
+                "weight": 800,
+                "line_height": 1.27
+              },
+              "body": {
+                "size_px": 12,
+                "weight": 500,
+                "line_height": 1.8
+              },
+              "title_tracking_em": -0.04,
+              "reading_width_ch": 35
+            },
+            "mobile_typography": {
+              "family": "Manrope",
+              "title": {
+                "size_px": 29,
+                "weight": 800,
+                "line_height": 1.27
+              },
+              "body": {
+                "size_px": 12,
+                "weight": 500,
+                "line_height": 1.8
+              },
+              "title_tracking_em": -0.04,
+              "reading_width_ch": 35
+            },
+            "desktop_density": {
+              "mode": "mixed",
+              "section_gap_px": 27,
+              "group_gap_px": 13,
+              "object_padding_px": 23
+            },
+            "mobile_density": {
+              "mode": "mixed",
+              "section_gap_px": 27,
+              "group_gap_px": 13,
+              "object_padding_px": 23
+            },
+            "visual_object": {
+              "kind": "student-list",
+              "information_task": "Tìm và mở hồ sơ học sinh",
+              "anatomy": [
+                "search",
+                "filters",
+                "comparable student row"
+              ],
+              "reality": "synthetic"
+            }
+          }
+        }
+      ],
+      "selected_composition": "A",
+      "comparison_required": false,
+      "inherited_from": "TC01",
+      "reference_transfers": [
+        {
+          "reference_id": "user-concept-1-3",
+          "source": {
+            "kind": "reference",
+            "ref": "Three images attached by the user on 2026-10-21"
+          },
+          "action": "ADAPT",
+          "property": "Large rounded containers, left-aligned strong typography, circular next action, floating navigation.",
+          "reason": "Match the requested visual language while designing operations-specific journeys.",
+          "boundary": "Concept references only; monochrome and labelled tabs; no copied course layouts, people or artwork."
+        }
+      ],
+      "ux": {
+        "entry_state": "Synthetic selection content in a selected reviewer role",
+        "user_goal": "Tìm và mở hồ sơ học sinh",
+        "information_priority": [
+          "search",
+          "selected filters",
+          "comparable student identity",
+          "state"
+        ],
+        "primary_action": "Tìm và mở hồ sơ học sinh",
+        "destination": "GV03",
+        "feedback": "Central local store updates lists, detail and notifications; submitted forms show state feedback.",
+        "recovery": "Back keeps intake draft; filtered empty has clear filters; invalid input remains editable.",
+        "walkthrough_observation": "Actual browser interaction evidence in evidence/browser/flows.json and matrix.json. Agent heuristic, no participants.",
+        "evidence_ref": "evidence/browser/flows.json",
+        "review_source": "agent-heuristic",
+        "findings": [
+          {
+            "observation": "Functional screens used poetic headings that weakened information scent.",
+            "severity": "minor",
+            "status": "resolved",
+            "retest": "Current representative captures use explicit student, intake, schedule and report headings."
+          }
+        ]
+      }
+    },
+    {
+      "route": "GV04",
+      "page_role": "app-task",
+      "user_question": "Tôi đang ở bước nào và phải điền gì?",
+      "cta": "Tiếp tục sang thông tin phụ huynh",
+      "decisions": [
+        {
+          "axis": "layout",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/product-brief.md"
+          },
+          "value": "form task-first composition",
+          "rejected_alternative": "One hero copied to every function"
+        },
+        {
+          "axis": "font",
+          "source": {
+            "kind": "reference",
+            "ref": "User image references 1–3"
+          },
+          "value": "Self-hosted Manrope, rounded sans, Vietnamese coverage",
+          "rejected_alternative": "Decorative serif"
+        },
+        {
+          "axis": "typography",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "src/styles.css"
+          },
+          "value": "Title 29px; body 12px; UI 13px; meta 10px",
+          "rejected_alternative": "Oversized headings that hide next action"
+        },
+        {
+          "axis": "spacing",
+          "source": {
+            "kind": "reference",
+            "ref": "User image references 1–3"
+          },
+          "value": "24px gutter; 27px section; 13px group; 23px object padding",
+          "rejected_alternative": "Tight desktop table squeezed onto phone"
+        },
+        {
+          "axis": "media",
+          "source": {
+            "kind": "user",
+            "ref": "Request: UX trắng đen, style references without copying"
+          },
+          "value": "No photographs; initials identify fixture people; icon cues support labelled controls",
+          "rejected_alternative": "Copying photographs and decorative 3D from concept screenshots"
+        },
+        {
+          "axis": "voice",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/product-brief.md"
+          },
+          "value": "Functional Vietnamese screen headings, explicit action and state labels",
+          "rejected_alternative": "Poetic functional headings that obscure the task"
+        }
+      ],
+      "desktop_type": {
+        "title": {
+          "size_px": 29,
+          "weight": 800,
+          "line_height": 1.27
+        },
+        "section": {
+          "size_px": 16,
+          "weight": 800,
+          "line_height": 1.4
+        },
+        "body": {
+          "size_px": 12,
+          "weight": 500,
+          "line_height": 1.8
+        },
+        "ui": {
+          "size_px": 13,
+          "weight": 750,
+          "line_height": 1.5
+        },
+        "meta": {
+          "size_px": 10,
+          "weight": 650,
+          "line_height": 1.6
+        }
+      },
+      "mobile_type": {
+        "title": {
+          "size_px": 29,
+          "weight": 800,
+          "line_height": 1.27
+        },
+        "section": {
+          "size_px": 16,
+          "weight": 800,
+          "line_height": 1.4
+        },
+        "body": {
+          "size_px": 12,
+          "weight": 500,
+          "line_height": 1.8
+        },
+        "ui": {
+          "size_px": 13,
+          "weight": 750,
+          "line_height": 1.5
+        },
+        "meta": {
+          "size_px": 10,
+          "weight": 650,
+          "line_height": 1.6
+        }
+      },
+      "desktop_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 13,
+        "reading_width_ch": 35,
+        "density": "mixed"
+      },
+      "mobile_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 13,
+        "reading_width_ch": 35,
+        "density": "mixed"
+      },
+      "desktop_spacing": {
+        "gutter_px": 24,
+        "section_gap_px": 27,
+        "group_gap_px": 13,
+        "component_padding_px": 23
+      },
+      "mobile_spacing": {
+        "gutter_px": 24,
+        "section_gap_px": 27,
+        "group_gap_px": 13,
+        "component_padding_px": 23
+      },
+      "compositions": [
+        {
+          "id": "A",
+          "anchor": "Step and required fields",
+          "structure": {
+            "regions": [
+              {
+                "role": "progress",
+                "layout": "three-step-horizontal",
+                "contains": [
+                  "student",
+                  "parent",
+                  "test"
+                ]
+              },
+              {
+                "role": "inputs",
+                "layout": "single-column-form-with-paired-demographics",
+                "contains": [
+                  "generated id",
+                  "name",
+                  "birth",
+                  "gender",
+                  "grade",
+                  "school",
+                  "contact"
+                ]
+              },
+              {
+                "role": "action",
+                "layout": "full-width-footer",
+                "contains": [
+                  "continue"
+                ]
+              }
+            ],
+            "relationships": [
+              [
+                "progress",
+                "orients",
+                "inputs"
+              ],
+              [
+                "inputs",
+                "validates-before",
+                "action"
+              ]
+            ],
+            "mobile_layout": "vertical fields with paired birth and gender",
+            "mobile_grouping": [
+              [
+                "generated id",
+                "name"
+              ],
+              [
+                "birth",
+                "gender"
+              ],
+              [
+                "grade",
+                "school",
+                "contact"
+              ],
+              [
+                "continue"
+              ]
+            ]
+          },
+          "proof": "evidence/browser/form-mobile.png",
+          "tradeoff": "Prioritize recognition; long content requires scrolling.",
+          "direction": {
+            "desktop_typography": {
+              "family": "Manrope",
+              "title": {
+                "size_px": 29,
+                "weight": 800,
+                "line_height": 1.27
+              },
+              "body": {
+                "size_px": 12,
+                "weight": 500,
+                "line_height": 1.8
+              },
+              "title_tracking_em": -0.04,
+              "reading_width_ch": 35
+            },
+            "mobile_typography": {
+              "family": "Manrope",
+              "title": {
+                "size_px": 29,
+                "weight": 800,
+                "line_height": 1.27
+              },
+              "body": {
+                "size_px": 12,
+                "weight": 500,
+                "line_height": 1.8
+              },
+              "title_tracking_em": -0.04,
+              "reading_width_ch": 35
+            },
+            "desktop_density": {
+              "mode": "mixed",
+              "section_gap_px": 27,
+              "group_gap_px": 13,
+              "object_padding_px": 23
+            },
+            "mobile_density": {
+              "mode": "mixed",
+              "section_gap_px": 27,
+              "group_gap_px": 13,
+              "object_padding_px": 23
+            },
+            "visual_object": {
+              "kind": "intake-form",
+              "information_task": "Tiếp tục sang thông tin phụ huynh",
+              "anatomy": [
+                "step context",
+                "labelled inputs",
+                "validation",
+                "footer action"
+              ],
+              "reality": "synthetic"
+            }
+          }
+        }
+      ],
+      "selected_composition": "A",
+      "comparison_required": false,
+      "inherited_from": "TC01",
+      "reference_transfers": [
+        {
+          "reference_id": "user-concept-1-3",
+          "source": {
+            "kind": "reference",
+            "ref": "Three images attached by the user on 2026-10-21"
+          },
+          "action": "ADAPT",
+          "property": "Large rounded containers, left-aligned strong typography, circular next action, floating navigation.",
+          "reason": "Match the requested visual language while designing operations-specific journeys.",
+          "boundary": "Concept references only; monochrome and labelled tabs; no copied course layouts, people or artwork."
+        }
+      ],
+      "ux": {
+        "entry_state": "Synthetic form content in a selected reviewer role",
+        "user_goal": "Tiếp tục sang thông tin phụ huynh",
+        "information_priority": [
+          "step number",
+          "generated id",
+          "required student data",
+          "inline validation",
+          "continue"
+        ],
+        "primary_action": "Tiếp tục sang thông tin phụ huynh",
+        "destination": "GV04b → GV04c → GV05",
+        "feedback": "Central local store updates lists, detail and notifications; submitted forms show state feedback.",
+        "recovery": "Back keeps intake draft; filtered empty has clear filters; invalid input remains editable.",
+        "walkthrough_observation": "Actual browser interaction evidence in evidence/browser/flows.json and matrix.json. Agent heuristic, no participants.",
+        "evidence_ref": "evidence/browser/flows.json",
+        "review_source": "agent-heuristic",
+        "findings": [
+          {
+            "observation": "Functional screens used poetic headings that weakened information scent.",
+            "severity": "minor",
+            "status": "resolved",
+            "retest": "Current representative captures use explicit student, intake, schedule and report headings."
+          }
+        ]
+      }
+    }
+  ],
+  "captures": [
+    {
+      "route": "TC01",
+      "composition_id": "A",
+      "file": "evidence/browser/overview-a-mobile.png",
+      "sha256": "8ec160f47c929e33d3087aa5fc74fa571ba7e1da1fe018ffd095e285bdc5b1e6",
+      "width": 390,
+      "viewport_height": 844,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "A emphasizes the attendance deadline; B exposes more next-class content; selection leads with criteria; intake leads with step context.",
+        "typography": "Vietnamese headings readable, strong contrast. Small metadata remains secondary; critical actions carry text labels.",
+        "spacing": "24px product gutter. No observed clipping; long forms and lists scroll behind floating tabs with bottom reserve.",
+        "media": "No raster media, no crop claims. Initials are synthetic identifiers; icons support words.",
+        "distinctiveness": "Rounded grayscale task objects, circular directional control and capsule navigation transfer the requested reference grammar without course-screen copying."
+      }
+    },
+    {
+      "route": "TC01",
+      "composition_id": "A",
+      "file": "evidence/browser/overview-a-desktop.png",
+      "sha256": "07e5c7c884c01c95280f61f15a12792d70630f4a5078ed530c05d4bf2020d1c8",
+      "width": 1440,
+      "viewport_height": 1040,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "A emphasizes the attendance deadline; B exposes more next-class content; selection leads with criteria; intake leads with step context.",
+        "typography": "Vietnamese headings readable, strong contrast. Small metadata remains secondary; critical actions carry text labels.",
+        "spacing": "24px product gutter. No observed clipping; long forms and lists scroll behind floating tabs with bottom reserve.",
+        "media": "No raster media, no crop claims. Initials are synthetic identifiers; icons support words.",
+        "distinctiveness": "Rounded grayscale task objects, circular directional control and capsule navigation transfer the requested reference grammar without course-screen copying."
+      }
+    },
+    {
+      "route": "TC01",
+      "composition_id": "B",
+      "file": "evidence/browser/overview-b-mobile.png",
+      "sha256": "736e14b897a0646f2b7c19189d5687ae4d56b70dae8099ea7f8df7af6c94f2fe",
+      "width": 390,
+      "viewport_height": 844,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "A emphasizes the attendance deadline; B exposes more next-class content; selection leads with criteria; intake leads with step context.",
+        "typography": "Vietnamese headings readable, strong contrast. Small metadata remains secondary; critical actions carry text labels.",
+        "spacing": "24px product gutter. No observed clipping; long forms and lists scroll behind floating tabs with bottom reserve.",
+        "media": "No raster media, no crop claims. Initials are synthetic identifiers; icons support words.",
+        "distinctiveness": "Rounded grayscale task objects, circular directional control and capsule navigation transfer the requested reference grammar without course-screen copying."
+      }
+    },
+    {
+      "route": "TC01",
+      "composition_id": "B",
+      "file": "evidence/browser/overview-b-desktop.png",
+      "sha256": "7c29d4df341720e14117e6787779f9b67b77a9caa3a35699fa1897490710f602",
+      "width": 1440,
+      "viewport_height": 1040,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "A emphasizes the attendance deadline; B exposes more next-class content; selection leads with criteria; intake leads with step context.",
+        "typography": "Vietnamese headings readable, strong contrast. Small metadata remains secondary; critical actions carry text labels.",
+        "spacing": "24px product gutter. No observed clipping; long forms and lists scroll behind floating tabs with bottom reserve.",
+        "media": "No raster media, no crop claims. Initials are synthetic identifiers; icons support words.",
+        "distinctiveness": "Rounded grayscale task objects, circular directional control and capsule navigation transfer the requested reference grammar without course-screen copying."
+      }
+    },
+    {
+      "route": "GV02",
+      "composition_id": "A",
+      "file": "evidence/browser/selection-mobile.png",
+      "sha256": "5321e3e677147df375d49d8547761f8579cc627a5e66435b52f01acf5e8dd3a2",
+      "width": 390,
+      "viewport_height": 844,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "A emphasizes the attendance deadline; B exposes more next-class content; selection leads with criteria; intake leads with step context.",
+        "typography": "Vietnamese headings readable, strong contrast. Small metadata remains secondary; critical actions carry text labels.",
+        "spacing": "24px product gutter. No observed clipping; long forms and lists scroll behind floating tabs with bottom reserve.",
+        "media": "No raster media, no crop claims. Initials are synthetic identifiers; icons support words.",
+        "distinctiveness": "Rounded grayscale task objects, circular directional control and capsule navigation transfer the requested reference grammar without course-screen copying."
+      }
+    },
+    {
+      "route": "GV02",
+      "composition_id": "A",
+      "file": "evidence/browser/selection-desktop.png",
+      "sha256": "00c23f0da2ffc910c8e404496c79628ac1eae645e8d19634f3c790a2efa2015d",
+      "width": 1440,
+      "viewport_height": 1040,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "A emphasizes the attendance deadline; B exposes more next-class content; selection leads with criteria; intake leads with step context.",
+        "typography": "Vietnamese headings readable, strong contrast. Small metadata remains secondary; critical actions carry text labels.",
+        "spacing": "24px product gutter. No observed clipping; long forms and lists scroll behind floating tabs with bottom reserve.",
+        "media": "No raster media, no crop claims. Initials are synthetic identifiers; icons support words.",
+        "distinctiveness": "Rounded grayscale task objects, circular directional control and capsule navigation transfer the requested reference grammar without course-screen copying."
+      }
+    },
+    {
+      "route": "GV04",
+      "composition_id": "A",
+      "file": "evidence/browser/form-mobile.png",
+      "sha256": "30f66b4b0ee78f6b0402da34bb44b053d04516554dac9b53136b5b1b65fcdc37",
+      "width": 390,
+      "viewport_height": 844,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "A emphasizes the attendance deadline; B exposes more next-class content; selection leads with criteria; intake leads with step context.",
+        "typography": "Vietnamese headings readable, strong contrast. Small metadata remains secondary; critical actions carry text labels.",
+        "spacing": "24px product gutter. No observed clipping; long forms and lists scroll behind floating tabs with bottom reserve.",
+        "media": "No raster media, no crop claims. Initials are synthetic identifiers; icons support words.",
+        "distinctiveness": "Rounded grayscale task objects, circular directional control and capsule navigation transfer the requested reference grammar without course-screen copying."
+      }
+    },
+    {
+      "route": "GV04",
+      "composition_id": "A",
+      "file": "evidence/browser/form-desktop.png",
+      "sha256": "8a0ae97917dbbd9fc8279f6587543e3a77abb11ab4856e33f69225e4f0df3c67",
+      "width": 1440,
+      "viewport_height": 1040,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "A emphasizes the attendance deadline; B exposes more next-class content; selection leads with criteria; intake leads with step context.",
+        "typography": "Vietnamese headings readable, strong contrast. Small metadata remains secondary; critical actions carry text labels.",
+        "spacing": "24px product gutter. No observed clipping; long forms and lists scroll behind floating tabs with bottom reserve.",
+        "media": "No raster media, no crop claims. Initials are synthetic identifiers; icons support words.",
+        "distinctiveness": "Rounded grayscale task objects, circular directional control and capsule navigation transfer the requested reference grammar without course-screen copying."
+      }
+    }
+  ]
+}

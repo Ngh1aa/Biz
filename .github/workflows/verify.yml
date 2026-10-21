@@ -1,0 +1,25 @@
+name: Verify Biz
+
+on:
+  push:
+    branches: [main, 'codex/**']
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Check JavaScript
+        run: npm run check
+      - name: Verify domain behavior
+        run: npm test
+      - name: Verify static export
+        run: npm run build

@@ -1,0 +1,1074 @@
+{
+  "schema_version": "1.2",
+  "status": "READY_FOR_EXTERNAL_COLLABORATOR",
+  "target_repository": "Ngh1aa/Biz",
+  "task": "Build a monochrome mobile-first education operations UX interactive browser prototype. Three roles: academic operations, teacher, department head. Implement all supplied GV TC TBM screen flows using synthetic local state. Rounded editorial learning-app references; no remote publication.",
+  "authority": "branch_write",
+  "task_contract": {
+    "intent": "build",
+    "website_type": "education",
+    "domain": "education",
+    "product_archetype": "generic",
+    "validation_lane": "prototype",
+    "mode": "interactive-prototype",
+    "risk": "standard",
+    "features": [],
+    "scope": [],
+    "change_surface": "PRODUCT",
+    "preserve": [],
+    "forbidden": [],
+    "references": [],
+    "authority": "branch_write",
+    "platform_family": "mobile_app",
+    "target_platforms": [],
+    "implementation_stack": "unknown",
+    "requested_output": "browser-prototype",
+    "task_contract_version": "1.0",
+    "delivery": {
+      "policy": "adaptive-prompt-os-v4",
+      "lane": "full_prompt_os"
+    },
+    "inference": {
+      "confidence": 0.95,
+      "evidence": [
+        "intent:build",
+        "change_surface:PAGE",
+        "authority:branch_write",
+        "website_type:education",
+        "website_type_evidence:education",
+        "mode:interactive-prototype",
+        "risk:standard",
+        "validation_lane:prototype",
+        "delivery_policy:adaptive-prompt-os-v4",
+        "delivery_lane:full_prompt_os"
+      ],
+      "routing_status": "resolved",
+      "candidate_domains": [],
+      "resolution_source": "canonical"
+    },
+    "target_truth": {
+      "status": "NO_USABLE_TRUTH",
+      "target_root": "C:\\Users\\LENOVO\\Documents\\Codex\\2026-10-21\\s-d-ng-https-github-com-5\\work\\Biz",
+      "fields": {},
+      "provenance": {},
+      "sources": [],
+      "diagnostics": []
+    },
+    "routing_provenance": {
+      "precedence": [
+        "explicit_override",
+        "target_project_truth",
+        "goal_inference"
+      ],
+      "field_sources": {
+        "website_type": "goal_inference",
+        "domain": "explicit_override",
+        "product_archetype": "derived_from_final_contract",
+        "validation_lane": "explicit_override",
+        "mode": "explicit_override",
+        "risk": "goal_inference",
+        "features": "goal_inference",
+        "platform_family": "explicit_override",
+        "target_platforms": "goal_inference",
+        "implementation_stack": "goal_inference",
+        "requested_output": "explicit_override"
+      },
+      "explicit_override_fields": [
+        "change_surface",
+        "domain",
+        "intent",
+        "mode",
+        "platform_family",
+        "requested_output",
+        "validation_lane"
+      ],
+      "derived_fields": {
+        "product_archetype": "domain_override"
+      },
+      "merge_diagnostics": [],
+      "target_truth_applied_before_flow_resolution": true
+    },
+    "requested_authority": "branch_write",
+    "effective_authority": "branch_write"
+  },
+  "resolved_flow": {
+    "id": "mobile-web-preview",
+    "source": "skills_UIUX/flows/mobile-web-preview.json",
+    "score": 128,
+    "stages": [
+      {
+        "id": "research",
+        "agent": "research",
+        "purpose": "Establish the app baseline, target platforms, client-review tasks and preview hosting constraints.",
+        "skills": [
+          "project-context",
+          "adaptive-skill-routing-and-context-budget",
+          "mobile-app-design",
+          "product-discovery",
+          "mobile-web-preview",
+          "journey-driven-content-and-layout",
+          "design-reference-research-and-benchmark"
+        ],
+        "mandatory_skills": [
+          "project-context",
+          "adaptive-skill-routing-and-context-budget",
+          "mobile-app-design",
+          "product-discovery",
+          "mobile-web-preview",
+          "journey-driven-content-and-layout",
+          "design-reference-research-and-benchmark"
+        ],
+        "jit_skills": [],
+        "jit_skill_sources": {},
+        "gates": [
+          {
+            "id": "mobile-preview-scope",
+            "require": "screen/state inventory, target platforms, source reuse, demo data, hosting/base path and current publication authority are explicit",
+            "evidence_types": [
+              "file_read"
+            ]
+          },
+          {
+            "id": "ux-before-visual",
+            "require": "Before visual direction, inspect representative overview, selection and form/recovery tasks: entry state, user question, prioritized content, primary action, destination, feedback and recovery. Record wireframe walkthrough findings and repair blocking comprehension or navigation defects. No participant claims from expert review."
+          }
+        ]
+      },
+      {
+        "id": "design",
+        "agent": "implementation",
+        "purpose": "Specify mobile navigation, components, states and browser-to-native differences using the existing app design system.",
+        "skills": [
+          "project-context",
+          "ai-agent-coding-guardrails",
+          "mobile-app-design",
+          "mobile-navigation-and-state-ux",
+          "mobile-design-system-and-handoff",
+          "mobile-web-preview",
+          "journey-driven-content-and-layout",
+          "visual-design-direction",
+          "asset-media-and-art-direction"
+        ],
+        "mandatory_skills": [
+          "project-context",
+          "ai-agent-coding-guardrails",
+          "mobile-app-design",
+          "mobile-navigation-and-state-ux",
+          "mobile-design-system-and-handoff",
+          "mobile-web-preview",
+          "journey-driven-content-and-layout",
+          "visual-design-direction",
+          "asset-media-and-art-direction"
+        ],
+        "jit_skills": [],
+        "jit_skill_sources": {},
+        "gates": [
+          {
+            "id": "mobile-preview-design",
+            "require": "current design contract, reusable components, screen/state transitions and simulated native behaviors are recorded",
+            "evidence_types": [
+              "file_change"
+            ]
+          },
+          {
+            "id": "design-decision-integrity",
+            "require": "After UX walkthrough, bind task-led compositions, numeric type/density, media role and reference transfers to the canonical v2 contract; artifact integrity is not aesthetic acceptance. Reuse approved representative direction for rollout.",
+            "evidence_types": [
+              "design_contract_check"
+            ],
+            "design_phase": "design",
+            "design_contract_version": "2.0",
+            "ux_contract_required": true
+          }
+        ]
+      },
+      {
+        "id": "implementation",
+        "agent": "implementation",
+        "purpose": "Implement a browser presentation of the mobile design in the target project using its existing frontend and state owners; prepare static hosting assets.",
+        "skills": [
+          "project-context",
+          "ai-agent-coding-guardrails",
+          "mobile-web-preview",
+          "frontend-implementation",
+          "mobile-navigation-and-state-ux"
+        ],
+        "mandatory_skills": [
+          "project-context",
+          "ai-agent-coding-guardrails",
+          "mobile-web-preview",
+          "frontend-implementation",
+          "mobile-navigation-and-state-ux"
+        ],
+        "jit_skills": [],
+        "jit_skill_sources": {},
+        "gates": [
+          {
+            "id": "mobile-preview-code",
+            "require": "interactive prototype source, deterministic screen/state links, reset behavior and static hosting output exist; backend/native integrations are labelled",
+            "evidence_types": [
+              "file_change",
+              "validator_result"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "qa",
+        "agent": "qa",
+        "purpose": "Verify the browser prototype at phone/desktop sizes and hand off a prepared or independently verified hosted link; publication remains the authorized external collaborator's responsibility.",
+        "skills": [
+          "testing-strategy",
+          "agent-evaluation-and-reliability",
+          "mobile-web-preview",
+          "mobile-prototype-and-qa",
+          "web-quality-and-performance",
+          "code-review-and-release",
+          "ui-craft-and-visual-qa",
+          "media-crop-and-layout-integrity"
+        ],
+        "mandatory_skills": [
+          "testing-strategy",
+          "agent-evaluation-and-reliability",
+          "mobile-web-preview",
+          "mobile-prototype-and-qa",
+          "web-quality-and-performance",
+          "code-review-and-release",
+          "ui-craft-and-visual-qa",
+          "media-crop-and-layout-integrity"
+        ],
+        "jit_skills": [],
+        "jit_skill_sources": {},
+        "gates": [
+          {
+            "id": "rendered-qa",
+            "require": "current browser captures and interaction evidence cover primary tasks, recovery, narrow phones, desktop frame and actual hosting base paths",
+            "evidence_types": [
+              "browser_render",
+              "validator_result"
+            ]
+          },
+          {
+            "id": "mobile-preview-handoff",
+            "require": "handoff identifies exact source/revision, current browser QA and explicit PREPARED or DEPLOYED_VERIFIED status; claim a delivered client URL only after authorized publication, provider SHA/status and live route/interaction checks",
+            "evidence_types": [
+              "validator_result"
+            ]
+          },
+          {
+            "id": "design-render-integrity",
+            "require": "Inspect actual representative captures, task comprehension, visual hierarchy, density, type, media crops and all seven purpose-based visual signs. Repair blockers before rollout; distinguish agent judgment from human preference.",
+            "evidence_types": [
+              "design_contract_check"
+            ],
+            "design_phase": "rendered",
+            "design_contract_version": "2.0",
+            "ux_contract_required": true
+          }
+        ]
+      }
+    ],
+    "replanning": {
+      "max_replans": 2,
+      "triggers": [
+        "GATE_FAIL",
+        "INVALID_ASSUMPTION",
+        "NEW_RISK",
+        "CONTEXT_DRIFT"
+      ],
+      "policies": [
+        {
+          "when": {
+            "signal": "INVALID_ASSUMPTION"
+          },
+          "reason": "Recheck platform, client tasks or preview-host assumptions.",
+          "target_stage": "research"
+        },
+        {
+          "when": {
+            "signal": "GATE_FAIL",
+            "current_stage": "qa"
+          },
+          "reason": "Repair the browser source/state/asset path that failed and collect fresh browser evidence.",
+          "target_stage": "implementation"
+        }
+      ]
+    },
+    "revision": 0,
+    "replan_history": []
+  },
+  "stages": [
+    {
+      "id": "research",
+      "agent": "research",
+      "purpose": "Establish the app baseline, target platforms, client-review tasks and preview hosting constraints.",
+      "skills": [
+        "project-context",
+        "adaptive-skill-routing-and-context-budget",
+        "mobile-app-design",
+        "product-discovery",
+        "mobile-web-preview",
+        "journey-driven-content-and-layout",
+        "design-reference-research-and-benchmark"
+      ],
+      "mandatory_skills": [
+        "project-context",
+        "adaptive-skill-routing-and-context-budget",
+        "mobile-app-design",
+        "product-discovery",
+        "mobile-web-preview",
+        "journey-driven-content-and-layout",
+        "design-reference-research-and-benchmark"
+      ],
+      "jit_skills": [],
+      "skill_paths": [
+        "skills_UIUX/project-context/SKILL.md",
+        "skills_UIUX/adaptive-skill-routing-and-context-budget/SKILL.md",
+        "skills_UIUX/mobile-app-design/SKILL.md",
+        "skills_UIUX/product-discovery/SKILL.md",
+        "skills_UIUX/mobile-web-preview/SKILL.md",
+        "skills_UIUX/journey-driven-content-and-layout/SKILL.md",
+        "skills_UIUX/design-reference-research-and-benchmark/SKILL.md"
+      ],
+      "gates": [
+        {
+          "id": "mobile-preview-scope",
+          "require": "screen/state inventory, target platforms, source reuse, demo data, hosting/base path and current publication authority are explicit",
+          "evidence_types": [
+            "file_read"
+          ]
+        },
+        {
+          "id": "ux-before-visual",
+          "require": "Before visual direction, inspect representative overview, selection and form/recovery tasks: entry state, user question, prioritized content, primary action, destination, feedback and recovery. Record wireframe walkthrough findings and repair blocking comprehension or navigation defects. No participant claims from expert review."
+        }
+      ],
+      "design_workflow": {
+        "active": false,
+        "decision_contract_required": false,
+        "ux_contract_required": false,
+        "required_check_phases": [],
+        "knowledge_source": null,
+        "lookup_tool": null,
+        "lookup_argv_template": null,
+        "check_tool": null,
+        "checker": null,
+        "contract_output": null,
+        "contract_version": null,
+        "comparison_tool": null,
+        "comparison_protocol": null,
+        "sequence": [],
+        "ux_first": null,
+        "structural_rule": null,
+        "authority_effect": "none",
+        "gate_effect": "none",
+        "evidence_effect": "none",
+        "aesthetic_quality": "UNKNOWN"
+      },
+      "delivery_workflow": {
+        "active": true,
+        "stage": "research",
+        "owner": "mobile-app-design",
+        "source": "skills_UIUX/mobile-app-design/data/lifecycle.json",
+        "catalog_sha256": "ded69f1af93e2e932c54283d2998675f55979a57f0ce0487b2462b50fc9fd700",
+        "baseline_rule": "Confirm whether a baseline exists; build does not imply greenfield. Record absent content/brand/data as UNKNOWN.",
+        "mode": "interactive-prototype",
+        "decision": "Which mobile task, target truth and evidence justify the design?",
+        "exit_checks": [
+          "Platform/output/scope and baseline explicit",
+          "Source-to-decision trace and actual participant access declared",
+          "UX walkthrough precedes visual direction: current state, next action and recovery are understandable"
+        ],
+        "deliverables": [
+          {
+            "id": "research.mobile_brief",
+            "output": "mobile brief and baseline inventory",
+            "fields": [
+              "problem/audience/top tasks",
+              "platform/OS/device/stack or UNKNOWN",
+              "screen/state inventory and preserved components",
+              "authority and excluded native implementation/release",
+              "screen job, priority order, CTA destination, feedback and recovery",
+              "wireframe walkthrough observations, blockers and retest; agent review is not user research"
+            ],
+            "resources": [
+              "mobile-app-design/SKILL.md",
+              "product-discovery/SKILL.md"
+            ]
+          },
+          {
+            "id": "research.mobile_evidence",
+            "output": "source-to-decision and research plan",
+            "fields": [
+              "source/pin/license",
+              "ADOPT/ADAPT/REJECT and screen/state verification",
+              "desk/scenario/direct-user evidence separated",
+              "PLANNED_VALIDATION without actual sessions"
+            ],
+            "resources": [
+              "mobile-app-design/data/sources.json",
+              "research-evidence-pipeline/SKILL.md"
+            ]
+          }
+        ],
+        "checker": "skills_UIUX/website-delivery-pipeline/scripts/check-delivery.py",
+        "human_validation": "UNKNOWN",
+        "aesthetic_quality": "UNKNOWN",
+        "gate_effect": "none",
+        "authority_effect": "none",
+        "rule": "Use the active card only. Reuse existing project artifacts; one file may serve several deliverables. Load linked resources only for unresolved decisions. RECORDED_CURRENT proves file integrity, not content quality, human validation, approval or stage completion. Existing Flow gates remain required."
+      },
+      "load_policy": "Load only this stage's routed skills plus target-project evidence needed for the active decision."
+    },
+    {
+      "id": "design",
+      "agent": "implementation",
+      "purpose": "Specify mobile navigation, components, states and browser-to-native differences using the existing app design system.",
+      "skills": [
+        "project-context",
+        "ai-agent-coding-guardrails",
+        "mobile-app-design",
+        "mobile-navigation-and-state-ux",
+        "mobile-design-system-and-handoff",
+        "mobile-web-preview",
+        "journey-driven-content-and-layout",
+        "visual-design-direction",
+        "asset-media-and-art-direction"
+      ],
+      "mandatory_skills": [
+        "project-context",
+        "ai-agent-coding-guardrails",
+        "mobile-app-design",
+        "mobile-navigation-and-state-ux",
+        "mobile-design-system-and-handoff",
+        "mobile-web-preview",
+        "journey-driven-content-and-layout",
+        "visual-design-direction",
+        "asset-media-and-art-direction"
+      ],
+      "jit_skills": [],
+      "skill_paths": [
+        "skills_UIUX/project-context/SKILL.md",
+        "skills_UIUX/ai-agent-coding-guardrails/SKILL.md",
+        "skills_UIUX/mobile-app-design/SKILL.md",
+        "skills_UIUX/mobile-navigation-and-state-ux/SKILL.md",
+        "skills_UIUX/mobile-design-system-and-handoff/SKILL.md",
+        "skills_UIUX/mobile-web-preview/SKILL.md",
+        "skills_UIUX/journey-driven-content-and-layout/SKILL.md",
+        "skills_UIUX/visual-design-direction/SKILL.md",
+        "skills_UIUX/asset-media-and-art-direction/SKILL.md"
+      ],
+      "gates": [
+        {
+          "id": "mobile-preview-design",
+          "require": "current design contract, reusable components, screen/state transitions and simulated native behaviors are recorded",
+          "evidence_types": [
+            "file_change"
+          ]
+        },
+        {
+          "id": "design-decision-integrity",
+          "require": "After UX walkthrough, bind task-led compositions, numeric type/density, media role and reference transfers to the canonical v2 contract; artifact integrity is not aesthetic acceptance. Reuse approved representative direction for rollout.",
+          "evidence_types": [
+            "design_contract_check"
+          ],
+          "design_phase": "design",
+          "design_contract_version": "2.0",
+          "ux_contract_required": true
+        }
+      ],
+      "design_workflow": {
+        "active": true,
+        "decision_contract_required": true,
+        "ux_contract_required": true,
+        "required_check_phases": [
+          "design"
+        ],
+        "knowledge_source": "skills_UIUX/visual-design-direction/data/design-knowledge.json",
+        "lookup_tool": "retrieve_design_knowledge",
+        "lookup_argv_template": [
+          "python",
+          "-B",
+          "skills_UIUX/design-intelligence-retrieval/scripts/query.py",
+          "<focused-domain-query>",
+          "--design-system",
+          "--json",
+          "--website-type",
+          "education",
+          "--project-domain",
+          "education",
+          "--product-archetype",
+          "generic",
+          "--page-role",
+          "<active-page-role>"
+        ],
+        "check_tool": "check_design_decisions",
+        "checker": "skills_UIUX/visual-design-direction/scripts/check-design-decisions.py",
+        "contract_output": "docs/uiux/design-decisions.json",
+        "contract_version": "2.0",
+        "comparison_tool": "skills_UIUX/visual-design-direction/scripts/evaluate-design-comparison.py",
+        "comparison_protocol": {
+          "hold_constant": [
+            "audience",
+            "content",
+            "claims",
+            "cta",
+            "state",
+            "assets",
+            "viewports"
+          ],
+          "vary_free_axes": [
+            "typography",
+            "density",
+            "visual_object"
+          ],
+          "evaluate": [
+            "comprehension",
+            "distinctiveness"
+          ],
+          "boundary": "Material declared differences and recorded judgments are inspectable; neither proves beauty, authentic human participation or a causal Factory upgrade."
+        },
+        "sequence": [
+          "load project truth and classify hard/suggested/free axes",
+          "map entry state, user question, prioritized information, primary action, feedback and recovery",
+          "walk through representative wireframes and repair UX blockers before visual styling",
+          "lookup identity + one page role + reference anatomy",
+          "ADOPT/ADAPT/REJECT reference properties with reasons",
+          "declare numeric type/density and object anatomy for alternatives",
+          "compare distinct topologies and every free direction axis on representative pages",
+          "predeclare comprehension/distinctiveness questions and constant inputs",
+          "check v2 decision contract",
+          "render/inspect representative desktop/mobile",
+          "prepare counterbalanced review and record observations",
+          "repair before rollout"
+        ],
+        "ux_first": {
+          "review_order": [
+            "task comprehension",
+            "navigation and recovery",
+            "hierarchy and composition",
+            "type spacing and media",
+            "visual consistency"
+          ],
+          "blockers": [
+            "unclear next action",
+            "dead end",
+            "misleading status",
+            "lost input",
+            "unreadable essential content"
+          ],
+          "rule": "Visual scores cannot compensate for a UX blocker. Record observations and retest in the existing design/review artifact; this packet does not perform the review."
+        },
+        "structural_rule": "Two representative alternatives must differ in the decision object's anatomy, region relationships or mobile grouping. Renaming anchors, skin changes or only swapping unchanged sections do not count. Rollout pages may inherit a representative decision owner.",
+        "authority_effect": "none",
+        "gate_effect": "none",
+        "evidence_effect": "none",
+        "aesthetic_quality": "UNKNOWN"
+      },
+      "delivery_workflow": {
+        "active": true,
+        "stage": "design",
+        "owner": "mobile-app-design",
+        "source": "skills_UIUX/mobile-app-design/data/lifecycle.json",
+        "catalog_sha256": "ded69f1af93e2e932c54283d2998675f55979a57f0ce0487b2462b50fc9fd700",
+        "baseline_rule": "Confirm whether a baseline exists; build does not imply greenfield. Record absent content/brand/data as UNKNOWN.",
+        "mode": "interactive-prototype",
+        "decision": "Which navigation, platform behavior and component system serves the task?",
+        "exit_checks": [
+          "Screen/state paths include relevant failure/recovery",
+          "Platform differences and accessibility annotations explicit",
+          "Prototype/design evidence current; native runtime still UNKNOWN"
+        ],
+        "deliverables": [
+          {
+            "id": "design.mobile_contract",
+            "output": "mobile design contract and navigation/state inventory",
+            "fields": [
+              "entry/task/state/transition",
+              "back/dismiss/keyboard/permissions/offline when relevant",
+              "brand/component reuse and platform mapping",
+              "source-to-decision trace and current revision",
+              "overview / selection / form representative compositions and justified inheritance",
+              "canonical v2 design-decisions.json with reference transfers and numeric roles"
+            ],
+            "resources": [
+              "mobile-app-design/templates/mobile-design-contract.md",
+              "mobile-navigation-and-state-ux/SKILL.md",
+              "visual-design-direction/SKILL.md",
+              "visual-design-direction/references/mobile-ux-first.md"
+            ]
+          },
+          {
+            "id": "design.mobile_system",
+            "output": "tokens/components and implementation handoff",
+            "fields": [
+              "semantic tokens and native units",
+              "component variants/states/semantics",
+              "stack/OS availability and asset rights",
+              "real/mock/simulated data and owner"
+            ],
+            "resources": [
+              "mobile-design-system-and-handoff/SKILL.md"
+            ]
+          },
+          {
+            "id": "design.mobile_prototype",
+            "output": "critical-task prototype and review plan",
+            "fields": [
+              "task success and consequential recovery",
+              "actual captures/revision and observed findings",
+              "expert versus actual participant evidence",
+              "prototype limits and native checks NOT_RUN"
+            ],
+            "resources": [
+              "mobile-prototype-and-qa/SKILL.md",
+              "mobile-app-design/templates/mobile-qa-matrix.md"
+            ]
+          }
+        ],
+        "checker": "skills_UIUX/website-delivery-pipeline/scripts/check-delivery.py",
+        "human_validation": "UNKNOWN",
+        "aesthetic_quality": "UNKNOWN",
+        "gate_effect": "none",
+        "authority_effect": "none",
+        "rule": "Use the active card only. Reuse existing project artifacts; one file may serve several deliverables. Load linked resources only for unresolved decisions. RECORDED_CURRENT proves file integrity, not content quality, human validation, approval or stage completion. Existing Flow gates remain required."
+      },
+      "load_policy": "Load only this stage's routed skills plus target-project evidence needed for the active decision."
+    },
+    {
+      "id": "implementation",
+      "agent": "implementation",
+      "purpose": "Implement a browser presentation of the mobile design in the target project using its existing frontend and state owners; prepare static hosting assets.",
+      "skills": [
+        "project-context",
+        "ai-agent-coding-guardrails",
+        "mobile-web-preview",
+        "frontend-implementation",
+        "mobile-navigation-and-state-ux"
+      ],
+      "mandatory_skills": [
+        "project-context",
+        "ai-agent-coding-guardrails",
+        "mobile-web-preview",
+        "frontend-implementation",
+        "mobile-navigation-and-state-ux"
+      ],
+      "jit_skills": [],
+      "skill_paths": [
+        "skills_UIUX/project-context/SKILL.md",
+        "skills_UIUX/ai-agent-coding-guardrails/SKILL.md",
+        "skills_UIUX/mobile-web-preview/SKILL.md",
+        "skills_UIUX/frontend-implementation/SKILL.md",
+        "skills_UIUX/mobile-navigation-and-state-ux/SKILL.md"
+      ],
+      "gates": [
+        {
+          "id": "mobile-preview-code",
+          "require": "interactive prototype source, deterministic screen/state links, reset behavior and static hosting output exist; backend/native integrations are labelled",
+          "evidence_types": [
+            "file_change",
+            "validator_result"
+          ]
+        }
+      ],
+      "design_workflow": {
+        "active": false,
+        "decision_contract_required": false,
+        "ux_contract_required": false,
+        "required_check_phases": [],
+        "knowledge_source": null,
+        "lookup_tool": null,
+        "lookup_argv_template": null,
+        "check_tool": null,
+        "checker": null,
+        "contract_output": null,
+        "contract_version": null,
+        "comparison_tool": null,
+        "comparison_protocol": null,
+        "sequence": [],
+        "ux_first": null,
+        "structural_rule": null,
+        "authority_effect": "none",
+        "gate_effect": "none",
+        "evidence_effect": "none",
+        "aesthetic_quality": "UNKNOWN"
+      },
+      "delivery_workflow": {
+        "active": true,
+        "stage": "implementation",
+        "owner": "mobile-app-design",
+        "source": "skills_UIUX/mobile-app-design/data/lifecycle.json",
+        "catalog_sha256": "ded69f1af93e2e932c54283d2998675f55979a57f0ce0487b2462b50fc9fd700",
+        "baseline_rule": "Confirm whether a baseline exists; build does not imply greenfield. Record absent content/brand/data as UNKNOWN.",
+        "mode": "interactive-prototype",
+        "decision": "Which shared renderer/state and static output delivers the mobile design in a browser?",
+        "exit_checks": [
+          "Source/components/tokens reused",
+          "Critical tasks and recovery work",
+          "Hosting subpath and direct state links verified"
+        ],
+        "deliverables": [
+          {
+            "id": "implementation.mobile_browser_prototype",
+            "output": "interactive browser prototype and static export",
+            "fields": [
+              "canonical screen/state renderer",
+              "demo fixtures and reset",
+              "existing stack/build output",
+              "native simulations and real integration limits"
+            ],
+            "resources": [
+              "mobile-web-preview/SKILL.md",
+              "frontend-implementation/SKILL.md"
+            ]
+          },
+          {
+            "id": "implementation.mobile_preview_hosting",
+            "output": "authorized target hosting configuration or prepared assets",
+            "fields": [
+              "target repository and current source revision",
+              "base path and exported routes/assets",
+              "publication authority and PREPARED status until verified"
+            ],
+            "resources": [
+              "mobile-web-preview/references/hosting-and-verification.md"
+            ]
+          }
+        ],
+        "checker": "skills_UIUX/website-delivery-pipeline/scripts/check-delivery.py",
+        "human_validation": "UNKNOWN",
+        "aesthetic_quality": "UNKNOWN",
+        "gate_effect": "none",
+        "authority_effect": "none",
+        "rule": "Use the active card only. Reuse existing project artifacts; one file may serve several deliverables. Load linked resources only for unresolved decisions. RECORDED_CURRENT proves file integrity, not content quality, human validation, approval or stage completion. Existing Flow gates remain required."
+      },
+      "load_policy": "Load only this stage's routed skills plus target-project evidence needed for the active decision."
+    },
+    {
+      "id": "qa",
+      "agent": "qa",
+      "purpose": "Verify the browser prototype at phone/desktop sizes and hand off a prepared or independently verified hosted link; publication remains the authorized external collaborator's responsibility.",
+      "skills": [
+        "testing-strategy",
+        "agent-evaluation-and-reliability",
+        "mobile-web-preview",
+        "mobile-prototype-and-qa",
+        "web-quality-and-performance",
+        "code-review-and-release",
+        "ui-craft-and-visual-qa",
+        "media-crop-and-layout-integrity"
+      ],
+      "mandatory_skills": [
+        "testing-strategy",
+        "agent-evaluation-and-reliability",
+        "mobile-web-preview",
+        "mobile-prototype-and-qa",
+        "web-quality-and-performance",
+        "code-review-and-release",
+        "ui-craft-and-visual-qa",
+        "media-crop-and-layout-integrity"
+      ],
+      "jit_skills": [],
+      "skill_paths": [
+        "skills_UIUX/testing-strategy/SKILL.md",
+        "skills_UIUX/agent-evaluation-and-reliability/SKILL.md",
+        "skills_UIUX/mobile-web-preview/SKILL.md",
+        "skills_UIUX/mobile-prototype-and-qa/SKILL.md",
+        "skills_UIUX/web-quality-and-performance/SKILL.md",
+        "skills_UIUX/code-review-and-release/SKILL.md",
+        "skills_UIUX/ui-craft-and-visual-qa/SKILL.md",
+        "skills_UIUX/media-crop-and-layout-integrity/SKILL.md"
+      ],
+      "gates": [
+        {
+          "id": "rendered-qa",
+          "require": "current browser captures and interaction evidence cover primary tasks, recovery, narrow phones, desktop frame and actual hosting base paths",
+          "evidence_types": [
+            "browser_render",
+            "validator_result"
+          ]
+        },
+        {
+          "id": "mobile-preview-handoff",
+          "require": "handoff identifies exact source/revision, current browser QA and explicit PREPARED or DEPLOYED_VERIFIED status; claim a delivered client URL only after authorized publication, provider SHA/status and live route/interaction checks",
+          "evidence_types": [
+            "validator_result"
+          ]
+        },
+        {
+          "id": "design-render-integrity",
+          "require": "Inspect actual representative captures, task comprehension, visual hierarchy, density, type, media crops and all seven purpose-based visual signs. Repair blockers before rollout; distinguish agent judgment from human preference.",
+          "evidence_types": [
+            "design_contract_check"
+          ],
+          "design_phase": "rendered",
+          "design_contract_version": "2.0",
+          "ux_contract_required": true
+        }
+      ],
+      "design_workflow": {
+        "active": false,
+        "decision_contract_required": true,
+        "ux_contract_required": true,
+        "required_check_phases": [
+          "rendered"
+        ],
+        "knowledge_source": null,
+        "lookup_tool": null,
+        "lookup_argv_template": null,
+        "check_tool": "check_design_decisions",
+        "checker": "skills_UIUX/visual-design-direction/scripts/check-design-decisions.py",
+        "contract_output": "docs/uiux/design-decisions.json",
+        "contract_version": "2.0",
+        "comparison_tool": null,
+        "comparison_protocol": null,
+        "sequence": [],
+        "ux_first": {
+          "review_order": [
+            "task comprehension",
+            "navigation and recovery",
+            "hierarchy and composition",
+            "type spacing and media",
+            "visual consistency"
+          ],
+          "blockers": [
+            "unclear next action",
+            "dead end",
+            "misleading status",
+            "lost input",
+            "unreadable essential content"
+          ],
+          "rule": "Visual scores cannot compensate for a UX blocker. Record observations and retest in the existing design/review artifact; this packet does not perform the review."
+        },
+        "structural_rule": null,
+        "authority_effect": "none",
+        "gate_effect": "none",
+        "evidence_effect": "none",
+        "aesthetic_quality": "UNKNOWN"
+      },
+      "delivery_workflow": {
+        "active": true,
+        "stage": "qa",
+        "owner": "mobile-app-design",
+        "source": "skills_UIUX/mobile-app-design/data/lifecycle.json",
+        "catalog_sha256": "ded69f1af93e2e932c54283d2998675f55979a57f0ce0487b2462b50fc9fd700",
+        "baseline_rule": "Confirm whether a baseline exists; build does not imply greenfield. Record absent content/brand/data as UNKNOWN.",
+        "mode": "interactive-prototype",
+        "decision": "What actual browser and deployment evidence justifies the client handoff?",
+        "exit_checks": [
+          "Current browser task/recovery captures inspected",
+          "Phone and desktop/subpath tests pass",
+          "Client URL verified or explicitly pending; native runtime NOT_RUN",
+          "Task comprehension before visual craft; actual captures opened and reviewed",
+          "Seven visual signs with location and purpose; no automatic beauty PASS"
+        ],
+        "deliverables": [
+          {
+            "id": "qa.mobile_browser_evidence",
+            "output": "browser interaction, state and capture evidence",
+            "fields": [
+              "source revision/viewports and observed tasks",
+              "console/network/assets and route reload",
+              "findings/owner/retest",
+              "browser versus native evidence boundary"
+            ],
+            "resources": [
+              "mobile-web-preview/SKILL.md",
+              "mobile-prototype-and-qa/SKILL.md",
+              "ui-craft-and-visual-qa/SKILL.md"
+            ]
+          },
+          {
+            "id": "qa.mobile_client_handoff",
+            "output": "prepared assets or verified hosted link and client instructions",
+            "fields": [
+              "PREPARED/DEPLOYED_VERIFIED/BLOCKED/UNKNOWN",
+              "provider SHA/status and live URL evidence",
+              "optional QR from confirmed URL",
+              "demo/reset/native/backend/user limits"
+            ],
+            "resources": [
+              "mobile-web-preview/templates/client-handoff.md",
+              "mobile-web-preview/references/hosting-and-verification.md"
+            ]
+          }
+        ],
+        "checker": "skills_UIUX/website-delivery-pipeline/scripts/check-delivery.py",
+        "human_validation": "UNKNOWN",
+        "aesthetic_quality": "UNKNOWN",
+        "gate_effect": "none",
+        "authority_effect": "none",
+        "rule": "Use the active card only. Reuse existing project artifacts; one file may serve several deliverables. Load linked resources only for unresolved decisions. RECORDED_CURRENT proves file integrity, not content quality, human validation, approval or stage completion. Existing Flow gates remain required."
+      },
+      "load_policy": "Load only this stage's routed skills plus target-project evidence needed for the active decision."
+    }
+  ],
+  "acceptance_criteria": [
+    "All supplied screen identifiers reachable and interactive",
+    "Grayscale only; Vietnamese; 390x844 and responsive",
+    "screen/state inventory, target platforms, source reuse, demo data, hosting/base path and current publication authority are explicit",
+    "Before visual direction, inspect representative overview, selection and form/recovery tasks: entry state, user question, prioritized content, primary action, destination, feedback and recovery. Record wireframe walkthrough findings and repair blocking comprehension or navigation defects. No participant claims from expert review.",
+    "current design contract, reusable components, screen/state transitions and simulated native behaviors are recorded",
+    "After UX walkthrough, bind task-led compositions, numeric type/density, media role and reference transfers to the canonical v2 contract; artifact integrity is not aesthetic acceptance. Reuse approved representative direction for rollout.",
+    "interactive prototype source, deterministic screen/state links, reset behavior and static hosting output exist; backend/native integrations are labelled",
+    "current browser captures and interaction evidence cover primary tasks, recovery, narrow phones, desktop frame and actual hosting base paths",
+    "handoff identifies exact source/revision, current browser QA and explicit PREPARED or DEPLOYED_VERIFIED status; claim a delivered client URL only after authorized publication, provider SHA/status and live route/interaction checks",
+    "Inspect actual representative captures, task comprehension, visual hierarchy, density, type, media crops and all seven purpose-based visual signs. Repair blockers before rollout; distinguish agent judgment from human preference."
+  ],
+  "qa_routes": [],
+  "canonical_sources": [
+    "START-HERE.md",
+    "AGENTS.md",
+    "docs/CONTRACT-OWNERSHIP.md",
+    "skills_UIUX/runtime/runtime-policy.json",
+    "skills_UIUX/flows/mobile-web-preview.json"
+  ],
+  "research_packet": {
+    "required": false,
+    "state": "NOT_REQUIRED_BY_CURRENT_TASK_CONTRACT",
+    "templates": []
+  },
+  "execution_advice": {
+    "schema_version": "1.0",
+    "advisory_only": true,
+    "manual_model_selection_required": true,
+    "overall_profile": {
+      "recommended_capability": "advanced",
+      "capability_floor": "balanced",
+      "reasoning_effort": "high",
+      "downgrade_allowed": true,
+      "complexity_score": 6,
+      "selection_reasons": [
+        "multi-dimensional task signals: prototype",
+        "long flow with 4 stages"
+      ],
+      "picker_instruction": "Choose the strongest available reasoning/coding model for this run.",
+      "auto_switch_model_in_consumer_ui": false,
+      "rule": "This is a preflight recommendation only. ChatGPT/Codex model selection remains manual; never downgrade below the capability floor to save tokens."
+    },
+    "stage_profiles": [
+      {
+        "stage_id": "research",
+        "agent": "research",
+        "recommended_capability": "balanced",
+        "reasoning_effort": "medium",
+        "skill_count": 7,
+        "gate_count": 2,
+        "model_stickiness": "keep the selected model stable for this stage/tool loop",
+        "reselect_between_runs_only": true
+      },
+      {
+        "stage_id": "design",
+        "agent": "implementation",
+        "recommended_capability": "balanced",
+        "reasoning_effort": "medium",
+        "skill_count": 9,
+        "gate_count": 2,
+        "model_stickiness": "keep the selected model stable for this stage/tool loop",
+        "reselect_between_runs_only": true
+      },
+      {
+        "stage_id": "implementation",
+        "agent": "implementation",
+        "recommended_capability": "balanced",
+        "reasoning_effort": "medium",
+        "skill_count": 5,
+        "gate_count": 1,
+        "model_stickiness": "keep the selected model stable for this stage/tool loop",
+        "reselect_between_runs_only": true
+      },
+      {
+        "stage_id": "qa",
+        "agent": "qa",
+        "recommended_capability": "balanced",
+        "reasoning_effort": "medium",
+        "skill_count": 8,
+        "gate_count": 3,
+        "model_stickiness": "keep the selected model stable for this stage/tool loop",
+        "reselect_between_runs_only": true
+      }
+    ],
+    "context_strategy": {
+      "mode": "progressive_disclosure",
+      "active_stage_only": true,
+      "max_active_skills_per_stage": 6,
+      "provider_document_char_ceiling": 180000,
+      "stable_prefix": [
+        "AGENTS.md",
+        "docs/CONTRACT-OWNERSHIP.md",
+        "task contract / manifest",
+        "resolved flow"
+      ],
+      "dynamic_tail": [
+        "active-stage SKILL.md files",
+        "target files directly needed by the current decision",
+        "current-run evidence"
+      ],
+      "avoid_eager_loading": true,
+      "prompt_cache_guidance": "Keep stable policy/instruction context ordered before dynamic task evidence so provider/platform-native prompt caching can help when available; never assume a cache hit.",
+      "compression_guidance": "Prefer an evidence-preserving checkpoint summary over lossy prompt compression. Do not compress mandatory rules, authority constraints, acceptance criteria or unresolved failures."
+    },
+    "continuation_strategy": {
+      "suggest_split_into_separate_runs": true,
+      "checkpoint_boundary": "after each completed flow stage and before context reset",
+      "resume_source": "latest verified checkpoint + unresolved work + required evidence refs",
+      "model_stickiness": "Do not switch models inside an active tool loop solely for cost. Reselect only at a clean checkpoint or separate run when the next stage has a different capability floor.",
+      "quota_exhaustion": "Persist completed stages and unresolved blockers; resume from the checkpoint instead of re-reading the whole repository or replaying verified work."
+    },
+    "measurement_strategy": {
+      "measure_before_default_downgrade": true,
+      "compare": [
+        "acceptance-criteria completion",
+        "verification pass/fail",
+        "repair/retry count",
+        "task completion before quota exhaustion",
+        "input/output token usage when provider metadata exists",
+        "elapsed time and provider cost when available"
+      ],
+      "promotion_rule": "Promote a cheaper/smaller profile only when representative-task quality is non-inferior and completion reliability does not regress."
+    },
+    "quality_boundary": {
+      "optimization_order": [
+        "correctness",
+        "grounding",
+        "completion",
+        "verification",
+        "maintainability",
+        "clarity",
+        "compute_efficiency"
+      ],
+      "provider_or_model_self_report_is_evidence": false,
+      "advisor_may_change_authority": false,
+      "advisor_may_satisfy_gates": false,
+      "advisor_may_authorize_release": false
+    }
+  },
+  "evidence_boundary": {
+    "mobile_completion_scope": "browser_prototype_and_client_handoff",
+    "browser_prototype_available": true,
+    "browser_preview_is_not_native_app": true,
+    "published_link_requires_deployment_truth": true,
+    "publication_requires_separate_release_authority": true,
+    "native_implementation_available": false,
+    "native_runtime_qa_available": false,
+    "design_records_do_not_prove_native_runtime": true,
+    "manifest_is_not_qa_pass": true,
+    "provider_self_report_is_not_gate_evidence": true,
+    "target_repository_audit_required_before_mutation": true,
+    "target_runtime_evidence_required_for_runtime_claims": true,
+    "missing_user_evidence_must_remain_planned_blocked_or_unknown": true,
+    "authority_never_exceeds_caller_or_task_language": true,
+    "target_truth_never_grants_authority_or_evidence": true,
+    "target_truth_status": "NO_USABLE_TRUTH",
+    "target_truth_probed_before_flow_resolution": true,
+    "routing_precedence": [
+      "explicit_override",
+      "target_project_truth",
+      "goal_inference"
+    ],
+    "visual_signature_guardrail_active": false,
+    "execution_advice_is_not_gate_evidence": true,
+    "execution_advice_never_selects_consumer_model": true,
+    "preferred_repository_workflow": "feature branch -> implementation -> verification -> pull request -> merge"
+  }
+}

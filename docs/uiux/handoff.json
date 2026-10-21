@@ -1,0 +1,38 @@
+{
+  "source_state": "LOCAL_UNCOMMITTED",
+  "target_repository": "https://github.com/Ngh1aa/Biz",
+  "base_sha": "3c44717e61029dc94a9a32770b4c8171c4b576c4",
+  "factory_sha": "dcfe2c70093eafab409965cd4948ab79b5366146",
+  "delivery": "PREPARED",
+  "source_sha256": {
+    "index.html": "f333aef41cd98e6a5945f0d486f99f57902cbfcd5d992ca40df4dc115ae302ba",
+    "package.json": "2fcba05e073737aec4a27c4691601c106be56b509bbf58e0b20e5ada909490d8",
+    "src\\actions.js": "60ff879d326de91ab94410d5a6ab50011e67f4e4ddb331086a912e612e079de7",
+    "src\\app.js": "92eef6df286b9f7a1fde8ba753e70e3e9652b4dcd273e62ad04b7c340fcc4454",
+    "src\\data.js": "b491ef052997fd6c686a352bc9b6bec7287c5c2dcf54827f7813a2df1daf3c7b",
+    "src\\screens\\communication.js": "2f356ddc23881fd4a73561014d31b3268692b203492ead8fffb716274408091f",
+    "src\\screens\\operations.js": "d4f81eb2e7df3fbc0972f6265b65b30bf4763e07a3da0538bf518611b8e2e184",
+    "src\\screens\\overview.js": "776db7026b53a7a1764bf70a872db01e0fc34b1084b64a5153d2d9d7aee2e91d",
+    "src\\screens\\reports.js": "f0e8fea63f5b379174031c013d1830034e9baea3e2eacbadfe7fe4ed7badd4b5",
+    "src\\screens\\students.js": "0073e93289c3cbb5378f640ee4fe01d4b1519eb9f8c58cd5c8f563ac4b72b76f",
+    "src\\screens\\teaching.js": "878d2fa860963a2a781b91986b22016d0cf228728ef413e4b5dcb30963ea653e",
+    "src\\styles.css": "8f3d0a3818adcc41b98fcbc3c6f2b37d8c78592544153ba7c1177f5b258feb45",
+    "src\\ui.js": "9cc4eb0af257fd4e154ec6298c31b905ced2c0ed9fcb3ed33b28d8444839fe62"
+  },
+  "unit_tests": {
+    "passed": 9,
+    "failed": 0
+  },
+  "route_viewport_matrix": {
+    "routes": 41,
+    "viewports": [
+      360,
+      390,
+      768,
+      1440
+    ],
+    "cases": 164,
+    "errors": 0
+  },
+  "native_backend_user_research": "NOT_RUN"
+}
