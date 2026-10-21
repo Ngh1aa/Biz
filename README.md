@@ -2,16 +2,14 @@
 
 ## GitHub Pages
 
-**[Mở bản Minh Hoàng Center V0.4](https://ngh1aa.github.io/Biz/?theme=center#/gv/GV01)** · [Đối chiếu bản pastel](https://ngh1aa.github.io/Biz/?theme=pastel#/gv/GV01) · **[Xem bản trắng đen](https://ngh1aa.github.io/Biz/?theme=mono#/gv/GV01)**
+**[Mở bản Minh Hoàng Center V0.4](https://ngh1aa.github.io/Biz/#/gv/GV01)**
 
 Repo dùng cấu hình Pages sẵn có: nhánh `main`, thư mục `/`. File `.nojekyll` giữ nguyên các ES module, font và SVG. Mỗi thay đổi trên `main` được GitHub Pages xuất bản tự động; workflow `Verify Biz` kiểm tra syntax, logic và static build trên push/pull request. Kết quả CI và kết quả triển khai Pages cần kiểm tra riêng.
 
-**V0.4:** giao diện mặc định bám cấu trúc và design system Minh Hoàng Center từ artifact và `files.zip`, theo xác nhận của người dùng; giữ câu chữ giáo dục V0.3. Xem `docs/minh-hoang-reference.md` để đối chiếu nguồn, các thành phần áp dụng và giới hạn. Hai phương án pastel/trắng đen trước đây vẫn có thể mở bằng tham số `theme`. Chuyển giao diện giữ nguyên tuyến, dữ liệu và nội dung biểu mẫu đang nhập.
+**V0.4:** giao diện mặc định bám cấu trúc và design system Minh Hoàng Center từ artifact và `files.zip`, theo xác nhận của người dùng; giữ câu chữ giáo dục V0.3. Xem `docs/minh-hoang-reference.md` để đối chiếu nguồn, các thành phần áp dụng và giới hạn. Minh Hoàng là giao diện duy nhất. Hai phương án Pastel và Trắng đen đã được gỡ; liên kết cũ tự mở giao diện hiện tại, giữ nguyên màn hình và dữ liệu đã lưu.
 
-- Minh Hoàng (mặc định): `http://127.0.0.1:4173/Biz/?theme=center#/gv/GV01`
-- Pastel: `http://127.0.0.1:4173/Biz/?theme=pastel#/gv/GV01`
-- Baseline trắng đen: `http://127.0.0.1:4173/Biz/?theme=mono#/gv/GV01`
-- Chi tiết áp dụng và QA mới: `docs/pastel-style-trial.md`; bằng chứng `evidence/pastel-v02/`. Hồ sơ/capture trong `evidence/browser/` là baseline V0.1.
+- Minh Hoàng: `http://127.0.0.1:4173/Biz/#/gv/GV01`
+- Tài liệu/capture phiên bản cũ chỉ là hồ sơ lịch sử, không còn là giao diện đang cung cấp.
 
 Browser prototype cho vận hành trung tâm đào tạo, theo tài liệu người dùng cung cấp ngày 21/10/2026. Có **41 màn/trạng thái** dùng chung component và dữ liệu, cho **Giáo vụ · Giáo viên · Trưởng bộ môn**.
 
