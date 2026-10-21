@@ -66,6 +66,7 @@
 [data-theme='center'] .segmented { background:var(--line); padding:4px; gap:4px; border:0; border-radius:var(--radius-lg); }
 [data-theme='center'] .segmented button { min-height:40px; border-radius:var(--radius-md); font-size:14px; color:#555b68; line-height:20px; padding:8px; }
 [data-theme='center'] .segmented .selected { background:#fff; color:var(--ink); box-shadow:0 1px 2px #0000000f; }
+[data-theme='center'] .center-secondary-modes { display:none; }
 
 /* Reference navigation keeps text labels and the original five destinations. */
 [data-theme='center'] .tabbar { left:20px; right:20px; bottom:24px; height:64px; padding:7px; border:0; border-radius:9999px; background:var(--brand-blue); box-shadow:var(--shadow-nav); gap:1px; }

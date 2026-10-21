@@ -39,7 +39,7 @@ Màu cảnh báo và thành công trên nền nhạt dùng màu chữ đậm hơ
 | GV04, GV04b, GV04c | Giữ tiếp nhận ba bước; ô nhập 56px, nhãn và trợ giúp rõ, nút lưu chính xanh |
 | GV05 và các trạng thái chọn | Giữ học sinh → môn → giáo viên → lịch tuần → ngày áp dụng; gợi ý mã nằm ngay trong biểu mẫu hiện có |
 | GV06, GV06b, GV06c | Cùng thanh chuyển tác vụ; thông tin hiện tại, thay đổi, lý do và ngày áp dụng |
-| TC02, TC02b | Giữ lưới tuần/ngày, chọn ngày và ca; màu trạng thái phân biệt đã/chưa điểm danh và buổi bổ sung |
+| TC02, TC02b | Ba cách xem Tuần/Ngày/Học sinh theo nguồn; dùng lại hai tuyến lịch và trạng thái sẵn có, phân biệt đã/chưa điểm danh và buổi bổ sung |
 | TC03, TC03b, TC03c | Thông tin buổi → trạng thái khóa → số có mặt/vắng → danh sách → lưu/đề nghị điều chỉnh; bổ sung buổi vẫn là luồng riêng |
 | GV07, TBM01, TC05 | Tháng/trạng thái → thẻ báo cáo → chuyên cần/điểm/nhận xét → bổ sung hoặc duyệt; giữ hai bước duyệt |
 | TC05b/c/d/w | Báo cáo, biểu mẫu và bảng Excel tiếp tục dùng chung dữ liệu, trường và hành vi đã kiểm tra |
@@ -54,6 +54,7 @@ Không thay mã tuyến hoặc tạo 41 bản HTML rời. Các trạng thái `GV
 - Giữ giới hạn xem thông tin học sinh theo phạm vi prototype trước đây. Không sao chép tên, địa chỉ hoặc liên hệ trong hình mẫu thành dữ liệu thật.
 - Danh mục môn và dữ liệu ví dụ hiện có được giữ: yêu cầu lần này chốt cấu trúc và design system, không yêu cầu thay toàn bộ dữ liệu theo hình mẫu.
 - Giữ nhãn chữ của năm tab để dễ nhận biết, thay vì sao chép thanh chỉ có icon từ tệp mẫu.
+- Với Trưởng bộ môn, tab thứ ba là Duyệt theo nguồn. Danh sách học sinh vẫn mở từ Tổng quan và các màn liên quan.
 - Chưa có tệp logo chính thức trong gói nguồn; dùng tên chữ “Minh Hoàng”, không tự nhận là logo gốc.
 - Đây là browser prototype, không có backend/xác thực/thanh toán hoặc native app thật.
 

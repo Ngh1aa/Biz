@@ -28,7 +28,8 @@ function formatHeadings(){
 }
 const tabs={
  gv:[['GV01','home','Tổng quan'],['GV02','users','Học sinh'],['GV07','check-square','Duyệt'],['GV08','file-text','Học phí'],['TC07','message-circle','Trao đổi']],
- tc:[['TC01','home','Tổng quan'],['TC02','calendar','Lịch dạy'],['TC04a','users','Học sinh'],['TC05','file-text','Báo cáo'],['TC06','check-square','Công việc']]
+ tc:[['TC01','home','Tổng quan'],['TC02','calendar','Lịch dạy'],['TC04a','users','Học sinh'],['TC05','file-text','Báo cáo'],['TC06','check-square','Công việc']],
+ tbm:[['TC01','home','Tổng quan'],['TC02','calendar','Lịch dạy'],['TBM01','check-square','Duyệt'],['TC05','file-text','Báo cáo'],['TC06','check-square','Công việc']]
 };
 function save(){try{persist(ctx.db);}catch{toast('Không thể lưu dữ liệu cục bộ. Kiểm tra dung lượng trình duyệt.');}}
 let toastTimer;
@@ -64,7 +65,7 @@ function readRoute(){
  if(ctx.route.startsWith('GV05-'))actions.openClassPicker(ctx.route);
 }
 function nav(){
- const list=tabs[ctx.db.role==='gv'?'gv':'tc'];
+ const list=tabs[ctx.db.role==='gv'?'gv':ctx.db.role==='tbm'&&theme==='center'?'tbm':'tc'];
  function active(r){if(r===ctx.route)return true;if(r==='GV02')return ['GV03','GV04','GV04b','GV04c','GV05','GV06','GV06b','GV06c'].includes(ctx.route);if(r==='TC02')return ctx.route.startsWith('TC02')||ctx.route.startsWith('TC03');if(r==='TC04a')return ctx.route.startsWith('TC04');if(r==='TC05')return ctx.route.startsWith('TC05');if(r==='TC06')return ctx.route.startsWith('TC06');return false;}
  return `<nav class="tabbar" aria-label="Điều hướng chính">${list.map(([r,i,t])=>`<button data-go="${r}" class="tab ${active(r)?'active':''}" ${active(r)?'aria-current="page"':''}>${icon(i,21)}<span>${t}</span></button>`).join('')}</nav>`;
 }
