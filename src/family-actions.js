@@ -27,7 +27,7 @@ export function createFamilyActions(ctx){
   }
   if(name==='family-reply'){
    const thread=currentThread();if(!thread||!d.text?.trim()){error(f,'Chọn hội thoại hợp lệ và nhập nội dung trước khi gửi.');return true;}
-   thread.messages.push({role:db.role,text:d.text.trim(),time:new Date().toLocaleString('vi-VN')});ctx.save();ctx.render();ctx.toast('Đã lưu tin nhắn.');return true;
+   thread.messages.push({role:db.role,text:d.text.trim(),time:new Date().toLocaleString('vi-VN')});ctx.save();ctx.render();document.querySelector('.composer')?.scrollIntoView({block:'end'});ctx.toast('Đã lưu tin nhắn.');return true;
   }
   if(db.role!=='ph')return true;
   if(name==='family-leave'){

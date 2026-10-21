@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "contract_sha256": "dea0b995a2db883aa67cfd90ac88fce6cdb6787ae29fe6a85f3d75611cd446b4",
+  "route": "TC01",
+  "seed": 0,
+  "facilitator": {
+    "labels": {
+      "A": "A",
+      "B": "B"
+    },
+    "protocol": {
+      "buyer_task": "Identify the lesson needing attendance and the action before midnight.",
+      "held_constant": {
+        "audience": "Teacher T01",
+        "content": "Same seeded sessions, queue, follow-up pupils and notices",
+        "claims": "Synthetic fixture only",
+        "cta": "Open same attendance session",
+        "state": "Fresh seeded browser context",
+        "assets": "Google Sans Flex, Feather and initials",
+        "viewports": "390x844 and 1440x1040"
+      },
+      "questions": [
+        {
+          "id": "C1",
+          "dimension": "comprehension",
+          "prompt": "Which session needs action, where do you open it, and what is the deadline?",
+          "criteria": [
+            "Session identity and open action visible",
+            "Midnight deadline discoverable"
+          ]
+        },
+        {
+          "id": "D1",
+          "dimension": "distinctiveness",
+          "prompt": "What hierarchy and domain object distinguish this education workspace?",
+          "criteria": [
+            "Session and learning work form distinct groups",
+            "Brand blue directs the main current action"
+          ]
+        }
+      ]
+    },
+    "captures": [
+      {
+        "route": "TC01",
+        "composition_id": "A",
+        "file": "evidence/redesign/TC01-A-390.png",
+        "sha256": "3fb7d9a77695a5882945c92670d7da0d53babe4a80e8d8a63f7ef543a5a951ea",
+        "width": 390,
+        "viewport_height": 844,
+        "inspected": true,
+        "review_source": "agent-heuristic",
+        "critique": {
+          "hierarchy": "Session and explicit action lead. Review of A/B retained A for the attendance task; this is author heuristic only.",
+          "typography": "Real Vietnamese titles/body readable; selected task headings 28/34, overview24/30, nav11/15. Alternative overview22/28 and session18/26.",
+          "spacing": "20px phone gutter. Screen owns scrolling and nav owns its own layout row; no compensating overlay padding.",
+          "media": "No photographs or focal crops; labelled Feather icons and synthetic initials.",
+          "distinctiveness": "Minh Hoang blue identifies the session/action while plain section/divider surfaces support reading and comparison."
+        }
+      },
+      {
+        "route": "TC01",
+        "composition_id": "A",
+        "file": "evidence/redesign/TC01-A-1440.png",
+        "sha256": "22a2748633423770c49251cf8831f549d35da715ffb778f0588fb90ec9905709",
+        "width": 1440,
+        "viewport_height": 1040,
+        "inspected": true,
+        "review_source": "agent-heuristic",
+        "critique": {
+          "hierarchy": "Session and explicit action lead. Review of A/B retained A for the attendance task; this is author heuristic only.",
+          "typography": "Real Vietnamese titles/body readable; selected task headings 28/34, overview24/30, nav11/15. Alternative overview22/28 and session18/26.",
+          "spacing": "20px phone gutter. Screen owns scrolling and nav owns its own layout row; no compensating overlay padding.",
+          "media": "No photographs or focal crops; labelled Feather icons and synthetic initials.",
+          "distinctiveness": "Minh Hoang blue identifies the session/action while plain section/divider surfaces support reading and comparison."
+        }
+      },
+      {
+        "route": "TC01",
+        "composition_id": "B",
+        "file": "evidence/redesign/TC01-B-390.png",
+        "sha256": "b9dfe20fd8edbc62edcbef7b1335a579dc7c4b0554e2f4096ade3e33fb067872",
+        "width": 390,
+        "viewport_height": 844,
+        "inspected": true,
+        "review_source": "agent-heuristic",
+        "critique": {
+          "hierarchy": "Work queue leads; session/time use a split row with an icon-only action. Attendance is less dominant than A.",
+          "typography": "Real Vietnamese titles/body readable; selected task headings 28/34, overview24/30, nav11/15. Alternative overview22/28 and session18/26.",
+          "spacing": "20px phone gutter. Screen owns scrolling and nav owns its own layout row; no compensating overlay padding.",
+          "media": "No photographs or focal crops; labelled Feather icons and synthetic initials.",
+          "distinctiveness": "Minh Hoang blue identifies the session/action while plain section/divider surfaces support reading and comparison."
+        }
+      },
+      {
+        "route": "TC01",
+        "composition_id": "B",
+        "file": "evidence/redesign/TC01-B-1440.png",
+        "sha256": "36379424245679aada2d6c8cac3398434610c5f89c500f48f2b341a12dfe32b3",
+        "width": 1440,
+        "viewport_height": 1040,
+        "inspected": true,
+        "review_source": "agent-heuristic",
+        "critique": {
+          "hierarchy": "Work queue leads; session/time use a split row with an icon-only action. Attendance is less dominant than A.",
+          "typography": "Real Vietnamese titles/body readable; selected task headings 28/34, overview24/30, nav11/15. Alternative overview22/28 and session18/26.",
+          "spacing": "20px phone gutter. Screen owns scrolling and nav owns its own layout row; no compensating overlay padding.",
+          "media": "No photographs or focal crops; labelled Feather icons and synthetic initials.",
+          "distinctiveness": "Minh Hoang blue identifies the session/action while plain section/divider surfaces support reading and comparison."
+        }
+      }
+    ],
+    "ordering": "Assign contiguous session_index from zero; rotate label order by seed + session index. This balances first exposure within one cohort."
+  },
+  "reviewer": {
+    "buyer_task": "Identify the lesson needing attendance and the action before midnight.",
+    "labels": [
+      "A",
+      "B"
+    ],
+    "questions": [
+      {
+        "id": "C1",
+        "dimension": "comprehension",
+        "prompt": "Which session needs action, where do you open it, and what is the deadline?"
+      },
+      {
+        "id": "D1",
+        "dimension": "distinctiveness",
+        "prompt": "What hierarchy and domain object distinguish this education workspace?"
+      }
+    ],
+    "instruction": "Show only this reviewer packet and anonymously labelled captures. Answer before seeing another candidate. Do not disclose answer criteria or author preference."
+  },
+  "status": "PLANNED_VALIDATION",
+  "human_preference": "UNKNOWN",
+  "causal_effect": "UNKNOWN",
+  "boundary": "Labels do not prove blinding. A facilitator who also authored or grades the candidates must report heuristic review. Human provenance remains a reviewer declaration."
+}

@@ -1,32 +1,32 @@
-# Biz — UX trắng đen
+# Minh Hoàng · UX redesign
 
-## Nguồn và phạm vi
-Nguồn chính: yêu cầu trực tiếp và văn bản người dùng cung cấp ngày 21/10/2026. Ba ảnh là concept reference về visual language, không phải bằng chứng usability. Các nhãn [PDF], [DOCX], [ART] trong văn bản không có file gốc để đối chiếu: UNKNOWN. Repo tại thời điểm bắt đầu chỉ có .gitattributes. Native target và backend: UNKNOWN.
+## Mục tiêu và nguồn
+Yêu cầu hiện tại: thiết kế lại toàn bộ UX đang yếu bằng workflow uiux-ai-workspace. Nguồn chức năng là 55 route trong SCREEN_META, các module màn hình, dữ liệu và kiểm thử hiện có tại f649a8b. Giữ Minh Hoàng, tiếng Việt giáo dục, bốn vai trò và các quy tắc nghiệp vụ; không giữ bố cục cũ chỉ vì đã có.
 
-Mục tiêu: nhân sự trung tâm biết việc cần làm tiếp theo và hoàn thành xuyên suốt một flow trong một app. Bản bàn giao là browser prototype, dữ liệu tổng hợp lưu cục bộ; không có xác thực, thanh toán, push, camera hoặc máy chủ thật. Không commit/push/deploy khi chưa có yêu cầu.
+## Người dùng và công việc
+- Giáo vụ xử lý tiếp nhận, xếp lớp, duyệt, học phí và điều chỉnh trong ngày. Cần thấy hàng chờ và đúng hồ sơ, tránh chọn sai người. Hiện dùng các màn trong prototype; thực tế vận hành ngoài prototype UNKNOWN.
+- Giáo viên mở lịch trên điện thoại, điểm danh và báo cáo. Cần nhận ra ca cần xử lý và hạn khóa, không mất nội dung khi quay lại.
+- Trưởng bộ môn vừa dạy vừa duyệt vòng một. Cần phân biệt chờ mình và chờ Giáo vụ.
+- Phụ huynh xem lịch, kết quả đã công bố, học phí và xin nghỉ theo từng con. Cần luôn thấy đang xem ai, ai tiếp nhận yêu cầu và cách liên hệ.
 
-## Người dùng và job
-- Giáo vụ: tiếp nhận hồ sơ → xếp lớp → điều chỉnh → duyệt → hóa đơn.
-- Giáo viên: xem ca → tích lịch → theo dõi học sinh → báo cáo → xử lý công việc.
-- Trưởng bộ môn: mọi tác vụ giáo viên và duyệt vòng bộ môn.
+JTBD: Khi bắt đầu ngày, tôi muốn biết việc cần xử lý để mở đúng màn. Khi tìm học sinh, tôi muốn lọc theo trạng thái và mở đúng hồ sơ. Khi nhập liệu dài, tôi muốn biết từng nhóm thông tin và lỗi cần sửa. Khi theo dõi con, tôi muốn chuyển con mà không lẫn báo cáo hay học phí.
 
-## Quyết định UX trước visual
-Chọn hub theo vai trò, ưu tiên hàng đợi việc cần xử lý. Học sinh là đối tượng dùng chung giữa các module. Tab có nhãn; hộp thư giáo viên đi từ nút trên đầu trang. Không thêm giao diện cho Giám đốc/Kế toán/Trưởng phòng do brief chưa định nghĩa.
+## Ràng buộc
+Buildless ESM, renderer và localStorage hiện hữu, hash routes /Biz/, không thêm framework/dependency. Blue #253a7e là nhận diện, orange dùng cảnh báo, yellow chỉ nhấn có mục đích. Google Sans Flex tự lưu, Feather icons có nhãn. Không thêm ảnh stock, số liệu tiến bộ hay backend giả. GitHub Pages là bản trải nghiệm; xác minh công bố riêng.
 
-| Family | Câu hỏi đầu vào | Wireframe nội dung | Hành động / feedback / recovery |
-|---|---|---|---|
-| Tổng quan | Hôm nay cần xử lý gì? | nhận diện → ngày → việc gấp → 2 chỉ số → lịch hôm nay | mở ca/hàng đợi; trạng thái cập nhật từ cùng store; quay về tab |
-| Danh sách | Chọn đúng học sinh nào? | tiêu đề + số lượng → tìm → bộ lọc → dòng so sánh | mở hồ sơ; không có kết quả có nút xóa lọc |
-| Biểu mẫu | Tôi đang nhập gì, còn bao nhiêu bước? | quay lại → bước → trường có nhãn → trợ giúp/lỗi → CTA đáy | giữ draft khi Back; lỗi inline; confirm trước thay đổi quan trọng |
-| Lịch | Ca nào và có thể sửa không? | tuần/ngày → chọn ngày → bảng → chú giải → ca | mở ca; khóa được hiển thị rõ; yêu cầu sửa đi Giáo vụ |
-| Duyệt | Ai đang giữ báo cáo? | tháng → tab vòng duyệt → học sinh → nội dung → 2 vòng | duyệt/làm lại với lý do bắt buộc; cùng trạng thái ở GV và TC |
+## Kết quả kiểm tra được
+55 route không mất; 360/390/768/1440 không tràn ngang; menu không che nội dung; trường/CTA chính tối thiểu 56px, mục điều hướng có nhãn đọc được; giữ domain tests, 7 staff journeys, Excel và parent scope. Kiểm thực tế hình chụp ba family: tổng quan, chọn hồ sơ, biểu mẫu; sau đó rà tất cả màn. Không gán giảm thời gian tác vụ hoặc tăng hài lòng khi chưa có người dùng thật.
 
-Hai bố cục overview để so sánh: A ưu tiên việc gấp với action-card rộng, metrics phụ bên dưới; B metrics-first với hàng 4 ô và task-list bên dưới. Chọn A vì ca chưa tích phải dễ thấy trước KPI. A dùng headline 30/36, body 14/22, 2 metrics; B title 24/32, body 14/20, 4 metrics. Cả hai monochrome theo yêu cầu. Kiểm tra ba family trước rollout; không suy diễn preference của người thật từ đánh giá agent.
+## Scope
+Toàn bộ shell, thành phần, bố cục và nội dung hướng dẫn của 55 màn; tổng quan theo vai trò, danh sách, lịch, hồ sơ, biểu mẫu, duyệt, tài chính, nhắn tin. Không mở rộng nghiệp vụ, auth, payment, native hoặc cloud sync. Dữ liệu, quyền và transition hiện hữu phải giữ.
 
-## Visual direction
-Tinh thần ảnh 1–2: bo góc 28–32, chữ đậm rõ, card lớn, icon nét, nút chuyển tròn. Ảnh 3: lịch tuần và floating tab. Adapt thành grayscale với nhãn, trạng thái không phụ thuộc màu; không dùng người/3D trang trí khi cần wireframe. Font Manrope hỗ trợ tiếng Việt; 24px gutter, 16px gap, touch 44px. Phone 390×844; trên mobile dùng viewport thật, trên desktop reviewer shell bên ngoài app.
+## UX walkthrough trước visual
+| Family | Vào từ / câu hỏi | Ưu tiên | Hành động và đích | Phản hồi / khôi phục |
+|---|---|---|---|---|
+| Tổng quan | Đầu ngày / làm gì trước? | Người dùng, hàng chờ có số, ca hôm nay, tác vụ khác | Mở ca TC03 hoặc hàng chờ GV07/GV10 | Dữ liệu cập nhật cùng store; rỗng có đích đến |
+| Lựa chọn | GV02/TC04a / đúng học sinh nào? | Tên màn, tìm kiếm, trạng thái, thuộc tính, số kết quả | Mở GV03/TC04 với ID | Không kết quả có xóa lọc; Back giữ filter |
+| Biểu mẫu | GV04 / cần điền gì, đang ở bước nào? | Back, bước 1/3, hướng dẫn, nhóm nhận diện, học tập, liên hệ | Tiếp tục GV04b rồi GV04c/GV05 | Validation giữ giá trị; draft lưu theo flow |
+| Bản ghi | TC05b/PH06b / trạng thái và ai xử lý? | Người/đối tượng, trạng thái, nội dung, lịch sử, bước tiếp | Gửi/duyệt/trao đổi theo quyền | Chặn sai vòng; lý do bổ sung/reject giữ lại |
+| Lịch | TC02/PH02 / có ca nào, mở đâu? | Thời gian, ca, đối tượng, trạng thái | Mở buổi cụ thể | Tuần rỗng trở về tuần này |
 
-Không dùng palette xanh/cam/vàng của tài liệu trong vòng này vì yêu cầu hiện tại là trắng đen. Không giả lập chi phí hoặc chính sách như dữ liệu thật. Profile Giáo vụ/Giáo viên/Trưởng bộ môn chỉ thấy tên/mã/trường; thông tin liên hệ chỉ có trong flow tiếp nhận, không hiển thị lại ở hồ sơ bị hạn chế.
-
-## Acceptance
-Mọi mã màn trong brief có đường vào; các flow chính có mutation và phản ánh ở vai trò còn lại. Có validation, search/filter empty, return/retry, persist/reload/reset. Test 360, 390, tablet, desktop, zoom/large text; console/asset không lỗi; link hash hoạt động dưới /Biz/. KPI usability, impact và user preference: chưa đo, N/A.
+Audit từ source và hình: P1 menu đè trường cuối; P1 TC05w menu lệch desktop; P2 chữ nav 9px; P2 header h1 ngang nút Back gây gãy; P2 tổng quan đặt nhiều số ngang cấp trước việc; P2 trường read-only chiếm nhịp nhập; P2 lịch tuần chật. Thực hiện sửa nguyên nhân và retest các trạng thái đó. Đây là agent heuristic, không có người tham gia nghiên cứu.

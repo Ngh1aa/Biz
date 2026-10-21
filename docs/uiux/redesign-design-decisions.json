@@ -1,0 +1,1209 @@
+{
+  "schema_version": "2.0",
+  "pages": [
+    {
+      "route": "TC01",
+      "page_role": "app-overview",
+      "user_question": "Ca nào cần điểm danh và tôi mở đâu?",
+      "cta": "Mở buổi học",
+      "decisions": [
+        {
+          "axis": "layout",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/product-brief.md"
+          },
+          "value": "Task-specific overview, selection and form families; reserved navigation row",
+          "rejected_alternative": "One card/hero copied to every task"
+        },
+        {
+          "axis": "font",
+          "source": {
+            "kind": "reference",
+            "ref": "src/center.css; supplied Minh Hoang source"
+          },
+          "value": "Existing self-hosted Google Sans Flex",
+          "rejected_alternative": "Introducing another type family or network dependency"
+        },
+        {
+          "axis": "typography",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/design-reference-benchmark.md"
+          },
+          "value": "24/30 overview title; 28/34 task title; 18/26 section; 15/23 body; 13/19 metadata; labelled nav 11/15",
+          "rejected_alternative": "9px labels and inline title squeezed against Back"
+        },
+        {
+          "axis": "spacing",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/product-brief.md"
+          },
+          "value": "20px gutter; 28px sections; 12px groups; 20px priority object; 80px reserved navigation",
+          "rejected_alternative": "Absolute navigation overlay and 128px compensating content reserve"
+        },
+        {
+          "axis": "media",
+          "source": {
+            "kind": "rule",
+            "ref": "skills_UIUX/asset-media-and-art-direction/SKILL.md"
+          },
+          "value": "Feather semantic icons, labelled controls and synthetic initials; session/work objects carry information",
+          "rejected_alternative": "Stock photos, decorative 3D, claymorphism and landing-page hero suggestions"
+        },
+        {
+          "axis": "voice",
+          "source": {
+            "kind": "user",
+            "ref": "Current UX redesign request and prior education copy constraint"
+          },
+          "value": "Specific Vietnamese tasks, named processing owner and recoverable state",
+          "rejected_alternative": "Abstract promotional headings on functional screens"
+        }
+      ],
+      "desktop_type": {
+        "title": {
+          "size_px": 24,
+          "weight": 700,
+          "line_height": 1.25
+        },
+        "section": {
+          "size_px": 18,
+          "weight": 650,
+          "line_height": 1.4444444444444444
+        },
+        "body": {
+          "size_px": 15,
+          "weight": 400,
+          "line_height": 1.5333333333333334
+        },
+        "ui": {
+          "size_px": 15,
+          "weight": 600,
+          "line_height": 1.4666666666666666
+        },
+        "meta": {
+          "size_px": 13,
+          "weight": 400,
+          "line_height": 1.4615384615384615
+        }
+      },
+      "mobile_type": {
+        "title": {
+          "size_px": 24,
+          "weight": 700,
+          "line_height": 1.25
+        },
+        "section": {
+          "size_px": 18,
+          "weight": 650,
+          "line_height": 1.4444444444444444
+        },
+        "body": {
+          "size_px": 15,
+          "weight": 400,
+          "line_height": 1.5333333333333334
+        },
+        "ui": {
+          "size_px": 15,
+          "weight": 600,
+          "line_height": 1.4666666666666666
+        },
+        "meta": {
+          "size_px": 13,
+          "weight": 400,
+          "line_height": 1.4615384615384615
+        }
+      },
+      "desktop_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 12,
+        "reading_width_ch": 35,
+        "density": "productive"
+      },
+      "mobile_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 12,
+        "reading_width_ch": 35,
+        "density": "productive"
+      },
+      "desktop_spacing": {
+        "gutter_px": 20,
+        "section_gap_px": 28,
+        "group_gap_px": 12,
+        "component_padding_px": 20
+      },
+      "mobile_spacing": {
+        "gutter_px": 20,
+        "section_gap_px": 28,
+        "group_gap_px": 12,
+        "component_padding_px": 20
+      },
+      "compositions": [
+        {
+          "id": "A",
+          "anchor": "priority-session",
+          "structure": {
+            "regions": [
+              {
+                "role": "priority",
+                "layout": "full-width-session-action-card",
+                "contains": [
+                  "session name",
+                  "time",
+                  "student count",
+                  "open action"
+                ]
+              },
+              {
+                "role": "work",
+                "layout": "labelled-work-queue",
+                "contains": [
+                  "reports",
+                  "tasks"
+                ]
+              },
+              {
+                "role": "deadline",
+                "layout": "inline-clock-row",
+                "contains": [
+                  "unmarked count",
+                  "midnight deadline"
+                ]
+              }
+            ],
+            "relationships": [
+              [
+                "priority",
+                "precedes",
+                "deadline"
+              ],
+              [
+                "deadline",
+                "precedes",
+                "work"
+              ]
+            ],
+            "mobile_layout": "Session card with explicit text action then deadline and work queue",
+            "mobile_grouping": [
+              [
+                "session",
+                "time",
+                "text action"
+              ],
+              [
+                "count",
+                "deadline"
+              ],
+              [
+                "work queue"
+              ]
+            ]
+          },
+          "proof": "evidence/redesign/TC01-A-390.png",
+          "tradeoff": "Readable task hierarchy; long lists and forms still need vertical scrolling.",
+          "direction": {
+            "desktop_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 24,
+                "weight": 700,
+                "line_height": 1.25
+              },
+              "body": {
+                "size_px": 15,
+                "weight": 400,
+                "line_height": 1.5333333333333334
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "mobile_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 24,
+                "weight": 700,
+                "line_height": 1.25
+              },
+              "body": {
+                "size_px": 15,
+                "weight": 400,
+                "line_height": 1.5333333333333334
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "desktop_density": {
+              "mode": "productive",
+              "section_gap_px": 28,
+              "group_gap_px": 12,
+              "object_padding_px": 20
+            },
+            "mobile_density": {
+              "mode": "productive",
+              "section_gap_px": 28,
+              "group_gap_px": 12,
+              "object_padding_px": 20
+            },
+            "visual_object": {
+              "kind": "priority-session",
+              "information_task": "Recognize the session and attendance deadline",
+              "anatomy": [
+                "date and role greeting",
+                "session identity",
+                "time and class context",
+                "full-width explicit action",
+                "deadline row",
+                "work queue"
+              ],
+              "reality": "synthetic"
+            }
+          }
+        },
+        {
+          "id": "B",
+          "anchor": "Work queue above a compact split session object",
+          "structure": {
+            "regions": [
+              {
+                "role": "priority",
+                "layout": "compact-two-column-session-grid",
+                "contains": [
+                  "session name",
+                  "time",
+                  "student count",
+                  "open action"
+                ]
+              },
+              {
+                "role": "work",
+                "layout": "labelled-work-queue",
+                "contains": [
+                  "reports",
+                  "tasks"
+                ]
+              },
+              {
+                "role": "deadline",
+                "layout": "inline-clock-row",
+                "contains": [
+                  "unmarked count",
+                  "midnight deadline"
+                ]
+              }
+            ],
+            "relationships": [
+              [
+                "work",
+                "precedes",
+                "priority"
+              ],
+              [
+                "priority",
+                "precedes",
+                "deadline"
+              ]
+            ],
+            "mobile_layout": "Queue first then a compact two-column session object",
+            "mobile_grouping": [
+              [
+                "work queue"
+              ],
+              [
+                "name and time",
+                "right-hand arrow"
+              ],
+              [
+                "deadline"
+              ]
+            ]
+          },
+          "proof": "evidence/redesign/TC01-B-390.png",
+          "tradeoff": "More follow-up content visible but attendance competes with general work.",
+          "direction": {
+            "desktop_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 22,
+                "weight": 500,
+                "line_height": 1.2727272727272727
+              },
+              "body": {
+                "size_px": 14,
+                "weight": 400,
+                "line_height": 1.5714285714285714
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "mobile_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 22,
+                "weight": 500,
+                "line_height": 1.2727272727272727
+              },
+              "body": {
+                "size_px": 14,
+                "weight": 400,
+                "line_height": 1.5714285714285714
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "desktop_density": {
+              "mode": "productive",
+              "section_gap_px": 20,
+              "group_gap_px": 8,
+              "object_padding_px": 14
+            },
+            "mobile_density": {
+              "mode": "productive",
+              "section_gap_px": 20,
+              "group_gap_px": 8,
+              "object_padding_px": 14
+            },
+            "visual_object": {
+              "kind": "compact-session-grid",
+              "information_task": "Recognize the session and attendance deadline",
+              "anatomy": [
+                "work queue first",
+                "inline session name",
+                "time and context left",
+                "icon action in right column",
+                "inline deadline"
+              ],
+              "reality": "synthetic"
+            }
+          }
+        }
+      ],
+      "selected_composition": "A",
+      "comparison_required": true,
+      "inherited_from": null,
+      "reference_transfers": [
+        {
+          "reference_id": "task-and-education-patterns",
+          "source": {
+            "kind": "reference",
+            "ref": "docs/design-reference-benchmark.md"
+          },
+          "action": "ADAPT",
+          "property": "Current educational work and its status are exposed before secondary metrics",
+          "reason": "Ca nào cần điểm danh và tôi mở đâu?",
+          "boundary": "First-party documentation and existing project source; no external geometry or human preference claimed. Retrieval returned NO_CURATED_DOMAIN_PROFILE / NO_CURATED_REFERENCE_ANATOMY."
+        }
+      ],
+      "ux": {
+        "entry_state": "Synthetic seeded app-overview in existing role-scoped app",
+        "user_goal": "Ca nào cần điểm danh và tôi mở đâu?",
+        "information_priority": [
+          "date and role greeting",
+          "session identity",
+          "time and class context",
+          "full-width explicit action",
+          "deadline row",
+          "work queue"
+        ],
+        "primary_action": "Mở buổi học",
+        "destination": "TC03 with selected session",
+        "feedback": "Shared local store drives list/detail/status; validation retains values and persisted transitions.",
+        "recovery": "Back and drafts, filtered-empty clear action, missing entity return, no-child support and role boundaries remain explicit.",
+        "walkthrough_observation": "Session and explicit action lead. Review of A/B retained A for the attendance task; this is author heuristic only.",
+        "evidence_ref": "evidence/redesign/qa-summary.json; docs/product-brief.md",
+        "review_source": "agent-heuristic",
+        "findings": [
+          {
+            "observation": "Floating navigation covered content and the desktop Excel navigation was outside its frame.",
+            "severity": "major",
+            "status": "resolved",
+            "retest": "32 responsive geometry checks assert screen/nav separation, last control reachability and frame bounds. See reference-qa.json."
+          }
+        ]
+      },
+      "comparison_protocol": {
+        "buyer_task": "Identify the lesson needing attendance and the action before midnight.",
+        "held_constant": {
+          "audience": "Teacher T01",
+          "content": "Same seeded sessions, queue, follow-up pupils and notices",
+          "claims": "Synthetic fixture only",
+          "cta": "Open same attendance session",
+          "state": "Fresh seeded browser context",
+          "assets": "Google Sans Flex, Feather and initials",
+          "viewports": "390x844 and 1440x1040"
+        },
+        "questions": [
+          {
+            "id": "C1",
+            "dimension": "comprehension",
+            "prompt": "Which session needs action, where do you open it, and what is the deadline?",
+            "criteria": [
+              "Session identity and open action visible",
+              "Midnight deadline discoverable"
+            ]
+          },
+          {
+            "id": "D1",
+            "dimension": "distinctiveness",
+            "prompt": "What hierarchy and domain object distinguish this education workspace?",
+            "criteria": [
+              "Session and learning work form distinct groups",
+              "Brand blue directs the main current action"
+            ]
+          }
+        ]
+      },
+      "comparison_record": {
+        "plan": "docs/uiux/redesign-comparison-plan.json",
+        "observations": "docs/uiux/redesign-comparison-observations.json"
+      }
+    },
+    {
+      "route": "GV02",
+      "page_role": "app-selection",
+      "user_question": "Tìm đúng học sinh cần xử lý ở đâu?",
+      "cta": "Mở hồ sơ học sinh",
+      "decisions": [
+        {
+          "axis": "layout",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/product-brief.md"
+          },
+          "value": "Task-specific overview, selection and form families; reserved navigation row",
+          "rejected_alternative": "One card/hero copied to every task"
+        },
+        {
+          "axis": "font",
+          "source": {
+            "kind": "reference",
+            "ref": "src/center.css; supplied Minh Hoang source"
+          },
+          "value": "Existing self-hosted Google Sans Flex",
+          "rejected_alternative": "Introducing another type family or network dependency"
+        },
+        {
+          "axis": "typography",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/design-reference-benchmark.md"
+          },
+          "value": "24/30 overview title; 28/34 task title; 18/26 section; 15/23 body; 13/19 metadata; labelled nav 11/15",
+          "rejected_alternative": "9px labels and inline title squeezed against Back"
+        },
+        {
+          "axis": "spacing",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/product-brief.md"
+          },
+          "value": "20px gutter; 28px sections; 12px groups; 20px priority object; 80px reserved navigation",
+          "rejected_alternative": "Absolute navigation overlay and 128px compensating content reserve"
+        },
+        {
+          "axis": "media",
+          "source": {
+            "kind": "rule",
+            "ref": "skills_UIUX/asset-media-and-art-direction/SKILL.md"
+          },
+          "value": "Feather semantic icons, labelled controls and synthetic initials; session/work objects carry information",
+          "rejected_alternative": "Stock photos, decorative 3D, claymorphism and landing-page hero suggestions"
+        },
+        {
+          "axis": "voice",
+          "source": {
+            "kind": "user",
+            "ref": "Current UX redesign request and prior education copy constraint"
+          },
+          "value": "Specific Vietnamese tasks, named processing owner and recoverable state",
+          "rejected_alternative": "Abstract promotional headings on functional screens"
+        }
+      ],
+      "desktop_type": {
+        "title": {
+          "size_px": 28,
+          "weight": 700,
+          "line_height": 1.2142857142857142
+        },
+        "section": {
+          "size_px": 18,
+          "weight": 650,
+          "line_height": 1.4444444444444444
+        },
+        "body": {
+          "size_px": 15,
+          "weight": 400,
+          "line_height": 1.5333333333333334
+        },
+        "ui": {
+          "size_px": 15,
+          "weight": 600,
+          "line_height": 1.4666666666666666
+        },
+        "meta": {
+          "size_px": 13,
+          "weight": 400,
+          "line_height": 1.4615384615384615
+        }
+      },
+      "mobile_type": {
+        "title": {
+          "size_px": 28,
+          "weight": 700,
+          "line_height": 1.2142857142857142
+        },
+        "section": {
+          "size_px": 18,
+          "weight": 650,
+          "line_height": 1.4444444444444444
+        },
+        "body": {
+          "size_px": 15,
+          "weight": 400,
+          "line_height": 1.5333333333333334
+        },
+        "ui": {
+          "size_px": 15,
+          "weight": 600,
+          "line_height": 1.4666666666666666
+        },
+        "meta": {
+          "size_px": 13,
+          "weight": 400,
+          "line_height": 1.4615384615384615
+        }
+      },
+      "desktop_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 12,
+        "reading_width_ch": 35,
+        "density": "productive"
+      },
+      "mobile_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 12,
+        "reading_width_ch": 35,
+        "density": "productive"
+      },
+      "desktop_spacing": {
+        "gutter_px": 20,
+        "section_gap_px": 28,
+        "group_gap_px": 12,
+        "component_padding_px": 20
+      },
+      "mobile_spacing": {
+        "gutter_px": 20,
+        "section_gap_px": 28,
+        "group_gap_px": 12,
+        "component_padding_px": 20
+      },
+      "compositions": [
+        {
+          "id": "A",
+          "anchor": "filterable-student-list",
+          "structure": {
+            "regions": [
+              {
+                "role": "criteria",
+                "layout": "search-status-and-attribute-filters",
+                "contains": [
+                  "search",
+                  "status",
+                  "grade",
+                  "subject"
+                ]
+              },
+              {
+                "role": "results",
+                "layout": "comparable-student-rows",
+                "contains": [
+                  "name",
+                  "school",
+                  "course",
+                  "status"
+                ]
+              }
+            ],
+            "relationships": [
+              [
+                "criteria",
+                "filters",
+                "results"
+              ]
+            ],
+            "mobile_layout": "Vertical criteria then comparable rows, chips scroll horizontally",
+            "mobile_grouping": [
+              [
+                "search",
+                "status"
+              ],
+              [
+                "grade",
+                "subject"
+              ],
+              [
+                "identity",
+                "status"
+              ]
+            ]
+          },
+          "proof": "evidence/redesign/GV02-A-390.png",
+          "tradeoff": "Readable task hierarchy; long lists and forms still need vertical scrolling.",
+          "direction": {
+            "desktop_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 28,
+                "weight": 700,
+                "line_height": 1.2142857142857142
+              },
+              "body": {
+                "size_px": 15,
+                "weight": 400,
+                "line_height": 1.5333333333333334
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "mobile_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 28,
+                "weight": 700,
+                "line_height": 1.2142857142857142
+              },
+              "body": {
+                "size_px": 15,
+                "weight": 400,
+                "line_height": 1.5333333333333334
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "desktop_density": {
+              "mode": "productive",
+              "section_gap_px": 28,
+              "group_gap_px": 12,
+              "object_padding_px": 20
+            },
+            "mobile_density": {
+              "mode": "productive",
+              "section_gap_px": 28,
+              "group_gap_px": 12,
+              "object_padding_px": 20
+            },
+            "visual_object": {
+              "kind": "filterable-student-list",
+              "information_task": "Find the right student",
+              "anatomy": [
+                "search",
+                "status filters",
+                "grade and subject",
+                "result count",
+                "identity and status rows"
+              ],
+              "reality": "synthetic"
+            }
+          }
+        }
+      ],
+      "selected_composition": "A",
+      "comparison_required": false,
+      "inherited_from": "TC01",
+      "reference_transfers": [
+        {
+          "reference_id": "task-and-education-patterns",
+          "source": {
+            "kind": "reference",
+            "ref": "docs/design-reference-benchmark.md"
+          },
+          "action": "ADAPT",
+          "property": "Search and status filters precede comparable learner records",
+          "reason": "Tìm đúng học sinh cần xử lý ở đâu?",
+          "boundary": "First-party documentation and existing project source; no external geometry or human preference claimed. Retrieval returned NO_CURATED_DOMAIN_PROFILE / NO_CURATED_REFERENCE_ANATOMY."
+        }
+      ],
+      "ux": {
+        "entry_state": "Synthetic seeded app-selection in existing role-scoped app",
+        "user_goal": "Tìm đúng học sinh cần xử lý ở đâu?",
+        "information_priority": [
+          "search",
+          "status filters",
+          "grade and subject",
+          "result count",
+          "identity and status rows"
+        ],
+        "primary_action": "Mở hồ sơ học sinh",
+        "destination": "GV03 with student ID",
+        "feedback": "Shared local store drives list/detail/status; validation retains values and persisted transitions.",
+        "recovery": "Back and drafts, filtered-empty clear action, missing entity return, no-child support and role boundaries remain explicit.",
+        "walkthrough_observation": "Rows compare name, ID, school, subject and status after search/filters; pending queue now carries the status filter.",
+        "evidence_ref": "evidence/redesign/qa-summary.json; docs/product-brief.md",
+        "review_source": "agent-heuristic",
+        "findings": [
+          {
+            "observation": "Floating navigation covered content and the desktop Excel navigation was outside its frame.",
+            "severity": "major",
+            "status": "resolved",
+            "retest": "32 responsive geometry checks assert screen/nav separation, last control reachability and frame bounds. See reference-qa.json."
+          }
+        ]
+      }
+    },
+    {
+      "route": "GV04",
+      "page_role": "app-task",
+      "user_question": "Tôi đang ở bước nào và cần điền gì?",
+      "cta": "Tiếp tục · Phụ huynh",
+      "decisions": [
+        {
+          "axis": "layout",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/product-brief.md"
+          },
+          "value": "Task-specific overview, selection and form families; reserved navigation row",
+          "rejected_alternative": "One card/hero copied to every task"
+        },
+        {
+          "axis": "font",
+          "source": {
+            "kind": "reference",
+            "ref": "src/center.css; supplied Minh Hoang source"
+          },
+          "value": "Existing self-hosted Google Sans Flex",
+          "rejected_alternative": "Introducing another type family or network dependency"
+        },
+        {
+          "axis": "typography",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/design-reference-benchmark.md"
+          },
+          "value": "24/30 overview title; 28/34 task title; 18/26 section; 15/23 body; 13/19 metadata; labelled nav 11/15",
+          "rejected_alternative": "9px labels and inline title squeezed against Back"
+        },
+        {
+          "axis": "spacing",
+          "source": {
+            "kind": "hypothesis",
+            "ref": "docs/product-brief.md"
+          },
+          "value": "20px gutter; 28px sections; 12px groups; 20px priority object; 80px reserved navigation",
+          "rejected_alternative": "Absolute navigation overlay and 128px compensating content reserve"
+        },
+        {
+          "axis": "media",
+          "source": {
+            "kind": "rule",
+            "ref": "skills_UIUX/asset-media-and-art-direction/SKILL.md"
+          },
+          "value": "Feather semantic icons, labelled controls and synthetic initials; session/work objects carry information",
+          "rejected_alternative": "Stock photos, decorative 3D, claymorphism and landing-page hero suggestions"
+        },
+        {
+          "axis": "voice",
+          "source": {
+            "kind": "user",
+            "ref": "Current UX redesign request and prior education copy constraint"
+          },
+          "value": "Specific Vietnamese tasks, named processing owner and recoverable state",
+          "rejected_alternative": "Abstract promotional headings on functional screens"
+        }
+      ],
+      "desktop_type": {
+        "title": {
+          "size_px": 28,
+          "weight": 700,
+          "line_height": 1.2142857142857142
+        },
+        "section": {
+          "size_px": 18,
+          "weight": 650,
+          "line_height": 1.4444444444444444
+        },
+        "body": {
+          "size_px": 15,
+          "weight": 400,
+          "line_height": 1.5333333333333334
+        },
+        "ui": {
+          "size_px": 15,
+          "weight": 600,
+          "line_height": 1.4666666666666666
+        },
+        "meta": {
+          "size_px": 13,
+          "weight": 400,
+          "line_height": 1.4615384615384615
+        }
+      },
+      "mobile_type": {
+        "title": {
+          "size_px": 28,
+          "weight": 700,
+          "line_height": 1.2142857142857142
+        },
+        "section": {
+          "size_px": 18,
+          "weight": 650,
+          "line_height": 1.4444444444444444
+        },
+        "body": {
+          "size_px": 15,
+          "weight": 400,
+          "line_height": 1.5333333333333334
+        },
+        "ui": {
+          "size_px": 15,
+          "weight": 600,
+          "line_height": 1.4666666666666666
+        },
+        "meta": {
+          "size_px": 13,
+          "weight": 400,
+          "line_height": 1.4615384615384615
+        }
+      },
+      "desktop_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 12,
+        "reading_width_ch": 35,
+        "density": "productive"
+      },
+      "mobile_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 12,
+        "reading_width_ch": 35,
+        "density": "productive"
+      },
+      "desktop_spacing": {
+        "gutter_px": 20,
+        "section_gap_px": 28,
+        "group_gap_px": 12,
+        "component_padding_px": 20
+      },
+      "mobile_spacing": {
+        "gutter_px": 20,
+        "section_gap_px": 28,
+        "group_gap_px": 12,
+        "component_padding_px": 20
+      },
+      "compositions": [
+        {
+          "id": "A",
+          "anchor": "grouped-intake-form",
+          "structure": {
+            "regions": [
+              {
+                "role": "context",
+                "layout": "back-step-and-guidance",
+                "contains": [
+                  "back",
+                  "step 1 of 3",
+                  "required field hint"
+                ]
+              },
+              {
+                "role": "questions",
+                "layout": "three-semantic-fieldsets",
+                "contains": [
+                  "identity",
+                  "school",
+                  "contacts"
+                ]
+              },
+              {
+                "role": "action",
+                "layout": "primary-footer",
+                "contains": [
+                  "continue"
+                ]
+              }
+            ],
+            "relationships": [
+              [
+                "context",
+                "orients",
+                "questions"
+              ],
+              [
+                "questions",
+                "validate-before",
+                "action"
+              ]
+            ],
+            "mobile_layout": "Single-column sections; demographic pair stacks at 360px",
+            "mobile_grouping": [
+              [
+                "back",
+                "step"
+              ],
+              [
+                "student identity"
+              ],
+              [
+                "school"
+              ],
+              [
+                "contact"
+              ],
+              [
+                "continue"
+              ]
+            ]
+          },
+          "proof": "evidence/redesign/GV04-A-390.png",
+          "tradeoff": "Readable task hierarchy; long lists and forms still need vertical scrolling.",
+          "direction": {
+            "desktop_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 28,
+                "weight": 700,
+                "line_height": 1.2142857142857142
+              },
+              "body": {
+                "size_px": 15,
+                "weight": 400,
+                "line_height": 1.5333333333333334
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "mobile_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 28,
+                "weight": 700,
+                "line_height": 1.2142857142857142
+              },
+              "body": {
+                "size_px": 15,
+                "weight": 400,
+                "line_height": 1.5333333333333334
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "desktop_density": {
+              "mode": "productive",
+              "section_gap_px": 28,
+              "group_gap_px": 12,
+              "object_padding_px": 20
+            },
+            "mobile_density": {
+              "mode": "productive",
+              "section_gap_px": 28,
+              "group_gap_px": 12,
+              "object_padding_px": 20
+            },
+            "visual_object": {
+              "kind": "grouped-intake-form",
+              "information_task": "Complete the current intake step",
+              "anatomy": [
+                "back and step",
+                "three-step context",
+                "required field guidance",
+                "student identity",
+                "school information",
+                "contacts",
+                "continue action"
+              ],
+              "reality": "synthetic"
+            }
+          }
+        }
+      ],
+      "selected_composition": "A",
+      "comparison_required": false,
+      "inherited_from": "TC01",
+      "reference_transfers": [
+        {
+          "reference_id": "task-and-education-patterns",
+          "source": {
+            "kind": "reference",
+            "ref": "docs/design-reference-benchmark.md"
+          },
+          "action": "ADAPT",
+          "property": "Task-specific heading, Back and grouped questions retain the existing three-step flow",
+          "reason": "Tôi đang ở bước nào và cần điền gì?",
+          "boundary": "First-party documentation and existing project source; no external geometry or human preference claimed. Retrieval returned NO_CURATED_DOMAIN_PROFILE / NO_CURATED_REFERENCE_ANATOMY."
+        }
+      ],
+      "ux": {
+        "entry_state": "Synthetic seeded app-task in existing role-scoped app",
+        "user_goal": "Tôi đang ở bước nào và cần điền gì?",
+        "information_priority": [
+          "back and step",
+          "three-step context",
+          "required field guidance",
+          "student identity",
+          "school information",
+          "contacts",
+          "continue action"
+        ],
+        "primary_action": "Tiếp tục · Phụ huynh",
+        "destination": "GV04b then GV04c and GV05",
+        "feedback": "Shared local store drives list/detail/status; validation retains values and persisted transitions.",
+        "recovery": "Back and drafts, filtered-empty clear action, missing entity return, no-child support and role boundaries remain explicit.",
+        "walkthrough_observation": "Back is separate from h1. Three fieldsets group identity, learning and contact. Nav has its own row and cannot cover the final input.",
+        "evidence_ref": "evidence/redesign/qa-summary.json; docs/product-brief.md",
+        "review_source": "agent-heuristic",
+        "findings": [
+          {
+            "observation": "Floating navigation covered content and the desktop Excel navigation was outside its frame.",
+            "severity": "major",
+            "status": "resolved",
+            "retest": "32 responsive geometry checks assert screen/nav separation, last control reachability and frame bounds. See reference-qa.json."
+          }
+        ]
+      }
+    }
+  ],
+  "captures": [
+    {
+      "route": "TC01",
+      "composition_id": "A",
+      "file": "evidence/redesign/TC01-A-390.png",
+      "sha256": "3fb7d9a77695a5882945c92670d7da0d53babe4a80e8d8a63f7ef543a5a951ea",
+      "width": 390,
+      "viewport_height": 844,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Session and explicit action lead. Review of A/B retained A for the attendance task; this is author heuristic only.",
+        "typography": "Real Vietnamese titles/body readable; selected task headings 28/34, overview24/30, nav11/15. Alternative overview22/28 and session18/26.",
+        "spacing": "20px phone gutter. Screen owns scrolling and nav owns its own layout row; no compensating overlay padding.",
+        "media": "No photographs or focal crops; labelled Feather icons and synthetic initials.",
+        "distinctiveness": "Minh Hoang blue identifies the session/action while plain section/divider surfaces support reading and comparison."
+      }
+    },
+    {
+      "route": "TC01",
+      "composition_id": "A",
+      "file": "evidence/redesign/TC01-A-1440.png",
+      "sha256": "22a2748633423770c49251cf8831f549d35da715ffb778f0588fb90ec9905709",
+      "width": 1440,
+      "viewport_height": 1040,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Session and explicit action lead. Review of A/B retained A for the attendance task; this is author heuristic only.",
+        "typography": "Real Vietnamese titles/body readable; selected task headings 28/34, overview24/30, nav11/15. Alternative overview22/28 and session18/26.",
+        "spacing": "20px phone gutter. Screen owns scrolling and nav owns its own layout row; no compensating overlay padding.",
+        "media": "No photographs or focal crops; labelled Feather icons and synthetic initials.",
+        "distinctiveness": "Minh Hoang blue identifies the session/action while plain section/divider surfaces support reading and comparison."
+      }
+    },
+    {
+      "route": "TC01",
+      "composition_id": "B",
+      "file": "evidence/redesign/TC01-B-390.png",
+      "sha256": "b9dfe20fd8edbc62edcbef7b1335a579dc7c4b0554e2f4096ade3e33fb067872",
+      "width": 390,
+      "viewport_height": 844,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Work queue leads; session/time use a split row with an icon-only action. Attendance is less dominant than A.",
+        "typography": "Real Vietnamese titles/body readable; selected task headings 28/34, overview24/30, nav11/15. Alternative overview22/28 and session18/26.",
+        "spacing": "20px phone gutter. Screen owns scrolling and nav owns its own layout row; no compensating overlay padding.",
+        "media": "No photographs or focal crops; labelled Feather icons and synthetic initials.",
+        "distinctiveness": "Minh Hoang blue identifies the session/action while plain section/divider surfaces support reading and comparison."
+      }
+    },
+    {
+      "route": "TC01",
+      "composition_id": "B",
+      "file": "evidence/redesign/TC01-B-1440.png",
+      "sha256": "36379424245679aada2d6c8cac3398434610c5f89c500f48f2b341a12dfe32b3",
+      "width": 1440,
+      "viewport_height": 1040,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Work queue leads; session/time use a split row with an icon-only action. Attendance is less dominant than A.",
+        "typography": "Real Vietnamese titles/body readable; selected task headings 28/34, overview24/30, nav11/15. Alternative overview22/28 and session18/26.",
+        "spacing": "20px phone gutter. Screen owns scrolling and nav owns its own layout row; no compensating overlay padding.",
+        "media": "No photographs or focal crops; labelled Feather icons and synthetic initials.",
+        "distinctiveness": "Minh Hoang blue identifies the session/action while plain section/divider surfaces support reading and comparison."
+      }
+    },
+    {
+      "route": "GV02",
+      "composition_id": "A",
+      "file": "evidence/redesign/GV02-A-390.png",
+      "sha256": "7a29b3836138e00d1d9aaa5fd9128d4f4d1eb8c061a70a83aa10b5ce72d653ce",
+      "width": 390,
+      "viewport_height": 844,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Rows compare name, ID, school, subject and status after search/filters; pending queue now carries the status filter.",
+        "typography": "Real Vietnamese titles/body readable; selected task headings 28/34, overview24/30, nav11/15. Alternative overview22/28 and session18/26.",
+        "spacing": "20px phone gutter. Screen owns scrolling and nav owns its own layout row; no compensating overlay padding.",
+        "media": "No photographs or focal crops; labelled Feather icons and synthetic initials.",
+        "distinctiveness": "Minh Hoang blue identifies the session/action while plain section/divider surfaces support reading and comparison."
+      }
+    },
+    {
+      "route": "GV02",
+      "composition_id": "A",
+      "file": "evidence/redesign/GV02-A-1440.png",
+      "sha256": "19bd7d8bcd59566f7d47d7a46793fb24bc4090b51f4245de1cf6874155cdf3fa",
+      "width": 1440,
+      "viewport_height": 1040,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Rows compare name, ID, school, subject and status after search/filters; pending queue now carries the status filter.",
+        "typography": "Real Vietnamese titles/body readable; selected task headings 28/34, overview24/30, nav11/15. Alternative overview22/28 and session18/26.",
+        "spacing": "20px phone gutter. Screen owns scrolling and nav owns its own layout row; no compensating overlay padding.",
+        "media": "No photographs or focal crops; labelled Feather icons and synthetic initials.",
+        "distinctiveness": "Minh Hoang blue identifies the session/action while plain section/divider surfaces support reading and comparison."
+      }
+    },
+    {
+      "route": "GV04",
+      "composition_id": "A",
+      "file": "evidence/redesign/GV04-A-390.png",
+      "sha256": "d04aac195479bd424095ea674e0cefeaba177ce182dce2558dea5d22c4d87f2f",
+      "width": 390,
+      "viewport_height": 844,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Back is separate from h1. Three fieldsets group identity, learning and contact. Nav has its own row and cannot cover the final input.",
+        "typography": "Real Vietnamese titles/body readable; selected task headings 28/34, overview24/30, nav11/15. Alternative overview22/28 and session18/26.",
+        "spacing": "20px phone gutter. Screen owns scrolling and nav owns its own layout row; no compensating overlay padding.",
+        "media": "No photographs or focal crops; labelled Feather icons and synthetic initials.",
+        "distinctiveness": "Minh Hoang blue identifies the session/action while plain section/divider surfaces support reading and comparison."
+      }
+    },
+    {
+      "route": "GV04",
+      "composition_id": "A",
+      "file": "evidence/redesign/GV04-A-1440.png",
+      "sha256": "e213344ac274acb3f86a8466691a908b3ce9c5fcaa4676d9dad3d524c521759c",
+      "width": 1440,
+      "viewport_height": 1040,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Back is separate from h1. Three fieldsets group identity, learning and contact. Nav has its own row and cannot cover the final input.",
+        "typography": "Real Vietnamese titles/body readable; selected task headings 28/34, overview24/30, nav11/15. Alternative overview22/28 and session18/26.",
+        "spacing": "20px phone gutter. Screen owns scrolling and nav owns its own layout row; no compensating overlay padding.",
+        "media": "No photographs or focal crops; labelled Feather icons and synthetic initials.",
+        "distinctiveness": "Minh Hoang blue identifies the session/action while plain section/divider surfaces support reading and comparison."
+      }
+    }
+  ]
+}
