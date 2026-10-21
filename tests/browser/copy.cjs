@@ -1,0 +1,45 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const qaDir=process.env.BIZ_QA_DIR||'evidence/copy-v03';
+const base=process.env.BIZ_BASE_URL||'http://127.0.0.1:4173/Biz/';
+(async()=>{
+ const browser=await chromium.launch(),page=await browser.newPage({viewport:{width:390,height:844}});
+ const errors=[],inventory=[],checks=[];page.on('pageerror',e=>errors.push(e.message));
+ const go=async(role,route,id='')=>{await page.goto(`${base}?theme=pastel#/${role}/${route}${id?'?id='+id:''}`);await page.locator('.screen h1').waitFor();};
+ await go('gv','GV01');await page.evaluate(()=>localStorage.clear());await page.reload();
+ const meta=await page.evaluate(async()=>Object.keys((await import('./src/data.js')).SCREEN_META));
+ for(const role of ['gv','tc','tbm'])for(const route of meta.filter(r=>r==='A00'||(role==='gv'?r.startsWith('GV')||r.startsWith('TC07'):r.startsWith('TC')||role==='tbm'&&r==='TBM01'))){
+  await go(role,route,route==='TC03b'?'CA3':route==='TC05d'?'BC3':'');
+  const copy=await page.locator('.screen').evaluate(el=>({heading:el.querySelector('h1').textContent,body:el.innerText,controls:[...el.querySelectorAll('button,input,select,textarea')].map(e=>({name:e.getAttribute('name'),label:e.getAttribute('aria-label')||e.closest('label')?.innerText||e.textContent,placeholder:e.getAttribute('placeholder')}))}));
+  assert.doesNotMatch(copy.body,/tích lịch|tạo lớp|test đầu vào|bản scan|Import Excel|metadata|Học phí\s+học phí|Giáo viên mới việc|Tiếp nhận học sinh học sinh/i,`${role}/${route}`);
+  inventory.push({role,route,...copy});
+ }
+ checks.push('All role-specific screens inventoried; obsolete wording absent from pristine interface');
+ await go('tc','A00');await page.locator('[name=phone]').fill('123');await page.locator('[name=password]').fill('abc');await page.locator('.screen button[type=submit]').click();assert.match(await page.locator('.screen .form-error').innerText(),/10 chữ số, bắt đầu bằng 0/);
+ await go('tc','TC03','CA1');await page.locator('[data-action=save-attendance]').click();assert.match(await page.locator('#toast').innerText(),/Chọn Có mặt hoặc Vắng/);assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('biz.ux.v1')).sessions[0].marks),{});
+ checks.push('Invalid login and incomplete attendance explain recovery without saving incomplete data');
+ await go('tc','TC05');await page.locator('[data-action=filter][data-value="Làm lại"]').click();
+ assert.match(await page.locator('.chips').innerText(),/Cần bổ sung/);assert.equal(await page.locator('.report-card').count(),1);assert.match(await page.locator('.report-card').innerText(),/Cần bổ sung/);
+ await go('tc','TC03','CA1');assert.equal(await page.locator('[data-action=mark][data-value="Có"]').first().innerText(),'Có mặt');
+ await page.locator('[data-action=mark-all]').click();await page.locator('[data-action=save-attendance]').click();
+ assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('biz.ux.v1')).sessions[0].marks.HS001),'Có');
+ checks.push('New attendance labels and report filters retain canonical values and transitions');
+ await go('tc','TC05c','BC1');await page.locator('[name=comment]').fill('Nhận xét do giáo viên nhập: tích lịch là cách gọi trước đây.');
+ await page.reload();assert.equal(await page.locator('[name=comment]').inputValue(),'Nhận xét do giáo viên nhập: tích lịch là cách gọi trước đây.');
+ checks.push('Teacher-authored comments and drafts survive reload verbatim');
+ await go('gv','GV07');await page.locator('[data-action=report-return][data-id=BC2]').click();assert.match(await page.locator('#sheet').innerText(),/Nội dung cần bổ sung/);assert.match(await page.locator('#sheet button[type=submit]').innerText(),/Gửi yêu cầu bổ sung/);await page.keyboard.press('Escape');
+ await go('tc','TC03b','CA3');await page.locator('[data-action=request-attendance]').click();assert.match(await page.locator('#sheet').innerText(),/Đề nghị điều chỉnh điểm danh/);assert.equal(await page.locator('#sheet [name=to] option[value="Có"]').innerText(),'Có mặt');await page.keyboard.press('Escape');
+ await go('gv','GV11');await page.locator('[data-action=account-open]').first().click();await page.locator('[data-action=account-reset]').click();assert.match(await page.locator('#sheet [data-action=account-reset-confirm]').innerText(),/Tạo mật khẩu tạm/);await page.keyboard.press('Escape');await page.locator('[data-action=account-lock]').click();assert.equal(await page.locator('#sheet [data-action=account-lock-confirm]').innerText(),'Khóa tài khoản');await page.keyboard.press('Escape');
+ checks.push('Report supplement, attendance correction and password confirmation use contextual instructions and actions');
+ await go('gv','GV03','HS008');assert.equal(await page.locator('.profile-summary .pill').innerText(),'Ngừng học');
+ await page.locator('[data-action=reactivate]').click();assert.equal(await page.locator('#sheet [data-action=reactivate-confirm]').innerText(),'Tiếp nhận trở lại');await page.keyboard.press('Escape');
+ await page.evaluate(()=>{const d=JSON.parse(localStorage.getItem('biz.ux.v1'));d.tasks[2].status='Đã đóng';localStorage.setItem('biz.ux.v1',JSON.stringify(d));});await page.reload();
+ await go('tc','TC06');await page.locator('[data-action=filter][data-value="Đã đóng"]').click();assert.equal(await page.locator('.task-card').count(),1);assert.match(await page.locator('.task-card').innerText(),/Đã hoàn thành/);await page.reload();assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('biz.ux.v1')).tasks[2].status),'Đã đóng');
+ checks.push('Previously saved withdrawal/completion states display new terminology without data migration');
+ await go('tc','TC07');assert.match(await page.locator('.screen').innerText(),/Phụ huynh · An Nhiên/);
+ await go('tc','TC07c');await page.locator('[name=recipient]').selectOption('PH · An Nhiên');await page.locator('[name=text]').fill('Nội dung trao đổi thử nghiệm với phụ huynh.');await page.locator('.screen button[type=submit]').click();
+ assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('biz.ux.v1')).threads.length),2);assert.match(await page.locator('.conversation-head h1').innerText(),/Phụ huynh · An Nhiên/);
+ checks.push('Expanded parent label reuses the existing conversation rather than creating a duplicate');
+ fs.mkdirSync(qaDir,{recursive:true});fs.writeFileSync(`${qaDir}/copy-inventory.json`,JSON.stringify(inventory,null,2));fs.writeFileSync(`${qaDir}/copy-qa.json`,JSON.stringify({screens:inventory.length,checks,errors},null,2));
+ assert.equal(errors.length,0);console.log(JSON.stringify({screens:inventory.length,checks,errors},null,2));await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});
