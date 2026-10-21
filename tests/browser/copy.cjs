@@ -2,10 +2,11 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs');
 const qaDir=process.env.BIZ_QA_DIR||'evidence/copy-v03';
 const base=process.env.BIZ_BASE_URL||'http://127.0.0.1:4173/Biz/';
+const theme=process.env.BIZ_THEME||'center';
 (async()=>{
  const browser=await chromium.launch(),page=await browser.newPage({viewport:{width:390,height:844}});
  const errors=[],inventory=[],checks=[];page.on('pageerror',e=>errors.push(e.message));
- const go=async(role,route,id='')=>{await page.goto(`${base}?theme=pastel#/${role}/${route}${id?'?id='+id:''}`);await page.locator('.screen h1').waitFor();};
+ const go=async(role,route,id='')=>{await page.goto(`${base}?theme=${theme}#/${role}/${route}${id?'?id='+id:''}`);await page.locator('.screen h1').waitFor();};
  await go('gv','GV01');await page.evaluate(()=>localStorage.clear());await page.reload();
  const meta=await page.evaluate(async()=>Object.keys((await import('./src/data.js')).SCREEN_META));
  for(const role of ['gv','tc','tbm'])for(const route of meta.filter(r=>r==='A00'||(role==='gv'?r.startsWith('GV')||r.startsWith('TC07'):r.startsWith('TC')||role==='tbm'&&r==='TBM01'))){

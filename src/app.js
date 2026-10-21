@@ -11,15 +11,20 @@ const states={};
 export const ctx={db:load(),route:'GV01',state:{},save,render,navigate,toast,sheet,closeSheet,states};
 const defaults={gv:'GV01',tc:'TC01',tbm:'TC01'};
 const app=document.querySelector('#app'),dialog=document.querySelector('#sheet');
-let theme=new URLSearchParams(location.search).get('theme')==='mono'?'mono':'pastel';
+const resolveTheme=value=>['center','pastel','mono'].includes(value)?value:'center';
+let theme=resolveTheme(new URLSearchParams(location.search).get('theme'));
+ctx.theme=theme;
 document.documentElement.dataset.theme=theme;
 const graphic=(name,className='')=>`<img class="pastel-graphic ${className}" src="./assets/graphics/${name}.svg" width="240" height="260" alt="" aria-hidden="true">`;
 function setTheme(value){
- theme=value==='mono'?'mono':'pastel';
+ theme=resolveTheme(value);ctx.theme=theme;
  const url=new URL(location.href);url.searchParams.set('theme',theme);history.replaceState(null,'',url);
  document.documentElement.dataset.theme=theme;
- document.querySelector('meta[name="theme-color"]').content=theme==='pastel'?'#fbfbf9':'#f7f7f7';
- renderReviewer();
+ document.querySelector('meta[name="theme-color"]').content=theme==='center'?'#f4f5f9':theme==='pastel'?'#fbfbf9':'#f7f7f7';
+ if(app.querySelector('form')){formatHeadings();renderReviewer();}else render();
+}
+function formatHeadings(){
+ app.querySelectorAll('h1,h2').forEach(h=>{h.dataset.originalHeading ||= h.innerHTML;h.innerHTML=theme==='center'?h.dataset.originalHeading.replaceAll('<br>',' '):h.dataset.originalHeading;});
 }
 const tabs={
  gv:[['GV01','home','Tổng quan'],['GV02','users','Học sinh'],['GV07','check-square','Duyệt'],['GV08','file-text','Học phí'],['TC07','message-circle','Trao đổi']],
@@ -42,7 +47,7 @@ function navigate(route,opts={}) {
  if(opts.replace){history.replaceState(null,'',hash);readRoute();}else if(location.hash===hash){render();}else location.hash=hash;
 }
 function readRoute(){
- theme=new URLSearchParams(location.search).get('theme')==='mono'?'mono':'pastel';document.documentElement.dataset.theme=theme;
+ theme=resolveTheme(new URLSearchParams(location.search).get('theme'));ctx.theme=theme;document.documentElement.dataset.theme=theme;
  const [path,query]=location.hash.slice(1).split('?'),[,role,route]=path.split('/');
  ctx.db.role=ROLES[role]?role:ctx.db.role;ctx.route=SCREEN_META[route]?route:defaults[ctx.db.role];
  if(ctx.route.startsWith('GV')&&ctx.db.role!=='gv'){navigate(defaults[ctx.db.role],{replace:true});return;}
@@ -86,7 +91,7 @@ function render(){
  const headerGraphics={GV02:'student-graphic',TC04a:'student-graphic',TC02:'calendar-graphic',TC02b:'calendar-graphic',TC05:'report-graphic',GV07:'report-graphic',TBM01:'report-graphic',TC01b:'report-graphic'};
  if(headerGraphics[r])app.querySelector('.page-head')?.insertAdjacentHTML('beforeend',graphic(headerGraphics[r],'page-graphic'));
  // A reviewer-only comparison of the same overview content and state.
- app.classList.toggle('direction-b',new URLSearchParams(location.search).get('direction')==='b'&&r==='TC01');
+ app.classList.toggle('direction-b',theme!=='center'&&new URLSearchParams(location.search).get('direction')==='b'&&r==='TC01');
  if(app.classList.contains('direction-b')){
    const hero=app.querySelector('.hero-task'),metrics=app.querySelector('.metrics');
    hero.before(metrics);
@@ -94,18 +99,20 @@ function render(){
    hero.innerHTML=`<div class="compact-task-icon">${icon('clock',25)}</div><div class="compact-task-copy">${top.innerHTML}<h2>${h.innerHTML.replaceAll('<br>',' ')}</h2>${bottom.innerHTML}</div>`;
  }
  document.querySelector('#device').classList.toggle('web-device',r==='TC05w');
- document.title=`${SCREEN_META[r][0]} · Biz UX`;
+ formatHeadings();
+ document.title=`${SCREEN_META[r][0]} · Minh Hoàng Center`;
  renderReviewer();
 }
 function renderReviewer(){
  const role=ctx.db.role,r=ctx.route;
- const pastel=theme==='pastel';
- document.querySelector('.workspace-heading span:last-child').textContent=pastel?'iOS PASTEL · V0.3':'UX TRẮNG ĐEN · V0.3';
- const themeButtons=`<div class="theme-switch" role="group" aria-label="Giao diện trải nghiệm">${[['pastel','Pastel minh họa'],['mono','Trắng đen']].map(([value,label])=>btn(label,'theme',{class:theme===value?'selected':'',data:`data-value="${value}" aria-pressed="${theme===value}"`})).join('')}</div>`;
+ const pastel=theme==='pastel',center=theme==='center';
+ document.querySelector('.workspace-heading span:first-child').textContent=center?'MINH HOÀNG / QUẢN LÝ ĐÀO TẠO':'BIZ / QUẢN LÝ ĐÀO TẠO';
+ document.querySelector('.workspace-heading span:last-child').textContent=center?'MINH HOÀNG CENTER · V0.4':pastel?'iOS PASTEL · V0.3':'UX TRẮNG ĐEN · V0.3';
+ const themeButtons=`<div class="theme-switch" role="group" aria-label="Giao diện trải nghiệm">${[['center','Minh Hoàng'],['pastel','Pastel'],['mono','Trắng đen']].map(([value,label])=>btn(label,'theme',{class:theme===value?'selected':'',data:`data-value="${value}" aria-pressed="${theme===value}"`})).join('')}</div>`;
  const screens=Object.entries(SCREEN_META).filter(([id])=>id==='A00'||(role==='gv'?id.startsWith('GV')||id.startsWith('TC07'):id.startsWith('TC')||(role==='tbm'&&id==='TBM01')));
  const selectedGroup=r.startsWith('GV04')?'Tiếp nhận học sinh':r.startsWith('TC03')?'Lịch dạy và điểm danh':r.startsWith('TC05')||['GV07','TBM01'].includes(r)?'Báo cáo học tập':'Không gian làm việc';
- document.querySelector('#review-tools').innerHTML=`<aside class="review-sidebar"><div class="review-brand">biz<span>↗</span><small>QUẢN LÝ ĐÀO TẠO</small></div><div class="review-version"><span class="live-dot"></span> ${pastel?'PASTEL GRAPHIC':'UX TRẮNG ĐEN'} <b>V0.3</b></div>${themeButtons}<p class="review-label">ĐANG TRẢI NGHIỆM VỚI VAI TRÒ</p><div class="role-switch">${Object.entries(ROLES).map(([key,label])=>btn(`${icon(key==='gv'?'layers':key==='tc'?'book-open':'award',18)} ${label}${key===role?icon('check',16):''}`,'role',{class:key===role?'selected':'',data:`data-value="${key}" aria-pressed="${key===role}"`})).join('')}</div><div class="review-label screen-label">DANH MỤC MÀN HÌNH <span>${screens.length}</span></div><nav class="screen-index" aria-label="Danh mục màn hình UX">${screens.map(([id,[title]])=>link(id,`<code>${id.replace('-','·')}</code><span>${title}</span>`,id===r?'screen-item selected':'screen-item')).join('')}</nav><div class="review-bottom"><p>Dữ liệu mẫu · Lưu trên thiết bị<br>Không kết nối hệ thống thật</p>${btn(icon('rotate-ccw',15)+' Đặt lại bản trải nghiệm','demo-reset',{class:'text-link'})}</div></aside><div class="mobile-review"><b>biz. <small>UX</small></b><label><span class="sr-only">Vai trò trải nghiệm</span><select id="mobile-role">${Object.entries(ROLES).map(([k,v])=>`<option value="${k}" ${k===role?'selected':''}>${v}</option>`).join('')}</select></label>${btn(icon(pastel?'circle':'droplet',17),'theme',{class:'circle',data:`data-value="${pastel?'mono':'pastel'}" aria-label="${pastel?'Xem UX trắng đen':'Xem giao diện pastel'}"`})}${btn(icon('grid',18),'screen-menu',{class:'circle',data:'aria-label="Danh mục màn hình"'})}</div>`;
- document.querySelector('#context-panel').innerHTML=`<div class="context-top"><span class="context-number">${r}</span><p>${selectedGroup}</p><h2>${SCREEN_META[r][0]}</h2><span class="context-rule"></span><p>${SCREEN_META[r][1]}</p></div><div class="context-block"><span class="review-label">NGUYÊN TẮC TRẢI NGHIỆM</span><ul><li>Trạng thái hiện tại rõ ràng</li><li>Mỗi màn một việc chính</li><li>Luôn có đường quay lại</li></ul></div><div class="context-block"><span class="review-label">THỬ MỘT LUỒNG</span>${(role==='gv'?[['GV04','Tiếp nhận → Xếp lớp'],['GV07','Duyệt báo cáo hai vòng'],['GV10','Duyệt điều chỉnh điểm danh'],['GV09','Giao việc → Xác nhận']]:[['TC02','Lịch dạy → Điểm danh'],['TC05','Lập → Gửi báo cáo'],['TC06','Nhận việc → Gửi kết quả'],...(role==='tbm'?[['TBM01','Duyệt báo cáo bộ môn']]:[])]).map(([id,t])=>link(id,`${t} ${icon('arrow-up-right',15)}`,'context-flow')).join('')}</div><div class="context-foot"><span>390 × 844</span><span>${pastel?'GIAO DIỆN PASTEL':'GIAO DIỆN TRẮNG ĐEN'}</span><div class="swatches"><i></i><i></i><i></i><i></i><i></i></div></div>`;
+ document.querySelector('#review-tools').innerHTML=`<aside class="review-sidebar"><div class="review-brand">${center?'Minh Hoàng':'biz<span>↗</span>'}<small>${center?'CENTER · QUẢN LÝ ĐÀO TẠO':'QUẢN LÝ ĐÀO TẠO'}</small></div><div class="review-version"><span class="live-dot"></span> ${center?'THEO NGUỒN MINH HOÀNG':pastel?'PASTEL GRAPHIC':'UX TRẮNG ĐEN'} <b>${center?'V0.4':'V0.3'}</b></div>${themeButtons}<p class="review-label">ĐANG TRẢI NGHIỆM VỚI VAI TRÒ</p><div class="role-switch">${Object.entries(ROLES).map(([key,label])=>btn(`${icon(key==='gv'?'layers':key==='tc'?'book-open':'award',18)} ${label}${key===role?icon('check',16):''}`,'role',{class:key===role?'selected':'',data:`data-value="${key}" aria-pressed="${key===role}"`})).join('')}</div><div class="review-label screen-label">DANH MỤC MÀN HÌNH <span>${screens.length}</span></div><nav class="screen-index" aria-label="Danh mục màn hình UX">${screens.map(([id,[title]])=>link(id,`<code>${id.replace('-','·')}</code><span>${title}</span>`,id===r?'screen-item selected':'screen-item')).join('')}</nav><div class="review-bottom"><p>Dữ liệu mẫu · Lưu trên thiết bị<br>Không kết nối hệ thống thật</p>${btn(icon('rotate-ccw',15)+' Đặt lại bản trải nghiệm','demo-reset',{class:'text-link'})}</div></aside><div class="mobile-review"><b>${center?'Minh Hoàng':'biz.'} <small>UX</small></b><label><span class="sr-only">Vai trò trải nghiệm</span><select id="mobile-role">${Object.entries(ROLES).map(([k,v])=>`<option value="${k}" ${k===role?'selected':''}>${v}</option>`).join('')}</select></label>${btn(icon(pastel?'circle':'droplet',17),'theme',{class:'circle',data:`data-value="${center?'pastel':pastel?'mono':'center'}" aria-label="${center?'Xem giao diện pastel':pastel?'Xem UX trắng đen':'Xem giao diện Minh Hoàng'}"`})}${btn(icon('grid',18),'screen-menu',{class:'circle',data:'aria-label="Danh mục màn hình"'})}</div>`;
+ document.querySelector('#context-panel').innerHTML=`<div class="context-top"><span class="context-number">${r}</span><p>${selectedGroup}</p><h2>${SCREEN_META[r][0]}</h2><span class="context-rule"></span><p>${SCREEN_META[r][1]}</p></div><div class="context-block"><span class="review-label">NGUYÊN TẮC TRẢI NGHIỆM</span><ul><li>Trạng thái hiện tại rõ ràng</li><li>Mỗi màn một việc chính</li><li>Luôn có đường quay lại</li></ul></div><div class="context-block"><span class="review-label">THỬ MỘT LUỒNG</span>${(role==='gv'?[['GV04','Tiếp nhận → Xếp lớp'],['GV07','Duyệt báo cáo hai vòng'],['GV10','Duyệt điều chỉnh điểm danh'],['GV09','Giao việc → Xác nhận']]:[['TC02','Lịch dạy → Điểm danh'],['TC05','Lập → Gửi báo cáo'],['TC06','Nhận việc → Gửi kết quả'],...(role==='tbm'?[['TBM01','Duyệt báo cáo bộ môn']]:[])]).map(([id,t])=>link(id,`${t} ${icon('arrow-up-right',15)}`,'context-flow')).join('')}</div><div class="context-foot"><span>390 × 844</span><span>${center?'MINH HOÀNG DESIGN SYSTEM':pastel?'GIAO DIỆN PASTEL':'GIAO DIỆN TRẮNG ĐEN'}</span><div class="swatches"><i></i><i></i><i></i><i></i><i></i></div></div>`;
 }
 const actions=createActions(ctx);
 document.addEventListener('click',async e=>{
