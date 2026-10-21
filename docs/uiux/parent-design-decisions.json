@@ -1,0 +1,953 @@
+{
+  "schema_version": "2.0",
+  "pages": [
+    {
+      "route": "PH01",
+      "page_role": "family-overview",
+      "user_question": "Hôm nay con học gì và tôi cần theo dõi gì?",
+      "cta": "Xem buổi học gần nhất",
+      "decisions": [
+        {
+          "axis": "layout",
+          "source": {
+            "kind": "rule",
+            "ref": "docs/parent-role.md"
+          },
+          "value": "Reuse current overview/list/form composition families; selected child, next class time and teacher, attendance metrics, published information links",
+          "rejected_alternative": "Redesigning the staff app or a decorative course landing page"
+        },
+        {
+          "axis": "font",
+          "source": {
+            "kind": "user",
+            "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+          },
+          "value": "Google Sans Flex existing self-hosted files",
+          "rejected_alternative": "Introducing another font/dependency"
+        },
+        {
+          "axis": "typography",
+          "source": {
+            "kind": "user",
+            "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+          },
+          "value": "28/32 title; 17/24 section; 15/22 body and controls; 13/18 metadata",
+          "rejected_alternative": "Oversized editorial title hiding the primary action"
+        },
+        {
+          "axis": "spacing",
+          "source": {
+            "kind": "user",
+            "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+          },
+          "value": "20px gutter, 24 section, 12 group; 56px fields/buttons and 64px nav inherited",
+          "rejected_alternative": "A dense desktop table shrunk into a phone"
+        },
+        {
+          "axis": "media",
+          "source": {
+            "kind": "user",
+            "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+          },
+          "value": "Existing Feather icons and synthetic initials; no raster media",
+          "rejected_alternative": "Pastel graphics removed at user request"
+        },
+        {
+          "axis": "voice",
+          "source": {
+            "kind": "rule",
+            "ref": "docs/parent-role.md"
+          },
+          "value": "Vietnamese parent-facing task labels, explicit actor and state",
+          "rejected_alternative": "Treating approved leave as recorded absence or paid fees"
+        }
+      ],
+      "desktop_type": {
+        "title": {
+          "size_px": 22,
+          "line_height": 1.2727272727272727,
+          "weight": 700
+        },
+        "section": {
+          "size_px": 17,
+          "line_height": 1.411764705882353,
+          "weight": 600
+        },
+        "body": {
+          "size_px": 15,
+          "line_height": 1.4666666666666666,
+          "weight": 400
+        },
+        "ui": {
+          "size_px": 15,
+          "line_height": 1.4666666666666666,
+          "weight": 600
+        },
+        "meta": {
+          "size_px": 13,
+          "line_height": 1.3846153846153846,
+          "weight": 400
+        }
+      },
+      "mobile_type": {
+        "title": {
+          "size_px": 22,
+          "line_height": 1.2727272727272727,
+          "weight": 700
+        },
+        "section": {
+          "size_px": 17,
+          "line_height": 1.411764705882353,
+          "weight": 600
+        },
+        "body": {
+          "size_px": 15,
+          "line_height": 1.4666666666666666,
+          "weight": 400
+        },
+        "ui": {
+          "size_px": 15,
+          "line_height": 1.4666666666666666,
+          "weight": 600
+        },
+        "meta": {
+          "size_px": 13,
+          "line_height": 1.3846153846153846,
+          "weight": 400
+        }
+      },
+      "desktop_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 12,
+        "reading_width_ch": 35,
+        "density": "productive"
+      },
+      "mobile_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 12,
+        "reading_width_ch": 35,
+        "density": "productive"
+      },
+      "desktop_spacing": {
+        "gutter_px": 20,
+        "section_gap_px": 24,
+        "group_gap_px": 12,
+        "component_padding_px": 16
+      },
+      "mobile_spacing": {
+        "gutter_px": 20,
+        "section_gap_px": 24,
+        "group_gap_px": 12,
+        "component_padding_px": 16
+      },
+      "compositions": [
+        {
+          "id": "current",
+          "anchor": "next class time and teacher",
+          "structure": {
+            "regions": [
+              {
+                "role": "context",
+                "layout": "child-selector-stack",
+                "contains": [
+                  "selected child",
+                  "next class time and teacher"
+                ]
+              },
+              {
+                "role": "task",
+                "layout": "family-overview",
+                "contains": [
+                  "attendance metrics",
+                  "published information links"
+                ]
+              }
+            ],
+            "relationships": [
+              [
+                "context",
+                "scopes",
+                "task"
+              ]
+            ],
+            "mobile_layout": "Single column in existing phone frame, scrollable with bottom reserve",
+            "mobile_grouping": [
+              [
+                "selected child",
+                "next class time and teacher"
+              ],
+              [
+                "attendance metrics",
+                "published information links"
+              ]
+            ]
+          },
+          "proof": "docs/parent-role.md",
+          "tradeoff": "Preserve the current app direction and familiar task families; long records remain scrollable.",
+          "direction": {
+            "desktop_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 22,
+                "line_height": 1.2727272727272727,
+                "weight": 700
+              },
+              "body": {
+                "size_px": 15,
+                "line_height": 1.4666666666666666,
+                "weight": 400
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "mobile_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 22,
+                "line_height": 1.2727272727272727,
+                "weight": 700
+              },
+              "body": {
+                "size_px": 15,
+                "line_height": 1.4666666666666666,
+                "weight": 400
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "desktop_density": {
+              "mode": "productive",
+              "section_gap_px": 24,
+              "group_gap_px": 12,
+              "object_padding_px": 16
+            },
+            "mobile_density": {
+              "mode": "productive",
+              "section_gap_px": 24,
+              "group_gap_px": 12,
+              "object_padding_px": 16
+            },
+            "visual_object": {
+              "kind": "family-overview",
+              "information_task": "Hôm nay con học gì và tôi cần theo dõi gì?",
+              "anatomy": [
+                "selected child",
+                "next class time and teacher",
+                "attendance metrics",
+                "published information links"
+              ],
+              "reality": "synthetic"
+            }
+          }
+        }
+      ],
+      "selected_composition": "current",
+      "comparison_required": false,
+      "composition_constraint": {
+        "kind": "user",
+        "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+      },
+      "reference_transfers": [
+        {
+          "reference_id": "minh-hoang-existing-app",
+          "source": {
+            "kind": "reference",
+            "ref": "src/center.css; src/screens/overview.js; src/ui.js"
+          },
+          "action": "ADAPT",
+          "property": "Existing blue navigation, white rounded inputs, labelled task rows, teacher overview and form hierarchy",
+          "reason": "User explicitly continues the present interface; parent task objects need child context and scoped data.",
+          "boundary": "Inherited app composition families; no claim of matching the Claude artifact or independent usability evidence."
+        }
+      ],
+      "ux": {
+        "entry_state": "Selected linked child in synthetic browser data",
+        "user_goal": "Hôm nay con học gì và tôi cần theo dõi gì?",
+        "information_priority": [
+          "selected child",
+          "next class time and teacher",
+          "attendance metrics",
+          "published information links"
+        ],
+        "primary_action": "Xem buổi học gần nhất",
+        "destination": "PH02b",
+        "feedback": "Same browser data updates related list/detail/staff views; persisted confirmation and explicit status.",
+        "recovery": "Invalid/foreign entity shows return to list; child change clears detail; empty and invalid forms give an actionable next step.",
+        "walkthrough_observation": "Child selector leads; blue class row is the first action; metrics are subordinate and carry actual marks.",
+        "evidence_ref": "tests/browser/parent.cjs; evidence/parent/parent-qa.json",
+        "review_source": "agent-heuristic",
+        "findings": []
+      }
+    },
+    {
+      "route": "PH02",
+      "page_role": "family-schedule",
+      "user_question": "Con học ngày nào và buổi nào đã được điểm danh?",
+      "cta": "Xem chi tiết buổi học",
+      "decisions": [
+        {
+          "axis": "layout",
+          "source": {
+            "kind": "rule",
+            "ref": "docs/parent-role.md"
+          },
+          "value": "Reuse current overview/list/form composition families; child selector, week controls, dated session rows, attendance or leave status",
+          "rejected_alternative": "Redesigning the staff app or a decorative course landing page"
+        },
+        {
+          "axis": "font",
+          "source": {
+            "kind": "user",
+            "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+          },
+          "value": "Google Sans Flex existing self-hosted files",
+          "rejected_alternative": "Introducing another font/dependency"
+        },
+        {
+          "axis": "typography",
+          "source": {
+            "kind": "user",
+            "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+          },
+          "value": "28/32 title; 17/24 section; 15/22 body and controls; 13/18 metadata",
+          "rejected_alternative": "Oversized editorial title hiding the primary action"
+        },
+        {
+          "axis": "spacing",
+          "source": {
+            "kind": "user",
+            "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+          },
+          "value": "20px gutter, 24 section, 12 group; 56px fields/buttons and 64px nav inherited",
+          "rejected_alternative": "A dense desktop table shrunk into a phone"
+        },
+        {
+          "axis": "media",
+          "source": {
+            "kind": "user",
+            "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+          },
+          "value": "Existing Feather icons and synthetic initials; no raster media",
+          "rejected_alternative": "Pastel graphics removed at user request"
+        },
+        {
+          "axis": "voice",
+          "source": {
+            "kind": "rule",
+            "ref": "docs/parent-role.md"
+          },
+          "value": "Vietnamese parent-facing task labels, explicit actor and state",
+          "rejected_alternative": "Treating approved leave as recorded absence or paid fees"
+        }
+      ],
+      "desktop_type": {
+        "title": {
+          "size_px": 28,
+          "line_height": 1.1428571428571428,
+          "weight": 700
+        },
+        "section": {
+          "size_px": 17,
+          "line_height": 1.411764705882353,
+          "weight": 600
+        },
+        "body": {
+          "size_px": 15,
+          "line_height": 1.4666666666666666,
+          "weight": 400
+        },
+        "ui": {
+          "size_px": 15,
+          "line_height": 1.4666666666666666,
+          "weight": 600
+        },
+        "meta": {
+          "size_px": 13,
+          "line_height": 1.3846153846153846,
+          "weight": 400
+        }
+      },
+      "mobile_type": {
+        "title": {
+          "size_px": 28,
+          "line_height": 1.1428571428571428,
+          "weight": 700
+        },
+        "section": {
+          "size_px": 17,
+          "line_height": 1.411764705882353,
+          "weight": 600
+        },
+        "body": {
+          "size_px": 15,
+          "line_height": 1.4666666666666666,
+          "weight": 400
+        },
+        "ui": {
+          "size_px": 15,
+          "line_height": 1.4666666666666666,
+          "weight": 600
+        },
+        "meta": {
+          "size_px": 13,
+          "line_height": 1.3846153846153846,
+          "weight": 400
+        }
+      },
+      "desktop_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 12,
+        "reading_width_ch": 35,
+        "density": "productive"
+      },
+      "mobile_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 12,
+        "reading_width_ch": 35,
+        "density": "productive"
+      },
+      "desktop_spacing": {
+        "gutter_px": 20,
+        "section_gap_px": 24,
+        "group_gap_px": 12,
+        "component_padding_px": 16
+      },
+      "mobile_spacing": {
+        "gutter_px": 20,
+        "section_gap_px": 24,
+        "group_gap_px": 12,
+        "component_padding_px": 16
+      },
+      "compositions": [
+        {
+          "id": "current",
+          "anchor": "week controls",
+          "structure": {
+            "regions": [
+              {
+                "role": "context",
+                "layout": "child-selector-stack",
+                "contains": [
+                  "child selector",
+                  "week controls"
+                ]
+              },
+              {
+                "role": "task",
+                "layout": "family-schedule",
+                "contains": [
+                  "dated session rows",
+                  "attendance or leave status"
+                ]
+              }
+            ],
+            "relationships": [
+              [
+                "context",
+                "scopes",
+                "task"
+              ]
+            ],
+            "mobile_layout": "Single column in existing phone frame, scrollable with bottom reserve",
+            "mobile_grouping": [
+              [
+                "child selector",
+                "week controls"
+              ],
+              [
+                "dated session rows",
+                "attendance or leave status"
+              ]
+            ]
+          },
+          "proof": "docs/parent-role.md",
+          "tradeoff": "Preserve the current app direction and familiar task families; long records remain scrollable.",
+          "direction": {
+            "desktop_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 28,
+                "line_height": 1.1428571428571428,
+                "weight": 700
+              },
+              "body": {
+                "size_px": 15,
+                "line_height": 1.4666666666666666,
+                "weight": 400
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "mobile_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 28,
+                "line_height": 1.1428571428571428,
+                "weight": 700
+              },
+              "body": {
+                "size_px": 15,
+                "line_height": 1.4666666666666666,
+                "weight": 400
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "desktop_density": {
+              "mode": "productive",
+              "section_gap_px": 24,
+              "group_gap_px": 12,
+              "object_padding_px": 16
+            },
+            "mobile_density": {
+              "mode": "productive",
+              "section_gap_px": 24,
+              "group_gap_px": 12,
+              "object_padding_px": 16
+            },
+            "visual_object": {
+              "kind": "family-schedule",
+              "information_task": "Con học ngày nào và buổi nào đã được điểm danh?",
+              "anatomy": [
+                "child selector",
+                "week controls",
+                "dated session rows",
+                "attendance or leave status"
+              ],
+              "reality": "synthetic"
+            }
+          }
+        }
+      ],
+      "selected_composition": "current",
+      "comparison_required": false,
+      "composition_constraint": {
+        "kind": "user",
+        "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+      },
+      "reference_transfers": [
+        {
+          "reference_id": "minh-hoang-existing-app",
+          "source": {
+            "kind": "reference",
+            "ref": "src/center.css; src/screens/overview.js; src/ui.js"
+          },
+          "action": "ADAPT",
+          "property": "Existing blue navigation, white rounded inputs, labelled task rows, teacher overview and form hierarchy",
+          "reason": "User explicitly continues the present interface; parent task objects need child context and scoped data.",
+          "boundary": "Inherited app composition families; no claim of matching the Claude artifact or independent usability evidence."
+        }
+      ],
+      "ux": {
+        "entry_state": "Selected linked child in synthetic browser data",
+        "user_goal": "Con học ngày nào và buổi nào đã được điểm danh?",
+        "information_priority": [
+          "child selector",
+          "week controls",
+          "dated session rows",
+          "attendance or leave status"
+        ],
+        "primary_action": "Xem chi tiết buổi học",
+        "destination": "PH02b",
+        "feedback": "Same browser data updates related list/detail/staff views; persisted confirmation and explicit status.",
+        "recovery": "Invalid/foreign entity shows return to list; child change clears detail; empty and invalid forms give an actionable next step.",
+        "walkthrough_observation": "Week and comparable session rows precede request navigation; empty week has return-to-current-week recovery.",
+        "evidence_ref": "tests/browser/parent.cjs; evidence/parent/parent-qa.json",
+        "review_source": "agent-heuristic",
+        "findings": []
+      }
+    },
+    {
+      "route": "PH06a",
+      "page_role": "leave-request-form",
+      "user_question": "Tôi xin nghỉ cho buổi nào và ai tiếp nhận?",
+      "cta": "Gửi đến Giáo vụ",
+      "decisions": [
+        {
+          "axis": "layout",
+          "source": {
+            "kind": "rule",
+            "ref": "docs/parent-role.md"
+          },
+          "value": "Reuse current overview/list/form composition families; child selector, explanation of attendance boundary, eligible session, reason, submit",
+          "rejected_alternative": "Redesigning the staff app or a decorative course landing page"
+        },
+        {
+          "axis": "font",
+          "source": {
+            "kind": "user",
+            "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+          },
+          "value": "Google Sans Flex existing self-hosted files",
+          "rejected_alternative": "Introducing another font/dependency"
+        },
+        {
+          "axis": "typography",
+          "source": {
+            "kind": "user",
+            "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+          },
+          "value": "28/32 title; 17/24 section; 15/22 body and controls; 13/18 metadata",
+          "rejected_alternative": "Oversized editorial title hiding the primary action"
+        },
+        {
+          "axis": "spacing",
+          "source": {
+            "kind": "user",
+            "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+          },
+          "value": "20px gutter, 24 section, 12 group; 56px fields/buttons and 64px nav inherited",
+          "rejected_alternative": "A dense desktop table shrunk into a phone"
+        },
+        {
+          "axis": "media",
+          "source": {
+            "kind": "user",
+            "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+          },
+          "value": "Existing Feather icons and synthetic initials; no raster media",
+          "rejected_alternative": "Pastel graphics removed at user request"
+        },
+        {
+          "axis": "voice",
+          "source": {
+            "kind": "rule",
+            "ref": "docs/parent-role.md"
+          },
+          "value": "Vietnamese parent-facing task labels, explicit actor and state",
+          "rejected_alternative": "Treating approved leave as recorded absence or paid fees"
+        }
+      ],
+      "desktop_type": {
+        "title": {
+          "size_px": 28,
+          "line_height": 1.1428571428571428,
+          "weight": 700
+        },
+        "section": {
+          "size_px": 17,
+          "line_height": 1.411764705882353,
+          "weight": 600
+        },
+        "body": {
+          "size_px": 15,
+          "line_height": 1.4666666666666666,
+          "weight": 400
+        },
+        "ui": {
+          "size_px": 15,
+          "line_height": 1.4666666666666666,
+          "weight": 600
+        },
+        "meta": {
+          "size_px": 13,
+          "line_height": 1.3846153846153846,
+          "weight": 400
+        }
+      },
+      "mobile_type": {
+        "title": {
+          "size_px": 28,
+          "line_height": 1.1428571428571428,
+          "weight": 700
+        },
+        "section": {
+          "size_px": 17,
+          "line_height": 1.411764705882353,
+          "weight": 600
+        },
+        "body": {
+          "size_px": 15,
+          "line_height": 1.4666666666666666,
+          "weight": 400
+        },
+        "ui": {
+          "size_px": 15,
+          "line_height": 1.4666666666666666,
+          "weight": 600
+        },
+        "meta": {
+          "size_px": 13,
+          "line_height": 1.3846153846153846,
+          "weight": 400
+        }
+      },
+      "desktop_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 12,
+        "reading_width_ch": 35,
+        "density": "productive"
+      },
+      "mobile_layout": {
+        "max_width_px": 390,
+        "columns": 1,
+        "column_gap_px": 12,
+        "reading_width_ch": 35,
+        "density": "productive"
+      },
+      "desktop_spacing": {
+        "gutter_px": 20,
+        "section_gap_px": 24,
+        "group_gap_px": 12,
+        "component_padding_px": 16
+      },
+      "mobile_spacing": {
+        "gutter_px": 20,
+        "section_gap_px": 24,
+        "group_gap_px": 12,
+        "component_padding_px": 16
+      },
+      "compositions": [
+        {
+          "id": "current",
+          "anchor": "explanation of attendance boundary",
+          "structure": {
+            "regions": [
+              {
+                "role": "context",
+                "layout": "child-selector-stack",
+                "contains": [
+                  "child selector",
+                  "explanation of attendance boundary"
+                ]
+              },
+              {
+                "role": "task",
+                "layout": "leave-request-form",
+                "contains": [
+                  "eligible session",
+                  "reason",
+                  "submit"
+                ]
+              }
+            ],
+            "relationships": [
+              [
+                "context",
+                "scopes",
+                "task"
+              ]
+            ],
+            "mobile_layout": "Single column in existing phone frame, scrollable with bottom reserve",
+            "mobile_grouping": [
+              [
+                "child selector",
+                "explanation of attendance boundary"
+              ],
+              [
+                "eligible session",
+                "reason",
+                "submit"
+              ]
+            ]
+          },
+          "proof": "docs/parent-role.md",
+          "tradeoff": "Preserve the current app direction and familiar task families; long records remain scrollable.",
+          "direction": {
+            "desktop_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 28,
+                "line_height": 1.1428571428571428,
+                "weight": 700
+              },
+              "body": {
+                "size_px": 15,
+                "line_height": 1.4666666666666666,
+                "weight": 400
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "mobile_typography": {
+              "family": "Google Sans Flex",
+              "title": {
+                "size_px": 28,
+                "line_height": 1.1428571428571428,
+                "weight": 700
+              },
+              "body": {
+                "size_px": 15,
+                "line_height": 1.4666666666666666,
+                "weight": 400
+              },
+              "title_tracking_em": -0.02,
+              "reading_width_ch": 35
+            },
+            "desktop_density": {
+              "mode": "productive",
+              "section_gap_px": 24,
+              "group_gap_px": 12,
+              "object_padding_px": 16
+            },
+            "mobile_density": {
+              "mode": "productive",
+              "section_gap_px": 24,
+              "group_gap_px": 12,
+              "object_padding_px": 16
+            },
+            "visual_object": {
+              "kind": "leave-request-form",
+              "information_task": "Tôi xin nghỉ cho buổi nào và ai tiếp nhận?",
+              "anatomy": [
+                "child selector",
+                "explanation of attendance boundary",
+                "eligible session",
+                "reason",
+                "submit"
+              ],
+              "reality": "synthetic"
+            }
+          }
+        }
+      ],
+      "selected_composition": "current",
+      "comparison_required": false,
+      "composition_constraint": {
+        "kind": "user",
+        "ref": "Current request: tiếp tục với giao diện hiện tại làm thêm role phụ huynh; docs/parent-role.md"
+      },
+      "reference_transfers": [
+        {
+          "reference_id": "minh-hoang-existing-app",
+          "source": {
+            "kind": "reference",
+            "ref": "src/center.css; src/screens/overview.js; src/ui.js"
+          },
+          "action": "ADAPT",
+          "property": "Existing blue navigation, white rounded inputs, labelled task rows, teacher overview and form hierarchy",
+          "reason": "User explicitly continues the present interface; parent task objects need child context and scoped data.",
+          "boundary": "Inherited app composition families; no claim of matching the Claude artifact or independent usability evidence."
+        }
+      ],
+      "ux": {
+        "entry_state": "Selected linked child in synthetic browser data",
+        "user_goal": "Tôi xin nghỉ cho buổi nào và ai tiếp nhận?",
+        "information_priority": [
+          "child selector",
+          "explanation of attendance boundary",
+          "eligible session",
+          "reason",
+          "submit"
+        ],
+        "primary_action": "Gửi đến Giáo vụ",
+        "destination": "PH06b",
+        "feedback": "Same browser data updates related list/detail/staff views; persisted confirmation and explicit status.",
+        "recovery": "Invalid/foreign entity shows return to list; child change clears detail; empty and invalid forms give an actionable next step.",
+        "walkthrough_observation": "Form keeps the child and chosen session explicit. Whitespace reason produces inline recovery; success opens a persistent request record.",
+        "evidence_ref": "tests/browser/parent.cjs; evidence/parent/parent-qa.json",
+        "review_source": "agent-heuristic",
+        "findings": []
+      }
+    }
+  ],
+  "captures": [
+    {
+      "route": "PH01",
+      "composition_id": "current",
+      "file": "evidence/parent/parent-PH01-390.png",
+      "sha256": "78513c13f295cfcfc9476a1098149fdec88efdd8263d23dbdb66f9ae097ad22e",
+      "width": 390,
+      "viewport_height": 844,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Child selector leads; blue class row is the first action; metrics are subordinate and carry actual marks.",
+        "typography": "Vietnamese task titles and body remain readable within the existing type system.",
+        "spacing": "20px product gutter; no observed horizontal clipping; labelled fields and controls keep their grouping.",
+        "media": "No raster media or primary subject crop; synthetic initials and labelled icons only.",
+        "distinctiveness": "Same Minh Hoang blue floating navigation and rounded white controls; each task family has a different first decision object."
+      }
+    },
+    {
+      "route": "PH01",
+      "composition_id": "current",
+      "file": "evidence/parent/parent-PH01-1440.png",
+      "sha256": "2182f4fa12a07afd07579576f5976672e5fbe3284c8637a13b7a4adeda248a6f",
+      "width": 1440,
+      "viewport_height": 1040,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Child selector leads; blue class row is the first action; metrics are subordinate and carry actual marks.",
+        "typography": "Vietnamese task titles and body remain readable within the existing type system.",
+        "spacing": "20px product gutter; no observed horizontal clipping; labelled fields and controls keep their grouping.",
+        "media": "No raster media or primary subject crop; synthetic initials and labelled icons only.",
+        "distinctiveness": "Same Minh Hoang blue floating navigation and rounded white controls; each task family has a different first decision object."
+      }
+    },
+    {
+      "route": "PH02",
+      "composition_id": "current",
+      "file": "evidence/parent/parent-PH02-390.png",
+      "sha256": "9e9ebb7cf374ccb888f7678c792261f81df705796e6cfa97bcedfb8908fae119",
+      "width": 390,
+      "viewport_height": 844,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Week and comparable session rows precede request navigation; empty week has return-to-current-week recovery.",
+        "typography": "Vietnamese task titles and body remain readable within the existing type system.",
+        "spacing": "20px product gutter; no observed horizontal clipping; labelled fields and controls keep their grouping.",
+        "media": "No raster media or primary subject crop; synthetic initials and labelled icons only.",
+        "distinctiveness": "Same Minh Hoang blue floating navigation and rounded white controls; each task family has a different first decision object."
+      }
+    },
+    {
+      "route": "PH02",
+      "composition_id": "current",
+      "file": "evidence/parent/parent-PH02-1440.png",
+      "sha256": "ff1317e5eb6435fb92b01e8dc1516d5b0ff689a48fae5e4eddf5c0513cf1aedb",
+      "width": 1440,
+      "viewport_height": 1040,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Week and comparable session rows precede request navigation; empty week has return-to-current-week recovery.",
+        "typography": "Vietnamese task titles and body remain readable within the existing type system.",
+        "spacing": "20px product gutter; no observed horizontal clipping; labelled fields and controls keep their grouping.",
+        "media": "No raster media or primary subject crop; synthetic initials and labelled icons only.",
+        "distinctiveness": "Same Minh Hoang blue floating navigation and rounded white controls; each task family has a different first decision object."
+      }
+    },
+    {
+      "route": "PH06a",
+      "composition_id": "current",
+      "file": "evidence/parent/parent-PH06a-390.png",
+      "sha256": "25baf43d7e19ddf68bcc44fd053dbaa380efc702c3bf3ba8b06ed748bad02baa",
+      "width": 390,
+      "viewport_height": 844,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Form keeps the child and chosen session explicit. Whitespace reason produces inline recovery; success opens a persistent request record.",
+        "typography": "Vietnamese task titles and body remain readable within the existing type system.",
+        "spacing": "20px product gutter; no observed horizontal clipping; labelled fields and controls keep their grouping.",
+        "media": "No raster media or primary subject crop; synthetic initials and labelled icons only.",
+        "distinctiveness": "Same Minh Hoang blue floating navigation and rounded white controls; each task family has a different first decision object."
+      }
+    },
+    {
+      "route": "PH06a",
+      "composition_id": "current",
+      "file": "evidence/parent/parent-PH06a-1440.png",
+      "sha256": "37c19acb7f4fd3b698f820019af47d089f7752124d278e31e7a373fb7c7d8b4d",
+      "width": 1440,
+      "viewport_height": 1040,
+      "inspected": true,
+      "review_source": "agent-heuristic",
+      "critique": {
+        "hierarchy": "Form keeps the child and chosen session explicit. Whitespace reason produces inline recovery; success opens a persistent request record.",
+        "typography": "Vietnamese task titles and body remain readable within the existing type system.",
+        "spacing": "20px product gutter; no observed horizontal clipping; labelled fields and controls keep their grouping.",
+        "media": "No raster media or primary subject crop; synthetic initials and labelled icons only.",
+        "distinctiveness": "Same Minh Hoang blue floating navigation and rounded white controls; each task family has a different first decision object."
+      }
+    }
+  ]
+}

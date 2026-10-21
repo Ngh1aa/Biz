@@ -11,7 +11,7 @@ Repo dùng cấu hình Pages sẵn có: nhánh `main`, thư mục `/`. File `.no
 - Minh Hoàng: `http://127.0.0.1:4173/Biz/#/gv/GV01`
 - Tài liệu/capture phiên bản cũ chỉ là hồ sơ lịch sử, không còn là giao diện đang cung cấp.
 
-Browser prototype cho vận hành trung tâm đào tạo, theo tài liệu người dùng cung cấp ngày 21/10/2026. Có **41 màn/trạng thái** dùng chung component và dữ liệu, cho **Giáo vụ · Giáo viên · Trưởng bộ môn**.
+Browser prototype cho vận hành trung tâm đào tạo, theo tài liệu người dùng cung cấp ngày 21/10/2026. Có **55 màn/trạng thái** dùng chung component và dữ liệu, cho **Giáo vụ · Giáo viên · Trưởng bộ môn · Phụ huynh**.
 
 ## Xem bản local
 
@@ -63,3 +63,9 @@ Toàn bộ dữ liệu là tổng hợp. App dùng localStorage trên cùng trì
 Hồ sơ rút gọn theo vai trò; thông tin liên hệ chỉ xuất hiện ở flow nhập mới. Giao diện Giám đốc/Admin/Trưởng phòng chưa có đặc tả nên không tự thêm. Chưa có kiểm thử với người dùng thật, thiết bị native, screen reader hoặc chứng nhận WCAG.
 
 Workflow áp dụng: [Ngh1aa/uiux-ai-workspace](https://github.com/Ngh1aa/uiux-ai-workspace), Flow `mobile-web-preview`; hồ sơ v2 và capture ở `docs/uiux/` và `evidence/browser/`. Integrity checker xác nhận tính nhất quán của hồ sơ, không chứng minh thẩm mỹ hay hiệu quả người dùng.
+
+## Vai trò Phụ huynh
+
+[Mở không gian Phụ huynh](https://ngh1aa.github.io/Biz/#/ph/PH01). Chọn vai trò Phụ huynh trên thanh review; dữ liệu mẫu có hai con được liên kết. 14 màn bổ sung gồm lịch/chuyên cần, báo cáo đã công bố, học phí, hội thoại, xin nghỉ và gia đình/hỗ trợ. Giáo vụ xử lý xin nghỉ ở GV10; tin nhắn tới người phụ trách xuất hiện trong Trao đổi. Không tự thay điểm danh/học phí khi xin nghỉ.
+
+Chi tiết phạm vi, nguồn Factory, giả định, trạng thái và giới hạn: `docs/parent-role.md`. Quyền xem là mô phỏng trong trình duyệt, không thay thế phân quyền backend; dữ liệu không đồng bộ qua thiết bị.

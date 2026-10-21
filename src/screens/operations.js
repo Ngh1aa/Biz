@@ -1,5 +1,6 @@
 import {TEACHERS,teacherName,attendance} from '../data.js';
 import {head,section,link,btn,icon,pill,chips,avatar,detail,field,form,footer,note,history,empty,esc,money,progress,statusLabel,contactLabel} from '../ui.js';
+import {familyOfficeRequests} from './parents.js';
 export function operations(ctx) {
  const {db,route,state}=ctx;
  if(route==='GV08'){
@@ -8,9 +9,10 @@ export function operations(ctx) {
  }
  if(route==='GV10') {
   const tab=state.filter||'Yêu cầu',requests=db.requests.filter(r=>r.status==='Chờ duyệt');
-  return head('Đề nghị điều chỉnh<br>điểm danh','ĐIỀU CHỈNH ĐIỂM DANH')+chips(['Yêu cầu','Lịch sử sửa'],tab)+
+  return head('Điểm danh & xin nghỉ','YÊU CẦU HỌC TẬP')+chips(['Yêu cầu','Xin nghỉ','Lịch sử sửa'],tab)+
+   (tab==='Xin nghỉ'?familyOfficeRequests(ctx):
    (tab==='Yêu cầu'?requests.map(r=>{const session=db.sessions.find(s=>s.id===r.session),s=db.students.find(s=>s.id===r.student);return `<article class="request-card">${pill(r.kind||'Điều chỉnh điểm danh')}<h3>${esc(teacherName(r.teacher))}</h3><p>${esc(session?.name||r.subject||'Buổi học bổ sung')} · ${esc(session?.date||r.date)} · ${esc(session?.shift||r.shift)}</p>${detail('Học sinh',esc(s?.name||'—'))}${r.from?`<div class="change-display"><span>${esc(statusLabel(r.from))}</span>${icon('arrow-right')}<strong>${esc(statusLabel(r.to))}</strong></div>`:''}<p>${esc(r.reason)}</p><small>Gửi ${esc(r.time)}</small><div class="dual-actions">${btn('Từ chối','request-reject',{class:'secondary',data:`data-id="${r.id}"`})}${btn('Duyệt điều chỉnh','request-approve',{class:'primary',data:`data-id="${r.id}"`})}</div></article>`}).join('')||empty('Đã xử lý hết yêu cầu','Các yêu cầu mới từ giáo viên sẽ xuất hiện tại đây.'):
-   history(db.audit.filter(a=>a.owner==='Giáo vụ').length?db.audit.filter(a=>a.owner==='Giáo vụ'):[{text:'Chưa có lần sửa sau giờ khóa',time:'Lịch sử được ghi khi duyệt sửa'}]));
+   history(db.audit.filter(a=>a.owner==='Giáo vụ').length?db.audit.filter(a=>a.owner==='Giáo vụ'):[{text:'Chưa có lần sửa sau giờ khóa',time:'Lịch sử được ghi khi duyệt sửa'}])));
  }
  if(route==='GV11') {
   const selected=state.account?db.accounts.find(a=>a.id===state.account):null;
