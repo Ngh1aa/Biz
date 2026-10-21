@@ -34,7 +34,7 @@ export function createActions(ctx) {
   if(ctx.db.role==='ph'&&!['back','week','week-reset','role','screen-menu','close-sheet','demo-reset','reset-confirm','forgot'].includes(name))return;
   const db=ctx.db,id=el.dataset.id,value=el.dataset.value;
   switch(name) {
-   case 'back': {const parents={PH02b:'PH02',PH03b:'PH03',PH04b:'PH04',PH05b:'PH05',PH05c:'PH05',PH06:'PH01',PH06a:'PH06',PH06b:'PH06',PH07:'PH01',GV04b:'GV04',GV04c:'GV04b',TC06c:'TC06b',TC06b:'TC06',TC05c:'TC05',TC05d:'TC05',TC05b:db.role==='gv'?'GV07':db.role==='tbm'?'TBM01':'TC05',TC03:'TC02',TC03b:'TC02',TC07b:'TC07',TC07c:'TC07',GV03:'GV02',TC04:'TC04a',TC04b:db.role==='gv'?'GV03':'TC04'};navigate(parents[ctx.route]||roleHome(db.role));break;}
+   case 'back': {const parents={PH02b:'PH02',PH03b:'PH03',PH04b:'PH04',PH05b:'PH05',PH05c:'PH05',PH06:'PH01',PH06a:'PH06',PH06b:'PH06',PH07:'PH01',GV05:'GV03',GV06:'GV03',GV06b:'GV03',GV06c:'GV03',GV04b:'GV04',GV04c:'GV04b',TC06c:'TC06b',TC06b:'TC06',TC05c:'TC05',TC05d:'TC05',TC05b:db.role==='gv'?'GV07':db.role==='tbm'?'TBM01':'TC05',TC03:'TC02',TC03b:'TC02',TC07b:'TC07',TC07c:'TC07',GV03:'GV02',TC04:'TC04a',TC04b:db.role==='gv'?'GV03':'TC04'};navigate(parents[ctx.route]||roleHome(db.role));break;}
    case 'close-sheet': close();break;
    case 'role': db.role=value;save();navigate(roleHome(value),{role:value});break;
    case 'demo-reset': confirm('Đặt lại trải nghiệm?','Xóa dữ liệu mẫu đã chỉnh trên trình duyệt và khôi phục bản ban đầu.','reset-confirm');break;
@@ -114,7 +114,7 @@ export function createActions(ctx) {
    case 'task-comment':{const t=selectedTask();t.comments.push({author:ROLES[db.role],text:d.text,time:stamp()});save();render();toast('Đã gửi trao đổi công việc.');break;}
    case 'ask-task':{const t=db.tasks.find(t=>t.id===d.id);t.comments.push({author:'Giáo viên',text:d.reason,time:stamp()});t.history.push({text:'Giáo viên hỏi lại yêu cầu',time:stamp()});save();close();render();break;}
    case 'return-task':{const t=selectedTask();t.status='Đang làm';t.comments.push({author:'Người giao việc',text:d.reason,time:stamp()});t.history.push({text:'Người giao việc yêu cầu bổ sung: '+d.reason,time:stamp()});save();close();render();break;}
-   case 'reply':{const t=db.threads.find(t=>t.id===db.selectedThread);t.messages.push({sender:'me',text:d.text,file:files(f)[0],time:new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'}),seen:false});save();render();document.querySelector('#app').scrollTop=document.querySelector('#app').scrollHeight;break;}
+   case 'reply':{const t=db.threads.find(t=>t.id===db.selectedThread);t.messages.push({sender:'me',text:d.text,file:files(f)[0],time:new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'}),seen:false});save();render();document.querySelector('.composer')?.scrollIntoView({block:'end'});break;}
    case 'new-message':{let t=db.threads.find(t=>t.name===d.recipient);if(!t){t={id:'TN'+Date.now(),name:d.recipient,group:'Trao đổi công việc',unread:0,messages:[]};db.threads.unshift(t);}t.messages.push({sender:'me',text:d.text,file:files(f)[0],time:new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'}),seen:false});db.selectedThread=t.id;save();navigate('TC07b');toast('Đã gửi tin nhắn trong bản trải nghiệm.');break;}
   }
  }

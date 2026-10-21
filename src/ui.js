@@ -13,7 +13,7 @@ export const pill=(text,dark=false)=>{
   return `<span class="pill ${dark?'dark':''}" data-status="${status}">${esc(statusLabel(text))}</span>`;
 };
 export const avatar=(name,cls='')=>`<span class="avatar ${cls}" aria-hidden="true">${esc(name.split(' ').slice(-2).map(n=>n[0]).join(''))}</span>`;
-export const head=(title,sub='',back=true,extra='')=>`<header class="page-head">${back?`<div class="head-actions">${btn(icon('arrow-left'),'back',{class:'circle',data:'aria-label="Quay lại"'})}${extra}</div>`:extra}<div class="eyebrow">${sub}</div><h1 tabindex="-1">${title}</h1></header>`;
+export const head=(title,sub='',back=true,extra='')=>`<header class="page-head"><div class="head-actions">${back?btn(icon('arrow-left')+'<span>Quay lại</span>','back',{class:'back-link'}):'<span class="product-label">MINH HOÀNG CENTER</span>'}${extra}</div>${sub?`<div class="eyebrow">${sub}</div>`:''}<h1 tabindex="-1">${title.replaceAll('<br>',' ').replace(/\.$/,'')}</h1></header>`;
 export const section=(title,extra='')=>`<div class="section-head"><h2>${title}</h2>${extra}</div>`;
 export const chips=(values,selected,name='filter')=>`<div class="chips" role="group" aria-label="Bộ lọc">${values.map(v=>btn(esc(statusLabel(v)),name,{class:`chip ${selected===v?'selected':''}`,data:`data-value="${esc(v)}" aria-pressed="${selected===v}"`})).join('')}</div>`;
 export function field(label,name,value='',opts={}) {
@@ -28,5 +28,8 @@ export const detail=(label,value)=>`<div class="detail-row"><span>${label}</span
 export const progress=value=>`<div class="progress" role="progressbar" aria-label="Tiến độ" aria-valuenow="${value}" aria-valuemin="0" aria-valuemax="100"><span style="width:${value}%"></span></div>`;
 export const history=rows=>`<ol class="history">${rows.map(r=>`<li><strong>${esc(r.text)}</strong><small>${esc(r.time)}</small></li>`).join('')}</ol>`;
 export function studentRow(s,route,extra='') {return link(route,`${avatar(s.name)}<span class="row-copy"><strong>${esc(s.name)}</strong><small>${esc(s.id)} · Khối ${esc(s.grade)} · ${esc(s.school)}</small>${extra||`<span class="row-bottom">${esc(s.subject)} ${pill(s.status)}</span>`}</span>${icon('chevron-right',18)}`,'student-row',`data-student="${s.id}"`);}
-export const form=(id,content)=>`<form data-form="${id}"><div class="form-error" role="alert" hidden></div>${content}</form>`;
+export const form=(id,content)=>`<form data-form="${id}"><div class="form-error" role="alert" tabindex="-1" hidden></div>${content}</form>`;
+export const formGroup=(title,content,hint='')=>`<fieldset class="form-group"><legend>${esc(title)}</legend>${hint?`<p class="group-hint">${esc(hint)}</p>`:''}${content}</fieldset>`;
 export const money=v=>new Intl.NumberFormat('vi-VN',{style:'currency',currency:'VND'}).format(v);
+export const dateLabel=value=>{const [year,month,day]=String(value).split('-');return day?`${day}/${month}/${year}`:value;};
+export const monthLabel=value=>{const [year,month]=String(value).split('-');return month?`${Number(month)}/${year}`:value;};

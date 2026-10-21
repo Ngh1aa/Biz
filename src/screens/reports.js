@@ -1,5 +1,5 @@
 import {attendance,teacherName} from '../data.js';
-import {head,section,link,btn,icon,pill,chips,avatar,detail,field,form,footer,note,history,empty,esc} from '../ui.js';
+import {head,section,link,btn,icon,pill,chips,avatar,detail,field,form,footer,note,history,empty,esc,formGroup} from '../ui.js';
 export function reports(ctx) {
  const {db,route,state}=ctx;const r=db.reports.find(r=>r.id===db.selectedReport)||db.reports[0];
  const student=id=>db.students.find(s=>s.id===id);
@@ -22,8 +22,8 @@ export function reports(ctx) {
   const d=db.drafts['report-'+r.id]||r;
   return head(route==='TC05d'?'Bổ sung và gửi lại<br>báo cáo.':'Lập báo cáo<br>tháng 10.',`BÁO CÁO · ${esc(s.name)}`)+(route==='TC05d'?note(`<strong>Yêu cầu bổ sung</strong><br>${esc(r.reason)}`,'strong'):'')+
    `<div class="report-student">${avatar(s.name)}<div><strong>${esc(s.name)}</strong><small>${s.id} · ${esc(r.subject)} · Tháng 10</small></div></div>`+form('report',
-   field('Chuyên cần · Tổng hợp từ điểm danh','attendance',`${a.present}/${s.planned} buổi · Vắng ${a.absent}`,{readonly:true})+section('Kết quả kiểm tra')+field('Điểm kiểm tra tháng','score',d.score,{type:'number',min:0,max:10,step:'0.1'})+field('Điểm kiểm tra giữa kỳ','midterm',d.midterm,{type:'number',min:0,max:10,step:'0.1'})+field('Tên bài kiểm tra bổ sung','extraName',d.extraName)+field('Điểm bổ sung','extraScore',d.extraScore,{type:'number',min:0,max:10,step:'0.1'})+
-   section('Nhận xét và đánh giá')+['foundation','ability','attitude'].map((key,i)=>field(['Nền tảng','Năng lực','Thái độ'][i],key,d[key],{required:true,options:[['','Chọn mức đánh giá'],['M1','M1 · Xây nền'],['M2','M2 · Phát triển'],['M3','M3 · Đạt chuẩn'],['M4','M4 · Vững chắc']]})).join('')+field('Nhận xét kết quả học tập','comment',d.comment,{textarea:true,required:true,placeholder:'Nêu tiến bộ, nội dung học sinh đã nắm được và phần cần rèn luyện.'})+field('Kế hoạch hỗ trợ tháng tới','next',d.next,{textarea:true,required:true,placeholder:'Nêu mục tiêu học tập, nội dung ôn tập và cách hỗ trợ học sinh.'})+footer(route==='TC05d'?'Bổ sung và gửi lại':'Gửi duyệt','',{type:'submit',icon:'send'})+btn('Lưu bản nháp','report-draft',{class:'secondary wide'}))+
+   field('Chuyên cần · Tổng hợp từ điểm danh','attendance',`${a.present}/${s.planned} buổi · Vắng ${a.absent}`,{readonly:true})+formGroup('Kết quả kiểm tra',field('Điểm kiểm tra tháng','score',d.score,{type:'number',min:0,max:10,step:'0.1'})+field('Điểm kiểm tra giữa kỳ','midterm',d.midterm,{type:'number',min:0,max:10,step:'0.1'})+field('Tên bài kiểm tra bổ sung','extraName',d.extraName)+field('Điểm bổ sung','extraScore',d.extraScore,{type:'number',min:0,max:10,step:'0.1'}))+
+   formGroup('Nhận xét và đánh giá',['foundation','ability','attitude'].map((key,i)=>field(['Nền tảng','Năng lực','Thái độ'][i],key,d[key],{required:true,options:[['','Chọn mức đánh giá'],['M1','M1 · Xây nền'],['M2','M2 · Phát triển'],['M3','M3 · Đạt chuẩn'],['M4','M4 · Vững chắc']]})).join('')+field('Nhận xét kết quả học tập','comment',d.comment,{textarea:true,required:true,placeholder:'Nêu tiến bộ, nội dung học sinh đã nắm được và phần cần rèn luyện.'})+field('Kế hoạch hỗ trợ tháng tới','next',d.next,{textarea:true,required:true,placeholder:'Nêu mục tiêu học tập, nội dung ôn tập và cách hỗ trợ học sinh.'}))+footer(route==='TC05d'?'Bổ sung và gửi lại':'Gửi duyệt','',{type:'submit',icon:'send'})+btn('Lưu bản nháp','report-draft',{class:'secondary wide'}))+
    (route==='TC05d'?section('Các lần gửi trước')+history(r.history):'');
  }
  const review=db.role==='gv'||db.role==='tbm';

@@ -1,5 +1,5 @@
 import {SUBJECTS,TEACHERS,teacherName,CRITERIA,attendance,today,courses} from '../data.js';
-import {head,section,link,btn,icon,field,form,footer,search,chips,studentRow,avatar,pill,note,detail,empty,esc} from '../ui.js';
+import {head,section,link,btn,icon,field,form,footer,search,chips,studentRow,avatar,pill,note,detail,empty,esc,formGroup} from '../ui.js';
 export function students(ctx) {
   const {db,route,state}=ctx;
   const s=db.students.find(s=>s.id===db.selectedStudent)||db.students[0];
@@ -12,7 +12,7 @@ export function students(ctx) {
     if(state.grade) list=list.filter(s=>s.grade===state.grade);
     if(state.subject) list=list.filter(s=>courses(s).some(c=>c.subject===state.subject));
     if(state.shift) list=list.filter(s=>s.slots.some(slot=>slot.endsWith(state.shift)));
-    return head('Danh sách<br>học sinh',`${base.length} HỌC SINH`,false,`<div class="list-top"><span class="mini-brand">biz.</span>${office?link('GV04',icon('plus'),'circle','aria-label="Tiếp nhận học sinh"'):link('TC07',icon('message-circle'),'circle','aria-label="Mở trao đổi"')}</div>`)+search('Tìm tên, mã học sinh, trường',state.search)+chips(office?['Tất cả','Chờ xếp lớp','Đang học','Đã nghỉ']:['Tất cả','Thiếu buổi'],state.filter||'Tất cả')+`<div class="filter-tools">${btn(`Khối ${state.grade||''} ${icon('chevron-down',14)}`,'list-filter',{class:'chip',data:'data-kind="grade"'})}${btn(`${state.subject||'Môn'} ${icon('chevron-down',14)}`,'list-filter',{class:'chip',data:'data-kind="subject"'})}${!office?btn(`${state.shift||'Ca'} ${icon('chevron-down',14)}`,'list-filter',{class:'chip',data:'data-kind="shift"'}):''}${state.grade||state.subject||state.shift?btn('Xóa lọc','clear-filter',{class:'text-link'}):''}</div><p class="result-count">${list.length} học sinh${state.search?' phù hợp':''}</p><div class="student-list">${list.length?list.map(s=>studentRow(s,office?'GV03':'TC04',office?'':`<span class="row-bottom">${s.subject} ${pill(`${attendance(db,s.id).present}/${s.planned} buổi`)}</span>`)).join(''):empty('Không tìm thấy học sinh','Thử tên hoặc mã khác, hoặc bỏ bộ lọc.',btn('Xóa tìm kiếm và bộ lọc','clear-filter',{class:'secondary'}))}</div>`;
+    return head(office?'Học sinh toàn trung tâm':'Học sinh của tôi',`${base.length} HỌC SINH`,false,`<div class="list-top"><span class="mini-brand">biz.</span>${office?link('GV04',icon('plus'),'circle','aria-label="Tiếp nhận học sinh"'):link('TC07',icon('message-circle'),'circle','aria-label="Mở trao đổi"')}</div>`)+search('Tìm tên, mã học sinh, trường',state.search)+chips(office?['Tất cả','Chờ xếp lớp','Đang học','Đã nghỉ']:['Tất cả','Thiếu buổi'],state.filter||'Tất cả')+`<div class="filter-tools">${btn(`Khối ${state.grade||''} ${icon('chevron-down',14)}`,'list-filter',{class:'chip',data:'data-kind="grade"'})}${btn(`${state.subject||'Môn'} ${icon('chevron-down',14)}`,'list-filter',{class:'chip',data:'data-kind="subject"'})}${!office?btn(`${state.shift||'Ca'} ${icon('chevron-down',14)}`,'list-filter',{class:'chip',data:'data-kind="shift"'}):''}${state.grade||state.subject||state.shift?btn('Xóa lọc','clear-filter',{class:'text-link'}):''}</div><p class="result-count">${list.length} học sinh${state.search?' phù hợp':''}</p><div class="student-list">${list.length?list.map(s=>studentRow(s,office?'GV03':'TC04',office?'':`<span class="row-bottom">${s.subject} ${pill(`${attendance(db,s.id).present}/${s.planned} buổi`)}</span>`)).join(''):empty('Không tìm thấy học sinh','Thử tên hoặc mã khác, hoặc bỏ bộ lọc.',btn('Xóa tìm kiếm và bộ lọc','clear-filter',{class:'secondary'}))}</div>`;
   }
   if(['GV03','TC04'].includes(route)) {
     const a=attendance(db,s.id);
@@ -23,13 +23,47 @@ export function students(ctx) {
   return classForm(ctx,s);
 }
 function intake(ctx) {
- const {db,route}=ctx,d=db.drafts.intake||{};const step=['GV04','GV04b','GV04c'].indexOf(route)+1;
- const steps=`<div class="steps">${['Học sinh','Phụ huynh','Đầu vào'].map((s,i)=>`<div class="${i<step?'active':''}"><b>${i+1}</b><span>${s}</span></div>`).join('')}</div>`;
+ const {db,route}=ctx,d=db.drafts.intake||{},step=['GV04','GV04b','GV04c'].indexOf(route)+1;
+ const steps=`<div class="steps">${['Học sinh','Phụ huynh','Đầu vào'].map((label,i)=>`<div class="${i<step?'active':''}"><b>${i+1}</b><span>${label}</span></div>`).join('')}</div>`;
  let content='';
- if(step===1) content=field('Mã học sinh','id',`HS${String(db.students.length+1).padStart(3,'0')}`,{readonly:true})+field('Họ và tên học sinh','name',d.name,{required:true,placeholder:'Ví dụ: Nguyễn An Nhiên'})+'<div id="duplicate-student"></div>'+`<div class="field-grid">${field('Ngày sinh','birth',d.birth,{type:'date',required:true,max:today()})}${field('Giới tính','gender',d.gender||'Nữ',{options:['Nữ','Nam','Khác']})}</div>`+field('Khối','grade',d.grade||'7',{options:['6','7','8','9','10','11','12']})+field('Cơ sở','campus',d.campus||'Cơ sở 1',{options:['Cơ sở 1','Cơ sở 2']})+field('Trường đang học','school',d.school,{required:true})+field('Địa chỉ','address',d.address)+field('Số điện thoại học sinh','studentPhone',d.studentPhone,{type:'tel'})+field('Nguồn biết đến','source',d.source||'Người quen giới thiệu',{options:['Người quen giới thiệu','Website','Mạng xã hội','Khác']})+footer('Tiếp tục · Phụ huynh','',{type:'submit',icon:'arrow-right'});
- if(step===2) content=field('Họ tên phụ huynh','parentName',d.parentName,{required:true})+field('Số điện thoại phụ huynh','parentPhone',d.parentPhone,{type:'tel',required:true})+'<div id="duplicate-parent"></div>'+field('Email phụ huynh','email',d.email,{type:'email'})+field('Quan hệ với học sinh','relation',d.relation||'Mẹ',{options:['Bố','Mẹ','Khác']})+section('Liên hệ khẩn cấp')+field('Họ tên người liên hệ','emergencyName',d.emergencyName,{required:true})+field('Số điện thoại khẩn cấp','emergencyPhone',d.emergencyPhone,{type:'tel',required:true})+footer('Tiếp tục · Kiểm tra đầu vào','',{type:'submit',icon:'arrow-right'});
- if(step===3) content=field('Ngày kiểm tra','testDate',d.testDate||today(),{type:'date',required:true})+field('Môn kiểm tra','subject',d.subject||'Toán',{options:SUBJECTS})+field('Giáo viên kiểm tra','testTeacher',d.testTeacher||'T01',{options:TEACHERS.map(t=>[t.id,`${t.name} · ${t.subject}`])})+field('Bản chụp bài kiểm tra','scan','',{type:'file',accept:'image/*,.pdf',hint:'Chọn ảnh hoặc PDF. Bản trải nghiệm chỉ lưu tên tệp.'})+field('Mức đánh giá','level',d.level||'M2',{hint:'Thang đánh giá M1–M4 của trung tâm.',options:[['M1','M1 · Xây nền'],['M2','M2 · Phát triển'],['M3','M3 · Đạt chuẩn'],['M4','M4 · Vững chắc']]})+field('Nhận xét đầu vào','notes',d.notes,{textarea:true,required:true,placeholder:'Nêu kiến thức đã có, kỹ năng cần rèn và đề xuất xếp lớp.'})+footer('Lưu và xếp lớp','',{type:'submit',icon:'arrow-right'})+btn('Chỉ lưu hồ sơ','intake-save-only',{class:'secondary wide'});
- return head(step===1?'Tiếp nhận<br>học sinh':step===2?'Thông tin<br>phụ huynh':'Đánh giá<br>đầu vào.',`TIẾP NHẬN HỌC SINH · BƯỚC ${step}/3`)+steps+form('intake',content);
+ if(step===1) {
+  content=formGroup('Thông tin học sinh',
+   field('Mã học sinh','id',`HS${String(db.students.length+1).padStart(3,'0')}`,{readonly:true})+
+   field('Họ và tên học sinh','name',d.name,{required:true,placeholder:'Ví dụ: Nguyễn An Nhiên'})+'<div id="duplicate-student"></div>'+
+   `<div class="field-grid">${field('Ngày sinh','birth',d.birth,{type:'date',required:true,max:today()})}${field('Giới tính','gender',d.gender||'Nữ',{options:['Nữ','Nam','Khác']})}</div>`)+
+  formGroup('Thông tin học tập',
+   field('Khối','grade',d.grade||'7',{options:['6','7','8','9','10','11','12']})+
+   field('Cơ sở','campus',d.campus||'Cơ sở 1',{options:['Cơ sở 1','Cơ sở 2']})+
+   field('Trường đang học','school',d.school,{required:true}))+
+  formGroup('Thông tin liên hệ',
+   field('Địa chỉ','address',d.address)+field('Số điện thoại học sinh','studentPhone',d.studentPhone,{type:'tel'})+
+   field('Nguồn biết đến','source',d.source||'Người quen giới thiệu',{options:['Người quen giới thiệu','Website','Mạng xã hội','Khác']}))+
+  footer('Tiếp tục · Phụ huynh','',{type:'submit',icon:'arrow-right'});
+ }
+ if(step===2) {
+  content=formGroup('Phụ huynh',
+   field('Họ tên phụ huynh','parentName',d.parentName,{required:true})+
+   field('Số điện thoại phụ huynh','parentPhone',d.parentPhone,{type:'tel',required:true})+'<div id="duplicate-parent"></div>'+
+   field('Email phụ huynh','email',d.email,{type:'email'})+
+   field('Quan hệ với học sinh','relation',d.relation||'Mẹ',{options:['Bố','Mẹ','Khác']}))+
+  formGroup('Liên hệ khẩn cấp',
+   field('Họ tên người liên hệ','emergencyName',d.emergencyName,{required:true})+
+   field('Số điện thoại khẩn cấp','emergencyPhone',d.emergencyPhone,{type:'tel',required:true}),
+   'Người có thể liên hệ khi phụ huynh không nghe máy.')+
+  footer('Tiếp tục · Kiểm tra đầu vào','',{type:'submit',icon:'arrow-right'});
+ }
+ if(step===3) {
+  content=formGroup('Kiểm tra đầu vào',
+   field('Ngày kiểm tra','testDate',d.testDate||today(),{type:'date',required:true})+
+   field('Môn kiểm tra','subject',d.subject||'Toán',{options:SUBJECTS})+
+   field('Giáo viên kiểm tra','testTeacher',d.testTeacher||'T01',{options:TEACHERS.map(t=>[t.id,`${t.name} · ${t.subject}`])})+
+   field('Bản chụp bài kiểm tra','scan','',{type:'file',accept:'image/*,.pdf',hint:'Chọn ảnh hoặc PDF. Bản trải nghiệm chỉ lưu tên tệp.'})+
+   field('Mức đánh giá','level',d.level||'M2',{hint:'Thang đánh giá M1–M4 của trung tâm.',options:[['M1','M1 · Xây nền'],['M2','M2 · Phát triển'],['M3','M3 · Đạt chuẩn'],['M4','M4 · Vững chắc']]})+
+   field('Nhận xét đầu vào','notes',d.notes,{textarea:true,required:true,placeholder:'Nêu kiến thức đã có, kỹ năng cần rèn và đề xuất xếp lớp.'}))+
+  footer('Lưu và xếp lớp','',{type:'submit',icon:'arrow-right'})+btn('Chỉ lưu hồ sơ','intake-save-only',{class:'secondary wide'});
+ }
+ const intro=step===1?'Tạo hồ sơ trước khi chọn môn và xếp lớp.':step===2?'Thông tin để trung tâm phối hợp cùng gia đình.':'Ghi nhận kết quả để chọn lớp phù hợp.';
+ return head(step===1?'Tiếp nhận học sinh':step===2?'Thông tin phụ huynh':'Đánh giá đầu vào',`BƯỚC ${step} / 3`)+steps+`<p class="form-intro">${intro} Các mục có * cần được điền.</p>`+form('intake',content);
 }
 function classForm(ctx,s) {
  const {db,route}=ctx,base=route.startsWith('GV05')?'GV05':route; const d=db.drafts[base]||{};
@@ -38,7 +72,7 @@ function classForm(ctx,s) {
  const tabs=adjust?`<div class="segmented">${[['GV06','Đổi giáo viên'],['GV06b','Đổi lịch học'],['GV06c','Ngừng học']].map(([r,t])=>link(r,t,r===base?'selected':'')).join('')}</div>`:'';
  const teacherReasons=['Lịch học với giáo viên hiện tại không phù hợp','Phương pháp giảng dạy chưa phù hợp','Trình độ hoặc mục tiêu của học sinh thay đổi','Theo đề xuất, điều phối của trung tâm','Lý do khác'];
  const stopReasons=['Trùng lịch học',['Giáo viên không phù hợp','Phương pháp giảng dạy chưa phù hợp'],'Chuyển trường hoặc chuyển nơi ở','Không sắp xếp được lịch học phù hợp','Kết quả học tập không đạt kỳ vọng',['Không liên hệ được hoặc tự ý ngừng học','Chưa xác nhận được việc tiếp tục theo học'],'Lý do cá nhân hoặc gia đình','Đã hoàn thành mục tiêu học tập','Lý do khác'];
- return head(stop?'Ghi nhận<br>ngừng học':base==='GV06b'?'Điều chỉnh<br>lịch học':base==='GV06'?'Đổi<br>giáo viên':'Xếp lớp<br>cho học sinh',adjust?'ĐIỀU CHỈNH LỚP':'XẾP LỚP')+tabs+form('class',
+ return head(stop?'Ghi nhận<br>ngừng học':base==='GV06b'?'Điều chỉnh<br>lịch học':base==='GV06'?'Đổi<br>giáo viên':'Xếp lớp<br>cho học sinh',adjust?'ĐIỀU CHỈNH LỚP':'XẾP LỚP')+tabs+`<p class="form-intro">Chọn đúng học sinh, kiểm tra thông tin và ngày áp dụng trước khi lưu.</p>`+form('class',
    field('Tìm học sinh bằng mã hoặc tên','studentSearch',d.studentSearch||s.id,{required:true})+`<div id="student-suggestions" class="suggestions"></div><div class="selected-student">${avatar(s.name)}<div><strong>${esc(s.name)}</strong><small>${s.id} · Khối ${s.grade} · ${esc(s.school)}</small></div>${pill('Điền tự động')}</div>`+
    (adjust?field('Môn đang học','subject',subject,{options:courses(s).map(c=>c.subject)})+field('Giáo viên hiện tại','currentTeacher',teacherName(current.teacher),{readonly:true})+field('Lịch hiện tại','currentSlots',current.slots.join(' · '),{readonly:true}):`<label class="field"><span>Môn học *</span>${btn(`${esc(subject)} ${icon('chevron-down')}`,'pick-subject',{class:'select-button'})}</label>`)+
    (base==='GV05'||base==='GV06'?`<label class="field"><span>${base==='GV06'?'Giáo viên mới':'Giáo viên'} *</span>${btn(`${esc(teacherName(teacher))} ${icon('chevron-down')}`,'pick-teacher',{class:'select-button'})}<small>Chỉ hiển thị giáo viên thuộc bộ môn ${esc(subject)}</small></label>`:'')+

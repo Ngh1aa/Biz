@@ -2,11 +2,11 @@
 
 ## GitHub Pages
 
-**[Mở bản Minh Hoàng Center V0.4](https://ngh1aa.github.io/Biz/#/gv/GV01)**
+**[Mở bản Minh Hoàng Center V0.5](https://ngh1aa.github.io/Biz/#/gv/GV01)**
 
 Repo dùng cấu hình Pages sẵn có: nhánh `main`, thư mục `/`. File `.nojekyll` giữ nguyên các ES module, font và SVG. Mỗi thay đổi trên `main` được GitHub Pages xuất bản tự động; workflow `Verify Biz` kiểm tra syntax, logic và static build trên push/pull request. Kết quả CI và kết quả triển khai Pages cần kiểm tra riêng.
 
-**V0.4:** giao diện mặc định bám cấu trúc và design system Minh Hoàng Center từ artifact và `files.zip`, theo xác nhận của người dùng; giữ câu chữ giáo dục V0.3. Xem `docs/minh-hoang-reference.md` để đối chiếu nguồn, các thành phần áp dụng và giới hạn. Minh Hoàng là giao diện duy nhất. Hai phương án Pastel và Trắng đen đã được gỡ; liên kết cũ tự mở giao diện hiện tại, giữ nguyên màn hình và dữ liệu đã lưu.
+**V0.5:** thiết kế lại UX của toàn bộ 55 màn theo workflow `mobile-web-preview` của uiux-ai-workspace. Tổng quan ưu tiên ca/việc cần xử lý; menu có vùng riêng; biểu mẫu chia nhóm, header và trạng thái thống nhất; lịch ngày là entry dễ đọc. Giữ nhận diện Minh Hoàng, câu chữ giáo dục và nghiệp vụ hiện có. Xem `docs/ux-redesign.md` và `docs/screen-inventory.md`. Minh Hoàng là giao diện duy nhất; liên kết Pastel/Mono cũ tự mở giao diện hiện tại, giữ màn và dữ liệu. Tài liệu V0.4 là lịch sử nguồn tham chiếu, không phải yêu cầu giữ bố cục ở lần redesign này.
 
 - Minh Hoàng: `http://127.0.0.1:4173/Biz/#/gv/GV01`
 - Tài liệu/capture phiên bản cũ chỉ là hồ sơ lịch sử, không còn là giao diện đang cung cấp.

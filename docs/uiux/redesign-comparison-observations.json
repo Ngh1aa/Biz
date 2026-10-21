@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "plan_sha256": "d8f0c01fa4afca0c9afdc484406dec5b600a724be1d45a6bd4d670c027c451e8",
+  "reviews": [
+    {
+      "reviewer_id": "codex-author-review",
+      "role": "Author reviewing synthetic teacher task",
+      "source": "agent-heuristic",
+      "independent": false,
+      "session_index": 0,
+      "presentation_order": [
+        "A",
+        "B"
+      ],
+      "answers": [
+        {
+          "label": "A",
+          "question_id": "C1",
+          "response": "A places Toán · Khối 7, 14:00–15:30 and the text action above the midnight reminder. B shows the same data after two work rows; the action is a right-hand arrow.",
+          "criteria_met": [
+            true,
+            true
+          ],
+          "observed_element": "Session object, work queue, deadline row and navigation on the inspected phone capture",
+          "capture_sha256": "3fb7d9a77695a5882945c92670d7da0d53babe4a80e8d8a63f7ef543a5a951ea"
+        },
+        {
+          "label": "A",
+          "question_id": "D1",
+          "response": "A uses one blue session card with a white text CTA, an orange deadline row and a separate labelled work queue. B treats session and general work with similar white surfaces and denser grouping.",
+          "criteria_met": [
+            true,
+            true
+          ],
+          "observed_element": "Session object, work queue, deadline row and navigation on the inspected phone capture",
+          "capture_sha256": "3fb7d9a77695a5882945c92670d7da0d53babe4a80e8d8a63f7ef543a5a951ea"
+        },
+        {
+          "label": "B",
+          "question_id": "C1",
+          "response": "A places Toán · Khối 7, 14:00–15:30 and the text action above the midnight reminder. B shows the same data after two work rows; the action is a right-hand arrow.",
+          "criteria_met": [
+            true,
+            true
+          ],
+          "observed_element": "Session object, work queue, deadline row and navigation on the inspected phone capture",
+          "capture_sha256": "b9dfe20fd8edbc62edcbef7b1335a579dc7c4b0554e2f4096ade3e33fb067872"
+        },
+        {
+          "label": "B",
+          "question_id": "D1",
+          "response": "A uses one blue session card with a white text CTA, an orange deadline row and a separate labelled work queue. B treats session and general work with similar white surfaces and denser grouping.",
+          "criteria_met": [
+            true,
+            true
+          ],
+          "observed_element": "Session object, work queue, deadline row and navigation on the inspected phone capture",
+          "capture_sha256": "b9dfe20fd8edbc62edcbef7b1335a579dc7c4b0554e2f4096ade3e33fb067872"
+        }
+      ],
+      "preferred_label": "A",
+      "tradeoff": "Choose A for current attendance recognition. B exposes follow-up work earlier. No human preference or causal improvement is established."
+    }
+  ]
+}
