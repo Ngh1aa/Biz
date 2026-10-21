@@ -56,6 +56,7 @@ export function createActions(ctx) {
    case 'week-reset':ctx.state.weekOffset=0;render();break;
    case 'day':ctx.state.day=value;render();break;
    case 'day-mode':ctx.state.dayMode=value;render();break;
+   case 'schedule-view':{if(value==='week')navigate('TC02');else{const key=`${db.role}-TC02b`;(ctx.states[key]||={}).dayMode=value==='student'?'student':'session';navigate('TC02b');}break;}
    case 'stats-month':{const date=new Date((ctx.state.statsDate||'2026-10')+'-01');date.setMonth(date.getMonth()+Number(value));ctx.state.statsDate=date.toISOString().slice(0,7);ctx.state.month=new Intl.DateTimeFormat('vi-VN',{month:'long',year:'numeric'}).format(date);render();break;}
    case 'mark':{const s=selectedSession();if(isLocked(s)){toast('Điểm danh đã khóa. Gửi đề nghị đến giáo vụ để điều chỉnh.');return;}db.drafts['marks-'+s.id]={...(db.drafts['marks-'+s.id]||s.marks),[el.dataset.student]:value};save();render();break;}
    case 'mark-all':{const s=selectedSession();if(isLocked(s))return;db.drafts['marks-'+s.id]=Object.fromEntries(s.students.filter(id=>db.students.some(x=>x.id===id&&x.status==='Đang học')).map(id=>[id,'Có']));save();render();break;}

@@ -1,13 +1,14 @@
-# Biz — UX tương tác · iOS Pastel Graphic
+# Biz — Minh Hoàng Center · UX tương tác
 
 ## GitHub Pages
 
-**[Mở Biz trên GitHub Pages](https://ngh1aa.github.io/Biz/?theme=pastel#/gv/GV01)** · **[Xem bản trắng đen](https://ngh1aa.github.io/Biz/?theme=mono#/gv/GV01)**
+**[Mở bản Minh Hoàng Center V0.4](https://ngh1aa.github.io/Biz/?theme=center#/gv/GV01)** · [Đối chiếu bản pastel](https://ngh1aa.github.io/Biz/?theme=pastel#/gv/GV01) · **[Xem bản trắng đen](https://ngh1aa.github.io/Biz/?theme=mono#/gv/GV01)**
 
 Repo dùng cấu hình Pages sẵn có: nhánh `main`, thư mục `/`. File `.nojekyll` giữ nguyên các ES module, font và SVG. Mỗi thay đổi trên `main` được GitHub Pages xuất bản tự động; workflow `Verify Biz` kiểm tra syntax, logic và static build trên push/pull request. Kết quả CI và kết quả triển khai Pages cần kiểm tra riêng.
 
-**V0.2:** áp dụng thử design system người dùng cung cấp trong `Biz-design-system.zip`. Style mặc định là **Pastel graphic**, có nút chuyển sang **Trắng đen** trong reviewer sidebar. Trên điện thoại, dùng nút tròn cạnh danh sách vai trò. Chuyển style giữ nguyên route, dữ liệu và nội dung form đang nhập.
+**V0.4:** giao diện mặc định bám cấu trúc và design system Minh Hoàng Center từ artifact và `files.zip`, theo xác nhận của người dùng; giữ câu chữ giáo dục V0.3. Xem `docs/minh-hoang-reference.md` để đối chiếu nguồn, các thành phần áp dụng và giới hạn. Hai phương án pastel/trắng đen trước đây vẫn có thể mở bằng tham số `theme`. Chuyển giao diện giữ nguyên tuyến, dữ liệu và nội dung biểu mẫu đang nhập.
 
+- Minh Hoàng (mặc định): `http://127.0.0.1:4173/Biz/?theme=center#/gv/GV01`
 - Pastel: `http://127.0.0.1:4173/Biz/?theme=pastel#/gv/GV01`
 - Baseline trắng đen: `http://127.0.0.1:4173/Biz/?theme=mono#/gv/GV01`
 - Chi tiết áp dụng và QA mới: `docs/pastel-style-trial.md`; bằng chứng `evidence/pastel-v02/`. Hồ sơ/capture trong `evidence/browser/` là baseline V0.1.
